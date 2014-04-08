@@ -17,13 +17,14 @@ Ext.define('CM.view.OrganizationWindow', {
     autoScroll:true,
     modal:true,
 
-    width: 600,
-    height:400,
+    width: 800,
+    height:600,
     padding: 6,
 
     initComponent: function() {
         this.items = [{
             xtype: 'form',
+            padding: 6,
             layout: {
                 type: 'vbox',
                 align:'stretch'

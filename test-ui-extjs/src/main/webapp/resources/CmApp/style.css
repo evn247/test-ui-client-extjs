@@ -70,7 +70,7 @@
 .button-delete {
     width:15px;
     height:15px;
-    background:url("../images/icons/tool-sprites.gif") 0 0;
+    background:url("../images/icons/tool-sprites.gif") -15px 0;
     background-repeat: no-repeat;
 }
 
