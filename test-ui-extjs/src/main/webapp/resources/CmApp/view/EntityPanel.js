@@ -24,6 +24,13 @@ Ext.define('CM.view.EntityPanel', {
                 name: prefix+'.create',
                 iconCls:'button-create',
                 width: 80
+            },
+            {
+                xtype: 'button',
+                text: 'Delete',
+                name: prefix+'.delete',
+                iconCls:'button-delete',
+                width: 80
             }
         ];
 
