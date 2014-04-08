@@ -1,0 +1,171 @@
+{
+    "success": true,
+    "data":[
+        {
+            "id":1,
+            "name":"Test organization 1",
+            "inn":"1234567890",
+            "website":"www.test1.ru",
+            "email":"info@test1.ru",
+
+            "phones":[
+                {
+                    "id":1,
+                    "type":"phone",
+                    "number":"555-555-5555",
+                    "extension":"123"
+                },
+                {
+                    "id":2,
+                    "type":"fax",
+                    "number":"555-555-5555",
+                    "extension":"123"
+                }
+            ],
+
+            "managers":[
+                {
+                    "id":1,
+                    "firstName":"Ivan",
+                    "lastName":"Ivanov",
+                    "middleName":"Ivanovich",
+                    "position":"Director",
+                    "email":"director@test1.ru",
+                    "phones":[
+                        {
+                            "id":3,
+                            "type":"cell phone",
+                            "number":"555-555-6666"
+                        }
+                    ]
+                },
+                {
+                    "id":2,
+                    "firstName":"Petr",
+                    "lastName":"Petrov",
+                    "middleName":"Petrovich",
+                    "position":"Accountant",
+                    "email":"accountant@test1.ru",
+                    "phones":[
+                        {
+                            "id":4,
+                            "type":"cell phone",
+                            "number":"555-555-7777"
+                        }
+                    ]
+                }
+            ],
+            "accounts":[
+                {
+                    "id":1,
+                    "type":"bank account",
+                    "number":"1234567890",
+                    "name":"main bank account"
+                }
+            ],
+
+            "locations":[
+                {
+                    "id":1,
+                    "name":"main location",
+                    "addressLine1":"Street address line 1",
+                    "addressLine2":"Street address line 2",
+                    "city":"Moscow",
+                    "postIndex":"123000"
+                }
+            ],
+
+            "files":[
+                {
+                    "id":1,
+                    "fileName":"testfile.pdf",
+                    "size":100234,
+                    "description":"Test file description"
+                }
+            ]
+        },
+        {
+            "id":2,
+            "name":"Test organization 2",
+            "inn":"1234567899",
+            "website":"www.test2.ru",
+            "email":"info@test2.ru",
+
+            "phones":[
+                {
+                    "id":1,
+                    "type":"phone",
+                    "number":"555-555-5555",
+                    "extension":"123"
+                },
+                {
+                    "id":2,
+                    "type":"fax",
+                    "number":"555-555-5555",
+                    "extension":"123"
+                }
+            ],
+
+            "managers":[
+                {
+                    "id":1,
+                    "firstName":"Ivan",
+                    "lastName":"Ivanov",
+                    "middleName":"Ivanovich",
+                    "position":"Director",
+                    "email":"director@test1.ru",
+                    "phones":[
+                        {
+                            "id":3,
+                            "type":"cell phone",
+                            "number":"555-555-6666"
+                        }
+                    ]
+                },
+                {
+                    "id":2,
+                    "firstName":"Petr",
+                    "lastName":"Petrov",
+                    "middleName":"Petrovich",
+                    "position":"Accountant",
+                    "email":"accountant@test1.ru",
+                    "phones":[
+                        {
+                            "id":4,
+                            "type":"cell phone",
+                            "number":"555-555-7777"
+                        }
+                    ]
+                }
+            ],
+            "accounts":[
+                {
+                    "id":1,
+                    "type":"bank account",
+                    "number":"1234567890",
+                    "name":"main bank account"
+                }
+            ],
+
+            "locations":[
+                {
+                    "id":1,
+                    "name":"main location",
+                    "addressLine1":"Street address line 1",
+                    "addressLine2":"Street address line 2",
+                    "city":"Moscow",
+                    "postIndex":"123000"
+                }
+            ],
+
+            "files":[
+                {
+                    "id":1,
+                    "fileName":"testfile.pdf",
+                    "size":100234,
+                    "description":"Test file description"
+                }
+            ]
+        }
+    ]
+}

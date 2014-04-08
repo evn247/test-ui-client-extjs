@@ -1,0 +1,121 @@
+.x-btn-disabled {
+    cursor: default;
+}
+
+.x-border-layout-ct-none {
+    background: white !important;
+}
+
+.x-window-body-default {
+    background: white !important;
+}
+
+.no-background, .no-background > .x-panel-body {
+    background: none !important;
+}
+
+.x-btn-default-small-noicon {
+    padding: 2px 20px;
+}
+
+.nsi-button-default {
+    padding: 2px 10px;
+    width: 90px;
+}
+
+.nsi-button-browse {
+    padding: 2px 10px;
+    width: 40px !important;
+}
+
+.nsi-field-date-default .x-form-item-body .x-form-trigger-wrap {
+    width: 90px !important;
+}
+
+.nsi-field-date-time-default .x-form-item-body .x-form-trigger-wrap {
+    width: 145px !important;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.width-button-column {
+    width: 100px;
+}
+
+.x-form-readonly input, .x-form-readonly textarea {
+    background: #efefef !important;
+}
+
+.action-button {
+    padding: 2px 10px;
+}
+
+.button-save {
+    background-image: url("../images/icons/save.png");
+    background-repeat: no-repeat;
+}
+
+.button-add {
+    background-image: url("../images/icons/add.png");
+    background-repeat: no-repeat;
+}
+
+.button-calendar {
+    background-image: url("../images/icons/calendar.png");
+    background-repeat: no-repeat;
+}
+
+.button-delete {
+    width:15px;
+    height:15px;
+    background:url("../images/icons/tool-sprites.gif") 0 0;
+    background-repeat: no-repeat;
+}
+
+.button-delete:hover{
+    width:15px;
+    height:15px;
+    background:url("../images/icons/tool-sprites.gif") -15px 0;
+    background-repeat: no-repeat;
+}
+
+.button-copy {
+    width:15px;
+    height:15px;
+    background:url("../images/icons/tool-sprites.gif") 0 -45px;
+    background-repeat: no-repeat;
+}
+
+.button-copy:hover{
+    width:15px;
+    height:15px;
+    background:url("../images/icons/tool-sprites.gif") -15px -45px;
+    background-repeat: no-repeat;
+}
+
+.button-first {
+    background-image: url("../images/icons/first.png");
+    background-repeat: no-repeat;
+}
+
+.button-modify {
+    background-image: url("../images/icons/modify.png");
+    background-repeat: no-repeat;
+}
+
+.button-prev {
+    background-image: url("../images/icons/prev.png");
+    background-repeat: no-repeat;
+}
+
+.button-search {
+    background-image: url("../images/icons/search.png");
+    background-repeat: no-repeat;
+}
+
+.button-send {
+    background-image: url("../images/icons/send.png");
+    background-repeat: no-repeat;
+}

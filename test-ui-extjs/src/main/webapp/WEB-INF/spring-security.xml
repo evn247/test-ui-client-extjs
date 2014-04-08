@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+    <beans:bean id="principalProvider" class="com.nsl.cm.auth.DefaultPrincipalProviderHelper"/>
+
+    <http>
+        <!-- Allow access to logged-in users -->
+        <intercept-url pattern="/*" access="IS_AUTHENTICATED_FULLY"/>
+
+        <intercept-url pattern="/resources/images/**" filters="none" />
+        <intercept-url pattern="/resources/css/**" filters="none" />
+        <intercept-url pattern="/resources/extjs/**" filters="none" />
+
+        <!-- direct xhtml access disallowed -->
+        <intercept-url pattern="/**/*.jsp" access="ROLE_NOBODY" />
+
+        <http-basic />
+
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider>
+            <user-service>
+                <user authorities="ROLE_USER" name="user" password="user" />
+                <user authorities="ROLE_ADMIN" name="admin" password="admin" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

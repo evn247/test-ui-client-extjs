@@ -1,0 +1,308 @@
+Ext.onReady(function(){
+    var panelCount = 0;
+
+    var treeStore = Ext.create("Ext.data.TreeStore", {
+        proxy:{
+            type: 'ajax',
+            url: 'http://localhost:8080/resources/data/treeData.json'
+        },
+
+        sorters: [
+            {
+                property: 'text',
+                direction: 'DESC'
+            }
+        ]
+    });
+
+    var tree = Ext.create('Ext.tree.Panel',
+        {
+        xtype: 'tree',
+        store: treeStore,
+            root: {
+                text: 'Все страны',
+                expanded: true
+            },
+
+            listeners: {
+                itemclick: function(tree, record, item, index, e, options){
+                    Ext.getCmp('txt').setValue(record.data.text);
+                }
+            }
+            /*,
+            root :{
+                text: 'Корень',
+                "expanded": true,
+                children: [{
+                    text: '1-1',
+                    leaf: false,
+                    "expanded": false,
+                    children:[
+                        {
+                            text: '1-1-1',
+                            leaf: true,
+                            "expanded": false
+                        },
+                        {
+                            text: '1-1-2',
+                            leaf: true,
+                            "expanded": false
+                        },
+                        {
+                            text: '1-1-3',
+                            leaf: true,
+                            "expanded": false
+                        },
+                        {
+                            text: '1-1-4',
+                            leaf: true,
+                            "expanded": false
+                        }
+                    ]
+                },
+                {
+                    text: '1-2',
+                    leaf: false,
+                    "expanded": false
+                },
+                {
+                    text: '1-3',
+                    leaf: true,
+                    "expanded": false,
+                    children: [
+                        {
+                            text: '1-3-1',
+                            leaf: true,
+                            "expanded": false
+                        },
+                        {
+                            text: '1-3-2',
+                            leaf: true,
+                            "expanded": false
+                        },
+                        {
+                            text: '1-3-3',
+                            leaf: true,
+                            "expanded": false
+                        },
+                        {
+                            text: '1-3-4',
+                            leaf: true,
+                            "expanded": false
+                        }
+                    ]
+                },
+                {
+                    text: '1-4',
+                    leaf: true,
+                    "expanded": false
+                }
+                    ]
+            }*/
+    });
+
+    var panel=Ext.create('Ext.panel.Panel',{
+        title: 'Панель',
+        width: 600,
+        height: 600,
+        id: 'rootPanel',
+        layout: {
+            type: 'vbox',
+            align: 'stretch'
+        },
+
+        items: [
+            {
+                xtype: 'panel',
+                title: 'Подпанель 1',
+                html: 'Засада',
+                width: 200,
+                height: 200,
+                region: 'north',
+
+                dockedItems:[
+
+                    {
+                        xtype: 'toolbar',
+                        items: [
+                            '->',
+                            'Тул'
+                        ],
+                        dock: 'bottom'
+                    },
+
+                    {
+                        xtype: 'toolbar',
+                        items: [
+                            'Тул'
+                        ],
+                        dock: 'left'
+                    },
+
+                    {
+                        xtype: 'toolbar',
+                        items: [
+                            'Тул'
+                        ],
+                        dock: 'right'
+                    },
+
+                    {
+                        dock: 'top',
+                        xtype: 'toolbar',
+                        items:                    [{
+                            xtype:'button',
+                            text:'Добавить панель',
+                            handler:function(e, target, zzz){
+                                panelCount++;
+                                Ext.getCmp('rootPanel').add(
+                                    Ext.create('Ext.panel.Panel',
+                                        {
+                                            title: 'Панель №'+panelCount,
+                                            html: 'Содержаньице'
+                                        })
+
+                                );
+                            }
+                        },
+                            '-',
+                    {
+                        xtype: 'button',
+                        text: 'Скрыть/показать',
+                        handler: function (e,t,z){
+                            if(Ext.getCmp('panel2').isHidden()){
+                                Ext.getCmp('panel2').show();
+                            }else{
+                                Ext.getCmp('panel2').hide();
+                            }
+                        }
+
+                    }
+
+                            , '->', 'Верхний тулбар'
+                ]
+
+            }
+
+
+                ]
+
+            },
+            {
+                id: 'panel2',
+                xtype: 'panel',
+                title: 'Подпанель 2',
+                columnWidth:.4,
+                region: 'center',
+                titleCollapse: true,
+                hidden: true,
+                disabled: true
+            },
+
+            {
+                xtype: 'panel',
+                title: 'Подпанель 3',
+                columnWidth:.6,
+                region: 'west',
+                html: 'Ббббб',
+                split: true,
+                draggable: true,
+                collapsible: true,
+
+                html: 'Дэрэво',
+
+                items:[
+                    {
+                        xtype: 'textfield',
+                        id: 'txt'
+                    },
+                    tree
+                ],
+
+                tools: [
+                    {
+                        type: 'help',
+                        text: 'Справка',
+                        handler: function (e,t,z){
+                            alert('Справка');
+                    }
+
+                    }
+                ]
+
+            }
+
+        ],
+
+
+        bbar: ['->', {
+            xtype: 'button',
+            text: 'Предыдущее',
+            handler: function(but){
+                var layout=panel.getLayout();
+                if(layout.getPrev()){
+                    layout.prev();
+                }
+            }
+        }, {
+            xtype: 'button',
+            text: 'Далее',
+            handler: function(but){
+                var layout=panel.getLayout();
+                if(layout.getNext()){
+                    layout.next();
+                }
+            }
+        }]
+
+    });
+
+    Ext.create('Ext.container.Viewport',{
+        renderTo: Ext.getBody(),
+        items:[panel]
+    });
+
+    Ext.create('Ext.window.Window', {
+            title: 'Авторизация',
+            layout: 'vbox',
+            buttonAlign: 'center',
+            height: 130,
+            width: 280,
+            closable: false,
+            bodyPadding: 10,
+            items:[
+                {
+                    id: 'loginField',
+                    xtype: 'textfield',
+                    fieldLabel: 'Логин',
+                    name: 'login',
+                    value: ''
+                },
+                {
+                    id: 'passField',
+                    xtype: 'textfield',
+                    fieldLabel: 'Пароль',
+                    name: 'password',
+                    inputType: 'password',
+                    value: ''
+                }]
+            ,
+            buttons:[
+                {
+                    text    : 'Ok',
+                    handler : function() {
+                        alert('login "' + Ext.getCmp('loginField').value + '" ; password "' + Ext.getCmp('passField').value +'"');
+                    }
+                },
+                {
+                    text    : 'Cancel',
+                    handler : function() {
+                        Ext.getCmp('loginField').setValue(null);
+                        Ext.getCmp('passField').setValue(value);
+                        alert('Cancelled');
+                    }
+                }
+            ]
+        }
+    ).show();
+});
