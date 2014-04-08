@@ -36,11 +36,11 @@ Ext.define('CM.controller.Organization', {
         var view = Ext.widget('OrganizationWindow');
 
         view.down('form').loadRecord(record);
-        this.setupTablePanel(view, '*[name=table_organization_phones]', record.phones());
-        this.setupTablePanel(view, '*[name=table_organization_managers]', record.managers());
-        this.setupTablePanel(view, '*[name=table_organization_locations]', record.locations());
-        this.setupTablePanel(view, '*[name=table_organization_accounts]', record.accounts());
-        this.setupTablePanel(view, '*[name=table_organization_file_data]', record.fileDatas());
+        this.setupTablePanel(view, 'grid[name=table.organization.phones]', record.phones());
+        this.setupTablePanel(view, 'grid[name=table.organization.managers]', record.managers());
+        this.setupTablePanel(view, 'grid[name=table.organization.locations]', record.locations());
+        this.setupTablePanel(view, 'grid[name=table.organization.accounts]', record.accounts());
+        this.setupTablePanel(view, 'grid[name=table.organization.file_data]', record.fileDatas());
         view.show();
     },
 

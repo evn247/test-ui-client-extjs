@@ -5,5 +5,5 @@
  */
 Ext.define('CM.model.Location', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'name', 'addressLine1', 'addressLine2', 'city','region','postIndex']
+    fields: ['id', 'name', 'streetAddress', 'city','region','postIndex']
 });

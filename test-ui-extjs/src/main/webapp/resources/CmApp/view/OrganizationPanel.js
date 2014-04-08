@@ -9,6 +9,7 @@ Ext.define('CM.view.OrganizationPanel', {
     collapsible: true,
     collapsed: true,
     layout: 'fit',
+    autoScroll:true,
 
     title: 'Organization',
 
