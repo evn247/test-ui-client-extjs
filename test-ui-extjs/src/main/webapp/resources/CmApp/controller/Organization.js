@@ -7,7 +7,8 @@ Ext.define('CM.controller.Organization', {
     extend: 'Ext.app.Controller',
 
     views: ['CM.view.OrganizationPanel',
-            'CM.view.OrganizationWindow'],
+            'CM.view.OrganizationWindow',
+            'CM.view.EntityWindow'],
 
     stores: ['CM.store.Organization',
         'CM.store.Phone',
@@ -106,6 +107,10 @@ Ext.define('CM.controller.Organization', {
     saveOrganization:function(button){
         console.log('saveOrganization clicked.');
         var window = button.up('window');
+        var record = window.down('form').getRecord();
+        console.log('record='+record);
+        var data = record.getData(true);
+        console.log('record.data='+data);
         window.hide();
     },
     createPhone:function(button){
@@ -148,9 +153,42 @@ Ext.define('CM.controller.Organization', {
         console.log('deleteFileData clicked.');
         // todo: deleteFileData
     },
-    editPhone:function(button){
+    editPhone:function(grid, record){
         console.log('editPhone clicked.');
-        // todo: editPhone
+        var view = Ext.create('CM.view.EntityWindow',{
+            title : 'Phone',
+            width: 400,
+            params:{
+                name : 'organization.phone',
+                form: {
+                    xtype: 'form',
+                    padding: 6,
+                    layout: {
+                        type: 'vbox',
+                        align:'stretch'
+                    },
+                    items: [{
+                        xtype: 'textfield',
+                        name : 'type',
+                        padding: 2,
+                        fieldLabel: 'type'
+                    },{
+                        xtype: 'textfield',
+                        padding: 2,
+                        name : 'number',
+                        fieldLabel: 'Number'
+                    },{
+                        xtype: 'textfield',
+                        padding: 2,
+                        name : 'extension',
+                        fieldLabel: 'Extension'
+                    }]
+                }
+            }
+        });
+
+        view.down('form').loadRecord(record);
+        view.show();
     },
     editLocation:function(grid, record){
         console.log('editLocation clicked.');

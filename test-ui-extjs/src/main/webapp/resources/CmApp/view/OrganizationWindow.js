@@ -31,18 +31,22 @@ Ext.define('CM.view.OrganizationWindow', {
             },
             items: [{
                 xtype: 'textfield',
+                padding: 2,
                 name : 'name',
                 fieldLabel: 'Name'
             },{
                 xtype: 'textfield',
+                padding: 2,
                 name : 'inn',
                 fieldLabel: 'INN'
             },{
                 xtype: 'textfield',
+                padding: 2,
                 name : 'website',
                 fieldLabel: 'Web-Site'
             },{
                 xtype: 'textfield',
+                padding: 2,
                 name : 'email',
                 fieldLabel: 'E-Mail'
             }]
