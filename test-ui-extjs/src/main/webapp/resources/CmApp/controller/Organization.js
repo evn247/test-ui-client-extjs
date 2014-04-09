@@ -46,21 +46,6 @@ Ext.define('CM.controller.Organization', {
             'OrganizationWindow button[name=table.organization.file_data.create]': {
                 click: this.createFileData
             },
-            'OrganizationWindow button[name=table.organization.phones.delete]': {
-                click: this.deletePhone
-            },
-            'OrganizationWindow button[name=table.organization.locations.delete]': {
-                click: this.deleteLocation
-            },
-            'OrganizationWindow button[name=table.organization.managers.delete]': {
-                click: this.deleteManager
-            },
-            'OrganizationWindow button[name=table.organization.accounts.delete]': {
-                click: this.deleteAccount
-            },
-            'OrganizationWindow button[name=table.organization.file_data.delete]': {
-                click: this.deleteFileData
-            },
             'OrganizationWindow grid[name=table.organization.phones]': {
                 itemdblclick: this.editPhone
             },
@@ -93,10 +78,14 @@ Ext.define('CM.controller.Organization', {
     setupTablePanel: function(view, query, records){
         console.log('setupTablePanel.query='+query);
         var table = view.down(query);
-        records.each(function(record){
-            table.store.add(record);
+        this.copy(records, table.store);
+    },
+    copy:function(from, to)
+    {
+        from.each(function(record)
+        {
+            to.add(record);
         });
-
     },
 
     createOrganization:function(button){
@@ -109,8 +98,17 @@ Ext.define('CM.controller.Organization', {
         var window = button.up('window');
         var record = window.down('form').getRecord();
         console.log('record='+record);
-        var data = record.getData(true);
-        console.log('record.data='+data);
+        console.log('id='+record.get('id')+' name='+record.get('name'));
+        var phones = record.phones();
+        var store = window.down('grid[name=table.organization.phones]').store;
+        console.log('store='+store);
+        console.log('count='+store.getCount());
+        console.log('phones.count='+phones.getCount());
+        phones.removeAll(true);
+        console.log('after remove phones.count='+phones.getCount());
+        copy(store, phones);
+        console.log('after copy phones.count='+phones.getCount());
+
         window.hide();
     },
     createPhone:function(button){

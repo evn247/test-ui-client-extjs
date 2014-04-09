@@ -14,6 +14,13 @@ Ext.define('CM.view.EntityPanel', {
     initComponent: function () {
         var prefix = this.params.table.name;
         var table = this.params.table;
+        table.getSelectionModel().on('selectionchange', function(model)
+        {
+            console.log('selectionchange event handler');
+            var button = table.up('panel').down('button[name='+prefix+'.delete]');
+            console.log('button='+button);
+            button.setDisabled(!model.hasSelection());
+        });
         console.log('create EntityPanel, prefix='+prefix);
         this.title = this.params.title;
 
@@ -27,8 +34,19 @@ Ext.define('CM.view.EntityPanel', {
             {
                 xtype: 'button',
                 text: 'Delete',
+                disabled: true,
                 name: prefix+'.delete',
-                width: 80
+                width: 80,
+                handler: function(button)
+                {
+                    console.log('handle.delete.button');
+                    var table = button.up('panel').down('grid[name='+prefix+']');
+                    var selectionModel = table.getSelectionModel();
+                    if(selectionModel.hasSelection())
+                    {
+                        table.store.remove(selectionModel.getSelection());
+                    }
+                }
             }
         ];
 
