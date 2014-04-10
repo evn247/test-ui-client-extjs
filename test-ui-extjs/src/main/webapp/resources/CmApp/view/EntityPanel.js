@@ -19,6 +19,9 @@ Ext.define('CM.view.EntityPanel', {
         this.table = this.params.table;
         this.createEntityWindow = this.params.entityEditorWindowProducer;
 
+        var printRecord=function(record){
+            console.log('record.id'+record.get('id')+'record.number='+record.get('number'));
+        };
         var onSelectionChange = function(model)
         {
             console.log('selectionchange event handler');
@@ -30,12 +33,33 @@ Ext.define('CM.view.EntityPanel', {
         var updateStore = function(window, record)
         {
             console.log('updateStore called');
+            printRecord(record);
+            var changes = me.table.store.getUpdatedRecords();
+            console.log('updatedRecords='+changes);
+            if(changes)
+            {
+                for(var i = 0; i < changes.length; i++){
+                    printRecord(changes[i]);
+                }
+            }
             me.table.store.commitChanges();
-            me.table.store.resumeEvents();
+            changes = me.table.store.getUpdatedRecords();
+            console.log('updatedRecords after commit='+changes);
+            if(changes)
+            {
+                for(var i = 0; i < changes.length; i++){
+                    printRecord(changes[i]);
+                }
+            }
+            console.log('store content:');
+            me.table.store.each(function(record){
+                printRecord(record);
+            });
+//            me.table.store.resumeEvents();
         };
         var editRecord =function(record)
         {
-            me.table.store.suspendEvents();
+//            me.table.store.suspendEvents();
             record.beginEdit();
             var view = me.createEntityWindow();
             view.on('save', updateStore);
@@ -55,7 +79,9 @@ Ext.define('CM.view.EntityPanel', {
         var onItemCreateClick=function()
         {
             console.log('handle.create.button');
-            me.createEntityWindow().show();
+            var window = me.createEntityWindow();
+            window.on('save', updateStore);
+            window.show();
         };
         var onItemDeleteClick =function()
         {

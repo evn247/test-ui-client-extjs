@@ -6,7 +6,7 @@
 Ext.define('CM.view.ViewFactory', {
     statics:{
         createOrganizationPhonePanel:function(){
-            return         Ext.create('CM.view.EntityPanel',{
+            return Ext.create('CM.view.EntityPanel',{
                 params:{
                     title:'Phones',
                     entityEditorWindowProducer: function(){
@@ -38,7 +38,8 @@ Ext.define('CM.view.ViewFactory', {
                                         name : 'extension',
                                         fieldLabel: 'Extension'
                                     }]
-                                }
+                                },
+                                tables:[]
                             }
                         });
                     },

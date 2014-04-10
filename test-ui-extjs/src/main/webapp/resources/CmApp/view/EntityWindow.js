@@ -32,7 +32,7 @@ Ext.define('CM.view.EntityWindow', {
 
         var findStores = function(button)
         {
-            var stores = new Array();
+            var stores = [];
             var tables=button.up('window').down('grid');
             if(tables)
             {
@@ -46,8 +46,8 @@ Ext.define('CM.view.EntityWindow', {
 
         var resetWindow = function(button)
         {
-            button.up('window').down('form').reset();
-            var tables=button.up('window').down('grid');
+            me.down('form').reset();
+            var tables=me.down('grid');
             if(tables)
             {
                 for(var i = 0; i < tables.length; i++)
@@ -71,12 +71,13 @@ Ext.define('CM.view.EntityWindow', {
                 action: name+'.save',
                 handler: function(button)
                 {
-                    var window = button.up('window');
-                    var record = window.down('form').getRecord();
+                    var record = me.down('form').updateRecord().getRecord();
+                    console.log('record.number before endEdit='+record.get('number'));
                     record.endEdit();
-                    console.log('fire save event');
-                    window.fireEvent('save', window, record, findStores(button));
-                    window.hide();
+                    console.log('record.number after endEdit='+record.get('number'));
+                    console.log('firing save event...');
+                    me.fireEvent('save', window, record, findStores(button));
+                    me.hide();
                 }
             },
             {
@@ -85,10 +86,9 @@ Ext.define('CM.view.EntityWindow', {
                 action: name+'.cancel',
                 handler: function(button)
                 {
-                    var window = button.up('window');
-                    var record = window.down('form').getRecord();
+                    var record = me.down('form').getRecord();
                     record.cancelEdit();
-                    window.hide();
+                    me.hide();
                 }
             }
         ];
