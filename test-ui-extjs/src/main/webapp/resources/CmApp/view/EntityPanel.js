@@ -27,9 +27,18 @@ Ext.define('CM.view.EntityPanel', {
             me.table.up('panel').down('button[name$=edit]').setDisabled(disabled);
 
         };
+        var updateStore = function(window, record)
+        {
+            console.log('updateStore called');
+            me.table.store.commitChanges();
+            me.table.store.resumeEvents();
+        };
         var editRecord =function(record)
         {
+            me.table.store.suspendEvents();
+            record.beginEdit();
             var view = me.createEntityWindow();
+            view.on('save', updateStore);
             view.down('form').loadRecord(record);
             view.show();
         };

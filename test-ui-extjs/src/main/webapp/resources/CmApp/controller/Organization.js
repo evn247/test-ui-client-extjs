@@ -30,6 +30,11 @@ Ext.define('CM.controller.Organization', {
             },
             'OrganizationWindow button[action=save]': {
                 click: this.saveOrganization
+            },
+            'EntityWindow':{
+                save:function(window, record, stores){
+                    console.log('save event. window='+window+' record='+record+' stores='+stores);
+                }
             }
         });
     },
