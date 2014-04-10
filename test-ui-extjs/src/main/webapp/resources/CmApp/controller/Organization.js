@@ -30,36 +30,6 @@ Ext.define('CM.controller.Organization', {
             },
             'OrganizationWindow button[action=save]': {
                 click: this.saveOrganization
-            },
-            'OrganizationWindow button[name=table.organization.phones.create]': {
-                click: this.createPhone
-            },
-            'OrganizationWindow button[name=table.organization.locations.create]': {
-                click: this.createLocation
-            },
-            'OrganizationWindow button[name=table.organization.managers.create]': {
-                click: this.createManager
-            },
-            'OrganizationWindow button[name=table.organization.accounts.create]': {
-                click: this.createAccount
-            },
-            'OrganizationWindow button[name=table.organization.file_data.create]': {
-                click: this.createFileData
-            },
-            'OrganizationWindow grid[name=table.organization.phones]': {
-                itemdblclick: this.editPhone
-            },
-            'OrganizationWindow grid[name=table.organization.locations]': {
-                itemdblclick: this.editLocation
-            },
-            'OrganizationWindow grid[name=table.organization.managers]': {
-                itemdblclick: this.editManager
-            },
-            'OrganizationWindow grid[name=table.organization.accounts]': {
-                itemdblclick: this.editAccount
-            },
-            'OrganizationWindow grid[name=table.organization.file_data]': {
-                itemdblclick: this.editFileData
             }
         });
     },
@@ -90,7 +60,6 @@ Ext.define('CM.controller.Organization', {
 
     createOrganization:function(button){
         var view = Ext.widget('OrganizationWindow');
-        view.down('form');
         view.show();
     },
     saveOrganization:function(button){
@@ -106,102 +75,9 @@ Ext.define('CM.controller.Organization', {
         console.log('phones.count='+phones.getCount());
         phones.removeAll(true);
         console.log('after remove phones.count='+phones.getCount());
-        copy(store, phones);
+        this.copy(store, phones);
         console.log('after copy phones.count='+phones.getCount());
 
         window.hide();
-    },
-    createPhone:function(button){
-        console.log('createPhone clicked.');
-        // todo: createPhone
-    },
-    createLocation:function(button){
-        console.log('createLocation clicked.');
-        // todo: createLocation
-    },
-    createManager:function(button){
-        console.log('createManager clicked.');
-        // todo: createManager
-    },
-    createAccount:function(button){
-        console.log('createAccount clicked.');
-        // todo: createAccount
-    },
-    createFileData:function(button){
-        console.log('createFileData clicked.');
-        // todo: createFileData
-    },
-    deletePhone:function(button){
-        console.log('deletePhone clicked.');
-        // todo: deletePhone
-    },
-    deleteLocation:function(button){
-        console.log('deleteLocation clicked.');
-        // todo: deleteLocation
-    },
-    deleteManager:function(button){
-        console.log('deleteManager clicked.');
-        // todo: deleteManager
-    },
-    deleteAccount:function(button){
-        console.log('deleteAccount clicked.');
-        // todo: deleteAccount
-    },
-    deleteFileData:function(button){
-        console.log('deleteFileData clicked.');
-        // todo: deleteFileData
-    },
-    editPhone:function(grid, record){
-        console.log('editPhone clicked.');
-        var view = Ext.create('CM.view.EntityWindow',{
-            title : 'Phone',
-            width: 400,
-            params:{
-                name : 'organization.phone',
-                form: {
-                    xtype: 'form',
-                    padding: 6,
-                    layout: {
-                        type: 'vbox',
-                        align:'stretch'
-                    },
-                    items: [{
-                        xtype: 'textfield',
-                        name : 'type',
-                        padding: 2,
-                        fieldLabel: 'type'
-                    },{
-                        xtype: 'textfield',
-                        padding: 2,
-                        name : 'number',
-                        fieldLabel: 'Number'
-                    },{
-                        xtype: 'textfield',
-                        padding: 2,
-                        name : 'extension',
-                        fieldLabel: 'Extension'
-                    }]
-                }
-            }
-        });
-
-        view.down('form').loadRecord(record);
-        view.show();
-    },
-    editLocation:function(grid, record){
-        console.log('editLocation clicked.');
-        // todo: editLocation
-    },
-    editManager:function(grid, record){
-        console.log('editManager clicked.');
-        // todo: editManager
-    },
-    editAccount:function(grid, record){
-        console.log('editAccount clicked.');
-        // todo: editAccount
-    },
-    editFileData:function(grid, record){
-        console.log('editFileData clicked.');
-        // todo: editFileData
     }
 });

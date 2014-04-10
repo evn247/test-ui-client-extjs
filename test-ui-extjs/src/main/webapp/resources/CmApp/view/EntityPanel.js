@@ -10,17 +10,55 @@ Ext.define('CM.view.EntityPanel', {
     collapsed: true,
     layout: 'fit',
     autoScroll:true,
+    table:null,
+    createEntityWindow:null,
 
     initComponent: function () {
         var prefix = this.params.table.name;
-        var table = this.params.table;
-        table.getSelectionModel().on('selectionchange', function(model)
+        var me = this;
+        this.table = this.params.table;
+        this.createEntityWindow = this.params.entityEditorWindowProducer;
+
+        var onSelectionChange = function(model)
         {
             console.log('selectionchange event handler');
-            var button = table.up('panel').down('button[name='+prefix+'.delete]');
-            console.log('button='+button);
-            button.setDisabled(!model.hasSelection());
-        });
+            var disabled = !model.hasSelection();
+            me.table.up('panel').down('button[name$=delete]').setDisabled(disabled);
+            me.table.up('panel').down('button[name$=edit]').setDisabled(disabled);
+
+        };
+        var editRecord =function(record)
+        {
+            var view = me.createEntityWindow();
+            view.down('form').loadRecord(record);
+            view.show();
+        };
+        var onItemDoubleClick = function(grid, record)
+        {
+            console.log('itemdblclick for '+me.table.name+' record='+record);
+            editRecord(record);
+        };
+        var onItemEditClick =function()
+        {
+            console.log('handle.edit.button');
+            editRecord(me.table.getSelectionModel().getSelection()[0]);
+        };
+        var onItemCreateClick=function()
+        {
+            console.log('handle.create.button');
+            me.createEntityWindow().show();
+        };
+        var onItemDeleteClick =function()
+        {
+            console.log('handle.delete.button');
+            me.table.store.remove(me.table.getSelectionModel().getSelection());
+        };
+
+
+        // enable/disable button depending on selection
+        this.table.getSelectionModel().on('selectionchange', onSelectionChange);
+        this.table.on('itemdblclick', onItemDoubleClick);
+
         console.log('create EntityPanel, prefix='+prefix);
         this.title = this.params.title;
 
@@ -29,7 +67,16 @@ Ext.define('CM.view.EntityPanel', {
                 xtype: 'button',
                 text: 'Create',
                 name: prefix+'.create',
-                width: 80
+                width: 80,
+                handler: onItemCreateClick
+            },
+            {
+                xtype: 'button',
+                text: 'Edit',
+                name: prefix+'.edit',
+                disabled: true,
+                width: 80,
+                handler: onItemEditClick
             },
             {
                 xtype: 'button',
@@ -37,22 +84,13 @@ Ext.define('CM.view.EntityPanel', {
                 disabled: true,
                 name: prefix+'.delete',
                 width: 80,
-                handler: function(button)
-                {
-                    console.log('handle.delete.button');
-                    var table = button.up('panel').down('grid[name='+prefix+']');
-                    var selectionModel = table.getSelectionModel();
-                    if(selectionModel.hasSelection())
-                    {
-                        table.store.remove(selectionModel.getSelection());
-                    }
-                }
+                handler: onItemDeleteClick
             }
         ];
 
-        this.items = [table];
+        this.items = [this.params.table];
+
 
         this.callParent(arguments);
     }
-
 });

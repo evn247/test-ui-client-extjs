@@ -12,7 +12,6 @@ Ext.define('CM.view.EntityWindow', {
         type: 'vbox',
         align:'stretch'
     },
-    autoShow: true,
     autoScroll:true,
     modal:true,
     padding: 6,
