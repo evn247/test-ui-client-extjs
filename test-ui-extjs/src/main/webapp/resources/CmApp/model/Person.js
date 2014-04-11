@@ -8,7 +8,7 @@ Ext.define('CM.model.Person', {
     fields: ['id', 'firstName', 'lastName', 'middleName', 'position','email'],
     associations: [{
         type: 'hasMany',
-        model: 'CmApp.model.Phone',
+        model: 'CM.model.Phone',
         name: 'phones'
     }]
 });

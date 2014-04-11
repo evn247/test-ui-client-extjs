@@ -52,42 +52,7 @@ Ext.define('CM.view.OrganizationWindow', {
             }]
         },
         CM.view.ViewFactory.createOrganizationPhonePanel(),
-        Ext.create('CM.view.EntityPanel', {
-            params:{
-                title:'Managers',
-                table: Ext.create('Ext.grid.Panel',{
-                    name: 'table.organization.managers',
-                    store:Ext.create('CM.store.Person'),
-                    columns: [
-                        {
-                            xtype:'rownumberer'
-                        },
-                        {
-                            header: 'First Name',
-                            dataIndex: 'firstName',
-                            flex:1
-                        },
-                        {
-                            header: 'Last Name',
-                            dataIndex: 'lastName',
-                            flex:1
-                        },
-                        {
-                            header: 'Middle Name',
-                            dataIndex: 'middleName'
-                        },
-                        {
-                            header: 'Position',
-                            dataIndex: 'position'
-                        },
-                        {
-                            header: 'E-mail',
-                            dataIndex: 'email'
-                        }
-                    ]
-                })
-            }
-        }),
+        CM.view.ViewFactory.createOrganizationManagerPanel(),
         Ext.create('CM.view.EntityPanel', {
             params:{
                 title:'Locations',

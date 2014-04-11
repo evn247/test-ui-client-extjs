@@ -5,6 +5,7 @@
  */
 Ext.define('CM.controller.Organization', {
     extend: 'Ext.app.Controller',
+    requires: ['CM.view.Util','CM.LogUtil'],
 
     views: ['CM.view.OrganizationPanel',
             'CM.view.OrganizationWindow',
@@ -32,8 +33,11 @@ Ext.define('CM.controller.Organization', {
                 click: this.saveOrganization
             },
             'EntityWindow':{
-                save:function(window, record, stores){
-                    console.log('save event. window='+window+' record='+record+' stores='+stores);
+                save:function(window){
+                    console.log('save event. window='+window);
+                },
+                cancel:function(window){
+                    console.log('cancel event. window='+window);
                 }
             }
         });
@@ -42,46 +46,34 @@ Ext.define('CM.controller.Organization', {
         var view = Ext.widget('OrganizationWindow');
 
         view.down('form').loadRecord(record);
-        this.setupTablePanel(view, 'grid[name=table.organization.phones]', record.phones());
-        this.setupTablePanel(view, 'grid[name=table.organization.managers]', record.managers());
-        this.setupTablePanel(view, 'grid[name=table.organization.locations]', record.locations());
-        this.setupTablePanel(view, 'grid[name=table.organization.accounts]', record.accounts());
-        this.setupTablePanel(view, 'grid[name=table.organization.file_data]', record.fileDatas());
+        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.phones]', record.phones());
+        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.managers]', record.managers());
+        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.locations]', record.locations());
+        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.accounts]', record.accounts());
+        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.file_data]', record.fileDatas());
         view.show();
     },
 
-    setupTablePanel: function(view, query, records){
-        console.log('setupTablePanel.query='+query);
-        var table = view.down(query);
-        this.copy(records, table.store);
-    },
-    copy:function(from, to)
-    {
-        from.each(function(record)
-        {
-            to.add(record);
-        });
-    },
 
     createOrganization:function(button){
         var view = Ext.widget('OrganizationWindow');
+        view.down('form').loadRecord(Ext.create('CM.model.Organization'));
         view.show();
     },
     saveOrganization:function(button){
         console.log('saveOrganization clicked.');
         var window = button.up('window');
         var record = window.down('form').getRecord();
-        console.log('record='+record);
-        console.log('id='+record.get('id')+' name='+record.get('name'));
+        console.log('updated organization.record:');
+        CM.LogUtil.logRecord(record);
         var phones = record.phones();
         var store = window.down('grid[name=table.organization.phones]').store;
-        console.log('store='+store);
-        console.log('count='+store.getCount());
-        console.log('phones.count='+phones.getCount());
+        console.log('view phone.store:');
+        CM.LogUtil.logStore(store);
         phones.removeAll(true);
-        console.log('after remove phones.count='+phones.getCount());
-        this.copy(store, phones);
-        console.log('after copy phones.count='+phones.getCount());
+        CM.view.Util.copy(store, phones);
+        console.log('updated organization.phones:');
+        CM.LogUtil.logStore(phones);
 
         window.hide();
     }

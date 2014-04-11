@@ -30,21 +30,7 @@ Ext.define('CM.view.EntityWindow', {
             this.items.push.apply(this.items, tables);
         }
 
-        var findStores = function(button)
-        {
-            var stores = [];
-            var tables=button.up('window').down('grid');
-            if(tables)
-            {
-                for(var i = 0; i < tables.length; i++)
-                {
-                    stores.push(tables.store);
-                }
-            }
-            return stores;
-        };
-
-        var resetWindow = function(button)
+        var resetWindow = function()
         {
             me.down('form').reset();
             var tables=me.down('grid');
@@ -69,14 +55,12 @@ Ext.define('CM.view.EntityWindow', {
                 xtype:'button',
                 text:'Сохранить',
                 action: name+'.save',
-                handler: function(button)
+                handler: function()
                 {
                     var record = me.down('form').updateRecord().getRecord();
-                    console.log('record.number before endEdit='+record.get('number'));
                     record.endEdit();
-                    console.log('record.number after endEdit='+record.get('number'));
                     console.log('firing save event...');
-                    me.fireEvent('save', window, record, findStores(button));
+                    me.fireEvent('save', window, record);
                     me.hide();
                 }
             },
@@ -84,7 +68,7 @@ Ext.define('CM.view.EntityWindow', {
                 xtype:'button',
                 text:'Отменить',
                 action: name+'.cancel',
-                handler: function(button)
+                handler: function()
                 {
                     var record = me.down('form').getRecord();
                     record.cancelEdit();

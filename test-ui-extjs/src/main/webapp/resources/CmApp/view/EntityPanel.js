@@ -6,22 +6,22 @@
 Ext.define('CM.view.EntityPanel', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.EntityPanel',
+    requires: ['CM.LogUtil'],
     collapsible: true,
     collapsed: true,
     layout: 'fit',
     autoScroll:true,
     table:null,
     createEntityWindow:null,
+    createRecord:null,
 
     initComponent: function () {
         var prefix = this.params.table.name;
         var me = this;
         this.table = this.params.table;
         this.createEntityWindow = this.params.entityEditorWindowProducer;
+        this.createRecord = this.params.recordFactory;
 
-        var printRecord=function(record){
-            console.log('record.id'+record.get('id')+'record.number='+record.get('number'));
-        };
         var onSelectionChange = function(model)
         {
             console.log('selectionchange event handler');
@@ -33,37 +33,30 @@ Ext.define('CM.view.EntityPanel', {
         var updateStore = function(window, record)
         {
             console.log('updateStore called');
-            printRecord(record);
+            console.log('updateStore.record:');
+            CM.LogUtil.logRecord(record);
+
+            console.log('store content before commit:');
+            CM.LogUtil.logStore(me.table.store);
+
+            if(!record.getId())
+            {
+                me.table.store.add(record);
+            }
+
             var changes = me.table.store.getUpdatedRecords();
-            console.log('updatedRecords='+changes);
-            if(changes)
-            {
-                for(var i = 0; i < changes.length; i++){
-                    printRecord(changes[i]);
-                }
-            }
+            console.log('updated records:');
+            CM.LogUtil.logRecords(changes);
             me.table.store.commitChanges();
-            changes = me.table.store.getUpdatedRecords();
-            console.log('updatedRecords after commit='+changes);
-            if(changes)
-            {
-                for(var i = 0; i < changes.length; i++){
-                    printRecord(changes[i]);
-                }
-            }
-            console.log('store content:');
-            me.table.store.each(function(record){
-                printRecord(record);
-            });
-//            me.table.store.resumeEvents();
+
+            console.log('store content after commit:');
+            CM.LogUtil.logStore(me.table.store);
         };
         var editRecord =function(record)
         {
-//            me.table.store.suspendEvents();
             record.beginEdit();
-            var view = me.createEntityWindow();
+            var view = me.createEntityWindow(record);
             view.on('save', updateStore);
-            view.down('form').loadRecord(record);
             view.show();
         };
         var onItemDoubleClick = function(grid, record)
@@ -79,9 +72,7 @@ Ext.define('CM.view.EntityPanel', {
         var onItemCreateClick=function()
         {
             console.log('handle.create.button');
-            var window = me.createEntityWindow();
-            window.on('save', updateStore);
-            window.show();
+            editRecord(me.createRecord());
         };
         var onItemDeleteClick =function()
         {
