@@ -64,16 +64,11 @@ Ext.define('CM.controller.Organization', {
         console.log('saveOrganization clicked.');
         var window = button.up('window');
         var record = window.down('form').getRecord();
-        console.log('updated organization.record:');
-        CM.LogUtil.logRecord(record);
-        var phones = record.phones();
-        var store = window.down('grid[name=table.organization.phones]').store;
-        console.log('view phone.store:');
-        CM.LogUtil.logStore(store);
-        phones.removeAll(true);
-        CM.view.Util.copy(store, phones);
-        console.log('updated organization.phones:');
-        CM.LogUtil.logStore(phones);
+        CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.phones]', record.phones());
+        CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.managers]', record.managers());
+        CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.locations]', record.locations());
+        CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.accounts]', record.accounts());
+        CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.file_data]', record.fileDatas());
 
         window.hide();
     }

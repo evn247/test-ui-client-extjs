@@ -21,6 +21,7 @@ Ext.define('CM.view.EntityPanel', {
         this.table = this.params.table;
         this.createEntityWindow = this.params.entityEditorWindowProducer;
         this.createRecord = this.params.recordFactory;
+        console.log('table='+this.table+' createWindow='+this.createEntityWindow+' createRecord='+this.createRecord);
 
         var onSelectionChange = function(model)
         {
@@ -41,7 +42,24 @@ Ext.define('CM.view.EntityPanel', {
 
             if(!record.getId())
             {
-                me.table.store.add(record);
+                console.log('potentially new entry');
+
+                var found = false;
+                me.table.store.each(function(entry){
+                    console.log('checking entry:');
+                    CM.LogUtil.logRecord(entry);
+                        if(entry === record){
+                            console.log('entry matched record!');
+                            found = true;
+                        }
+                });
+
+                console.log('found='+found);
+                if(!found)
+                {
+                    me.table.store.add(record);
+                }
+
             }
 
             var changes = me.table.store.getUpdatedRecords();
@@ -113,9 +131,7 @@ Ext.define('CM.view.EntityPanel', {
                 handler: onItemDeleteClick
             }
         ];
-
         this.items = [this.params.table];
-
 
         this.callParent(arguments);
     }
