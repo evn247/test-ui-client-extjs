@@ -45,10 +45,8 @@ Ext.define('CM.controller.Organization', {
     editOrganization: function(grid, record) {
         var view = Ext.widget('OrganizationWindow');
 
-        console.log('record.class='+Ext.getClassName(record));
-        console.log('record.getAddress='+CM.LogUtil.logRecord(record.getAddress(function(address, operation){
-            console.log('record.getAddress.function.address='+CM.LogUtil.logRecord(address));
-        })));
+        console.log('record.getAddress:');
+        CM.LogUtil.logRecord(record.getAddress());
 
         view.down('form').loadRecord(record);
         CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.phones]', record.phones());
