@@ -1,0 +1,19 @@
+{
+    "success": true,
+    "data":[
+        {
+            "id":25,
+            "name":"judicial address",
+            "streetAddress":"Lenina 25",
+            "city":"Moscow",
+            "postIndex":"123000"
+        },
+        {
+            "id":26,
+            "name":"judicial address",
+            "streetAddress":"Shevchenko 34",
+            "city":"Moscow",
+            "postIndex":"125000"
+        }
+   ]
+}

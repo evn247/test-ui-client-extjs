@@ -45,12 +45,16 @@ Ext.define('CM.controller.Organization', {
     editOrganization: function(grid, record) {
         var view = Ext.widget('OrganizationWindow');
 
+        console.log('record.class='+Ext.getClassName(record));
+        console.log('record.getAddress='+CM.LogUtil.logRecord(record.getAddress(function(address, operation){
+            console.log('record.getAddress.function.address='+CM.LogUtil.logRecord(address));
+        })));
+
         view.down('form').loadRecord(record);
         CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.phones]', record.phones());
         CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.managers]', record.managers());
         CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.locations]', record.locations());
         CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.accounts]', record.accounts());
-        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.file_data]', record.fileDatas());
         view.show();
     },
 
@@ -68,7 +72,6 @@ Ext.define('CM.controller.Organization', {
         CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.managers]', record.managers());
         CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.locations]', record.locations());
         CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.accounts]', record.accounts());
-        CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.file_data]', record.fileDatas());
 
         window.hide();
     }

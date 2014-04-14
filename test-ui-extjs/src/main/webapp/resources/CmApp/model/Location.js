@@ -5,5 +5,19 @@
  */
 Ext.define('CM.model.Location', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'name', 'streetAddress', 'city','region','postIndex']
+    fields: ['id', 'name', 'streetAddress', 'city','region','postIndex'],
+
+    proxy:{
+        type: 'ajax',
+
+        pageParam: undefined,
+
+        url: 'resources/data/Addresses.json',
+
+        reader: {
+            type: 'json',
+                root: 'data'
+        }
+    }
+
 });

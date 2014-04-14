@@ -6,8 +6,15 @@
 Ext.define('CM.model.Organization', {
     extend: 'Ext.data.Model',
     idProperty: 'id',
-    fields: ['id', 'name', 'inn', 'website', 'email'],
+    fields: ['id', 'name', 'inn', 'website', 'email', 'address_id'],
     associations: [{
+        type: 'hasOne',
+        model: 'CM.model.Location',
+        name: 'address',
+        getterName:'getAddress',
+        setterName:'setAddress',
+        foreignKey:'address_id'
+    },{
         type: 'hasMany',
         model: 'CM.model.Phone',
         name: 'phones'
@@ -27,5 +34,17 @@ Ext.define('CM.model.Organization', {
         type: 'hasMany',
         model: 'CM.model.FileData',
         name: 'fileDatas'
-    }]
+    }],
+    proxy:{
+        type: 'ajax',
+
+        pageParam: undefined,
+
+        url: 'resources/data/Organizations.json',
+
+        reader: {
+            type: 'json',
+            root: 'data'
+        }
+    }
 });

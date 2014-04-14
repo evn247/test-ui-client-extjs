@@ -7,18 +7,5 @@ Ext.define('CM.store.Organization', {
     extend: 'Ext.data.Store',
     model: 'CM.model.Organization',
 
-    autoLoad: true,
-
-    proxy:{
-        type: 'ajax',
-
-        pageParam: undefined,
-
-        url: 'resources/data/Organizations.json',
-
-        reader: {
-            type: 'json',
-            root: 'data'
-        }
-    }
+    autoLoad: true
 });
