@@ -47,10 +47,7 @@ Ext.define('CM.controller.Organization', {
 
         console.log('record.class='+Ext.getClassName(record));
         console.log('record.getAddress:');
-        CM.LogUtil.logRecord(record.getAddress(function(address, operation){
-            console.log('record.getAddress.function.address:');
-            CM.LogUtil.logRecord(address);
-        }));
+        CM.LogUtil.logRecord(record.getAddress());
 
 
         view.down('form').loadRecord(record);

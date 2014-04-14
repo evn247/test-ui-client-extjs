@@ -50,13 +50,25 @@ Ext.define('CM.view.OrganizationWindow', {
                 padding: 2,
                 name : 'email',
                 fieldLabel: 'E-Mail'
+            },{
+                xtype:'textfield',
+                editable:false,
+                padding: 2,
+                name:"address_id",
+                fieldLabel:"Judicial address",
+                listeners:{
+                    change:function(src, newValue, oldValue){
+                        console.log('onChange, newValue:'+newValue+' class='+Ext.getClassName(newValue));
+                        console.log('onChange, oldValue:'+oldValue);
+                    }
+                }
             }]
         },
         CM.view.ViewFactory.createOrganizationPhonePanel(),
         CM.view.ViewFactory.createOrganizationManagerPanel(),
         CM.view.ViewFactory.createOrganizationLocationPanel(),
         CM.view.ViewFactory.createOrganizationAccountPanel()
-        ]
+        ];
 
         this.buttons = [{
                 xtype:'button',

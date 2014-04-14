@@ -9,6 +9,14 @@
             "email":"info@test1.ru",
             "address_id": 25,
 
+            "Address":{
+                "id":25,
+                "name":"judicial address",
+                "streetAddress":"Lenina 25",
+                "city":"Moscow",
+                "postIndex":"123000"
+            },
+
             "phones":[
                 {
                     "id":1,
@@ -82,6 +90,14 @@
             "website":"www.test2.ru",
             "email":"info@test2.ru",
             "address_id":26,
+
+            "Address":{
+                "id":26,
+                "name":"judicial address",
+                "streetAddress":"Shevchenko 34",
+                "city":"Moscow",
+                "postIndex":"125000"
+            },
 
             "phones":[
                 {

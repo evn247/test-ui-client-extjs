@@ -21,7 +21,8 @@ Ext.define('CM.view.EntityPanel', {
         this.table = this.params.table;
         this.createEntityWindow = this.params.entityEditorWindowProducer;
         this.createRecord = this.params.recordFactory;
-        console.log('table='+this.table+' createWindow='+this.createEntityWindow+' createRecord='+this.createRecord);
+
+        console.log('create EntityPanel, prefix='+prefix);
 
         var onSelectionChange = function(model)
         {
@@ -33,8 +34,7 @@ Ext.define('CM.view.EntityPanel', {
         };
         var updateStore = function(window, record)
         {
-            console.log('updateStore called');
-            console.log('updateStore.record:');
+            console.log('updateStore called, record:');
             CM.LogUtil.logRecord(record);
 
             console.log('store content before commit:');
@@ -103,7 +103,6 @@ Ext.define('CM.view.EntityPanel', {
         this.table.getSelectionModel().on('selectionchange', onSelectionChange);
         this.table.on('itemdblclick', onItemDoubleClick);
 
-        console.log('create EntityPanel, prefix='+prefix);
         this.title = this.params.title;
 
         this.tbar = [

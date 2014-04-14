@@ -13,7 +13,9 @@ Ext.define('CM.model.Organization', {
         name: 'address',
         getterName:'getAddress',
         setterName:'setAddress',
-        foreignKey:'address_id'
+        foreignKey:'address_id',
+        associatedName : 'Location',
+        associationKey : 'Address'
     },{
         type: 'hasMany',
         model: 'CM.model.Phone',
@@ -34,17 +36,5 @@ Ext.define('CM.model.Organization', {
         type: 'hasMany',
         model: 'CM.model.FileData',
         name: 'fileDatas'
-    }],
-    proxy:{
-        type: 'ajax',
-
-        pageParam: undefined,
-
-        url: 'resources/data/Organizations.json',
-
-        reader: {
-            type: 'json',
-            root: 'data'
-        }
-    }
+    }]
 });
