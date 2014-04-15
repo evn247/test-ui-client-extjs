@@ -25,6 +25,8 @@ Ext.define('CM.store.Organization', {
         load : function (store, recs) {
             var rec   = recs[0],
                 address  = rec.getAddress();
+            console.log('onLoad, rec:');
+            CM.LogUtil.logRecord(rec);
             console.log('onLoad, address:');
             CM.LogUtil.logRecord(address);
         }

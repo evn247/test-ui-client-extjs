@@ -6,7 +6,7 @@
 Ext.define('CM.model.Organization', {
     extend: 'Ext.data.Model',
     idProperty: 'id',
-    fields: ['id', 'name', 'inn', 'website', 'email', 'address_id'],
+    fields: ['id', 'fullName','shortName', 'inn', 'kpp', 'website', 'email', 'address_id'],
     associations: [{
         type: 'hasOne',
         model: 'CM.model.Location',

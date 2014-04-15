@@ -37,13 +37,17 @@ Ext.define('CM.view.OrganizationPanel', {
                                     xtype:'rownumberer'
                                 },
                                 {
-                                    header: 'Name',
-                                    dataIndex: 'name',
+                                    header: 'Short Name',
+                                    dataIndex: 'shortName',
                                     flex:1
                                 },
                                 {
                                     header: 'INN',
                                     dataIndex: 'inn'
+                                },
+                                {
+                                    header: 'KPP',
+                                    dataIndex: 'kpp'
                                 },
                                 {
                                     header: 'Web-site',

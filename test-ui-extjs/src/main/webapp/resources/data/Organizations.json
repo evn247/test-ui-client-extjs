@@ -3,8 +3,10 @@
     "data":[
         {
             "id":1,
-            "name":"Test organization 1",
+            "shortName":"Test organization 1 short name",
+            "fullName":"Test organization 1 full name",
             "inn":"1234567890",
+            "kpp":"123456789012",
             "website":"www.test1.ru",
             "email":"info@test1.ru",
             "address_id": 25,
@@ -85,8 +87,10 @@
         },
         {
             "id":2,
-            "name":"Test organization 2",
+            "fullName":"Test organization 2 full name",
+            "shortName":"Test organization 2 short name",
             "inn":"1234567899",
+            "kpp":"123456789922",
             "website":"www.test2.ru",
             "email":"info@test2.ru",
             "address_id":26,
