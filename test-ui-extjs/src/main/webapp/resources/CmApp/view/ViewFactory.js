@@ -243,6 +243,53 @@ Ext.define('CM.view.ViewFactory', {
                 }]
             };
         },
+        createLocationWindowProducer:function(record){
+            var view = Ext.create('CM.view.EntityWindow',{
+                title : 'Locations',
+                width: 400,
+                params:{
+                    name : 'location.window',
+                    form: {
+                        xtype: 'form',
+                        padding: 6,
+                        layout: {
+                            type: 'vbox',
+                            align:'stretch'
+                        },
+                        items: [{
+                            xtype: 'textfield',
+                            name : 'name',
+                            padding: 2,
+                            fieldLabel: 'Name'
+                        },{
+                            xtype: 'textfield',
+                            padding: 2,
+                            name : 'city',
+                            fieldLabel: 'City'
+                        },{
+                            xtype: 'textfield',
+                            padding: 2,
+                            name : 'streetAddress',
+                            fieldLabel: 'Street Address'
+                        },{
+                            xtype: 'textfield',
+                            padding: 2,
+                            name : 'region',
+                            fieldLabel: 'Region'
+                        },{
+                            xtype: 'textfield',
+                            padding: 2,
+                            name : 'postIndex',
+                            fieldLabel: 'Post Index'
+                        }]
+                    },
+                    tables:[]
+                }
+            });
+            view.down('form').loadRecord(record);
+
+            return view;
+        },
         createOrganizationLocationPanel:function(){
             console.log('createOrganizationLocationPanel called');
             return Ext.create('CM.view.EntityPanel', {
@@ -251,53 +298,7 @@ Ext.define('CM.view.ViewFactory', {
                     recordFactory:function(){
                         return Ext.create('CM.model.Location');
                     },
-                    entityEditorWindowProducer: function(record){
-                        var view = Ext.create('CM.view.EntityWindow',{
-                            title : 'Locations',
-                            width: 400,
-                            params:{
-                                name : 'organization.location',
-                                form: {
-                                    xtype: 'form',
-                                    padding: 6,
-                                    layout: {
-                                        type: 'vbox',
-                                        align:'stretch'
-                                    },
-                                    items: [{
-                                        xtype: 'textfield',
-                                        name : 'name',
-                                        padding: 2,
-                                        fieldLabel: 'Name'
-                                    },{
-                                        xtype: 'textfield',
-                                        padding: 2,
-                                        name : 'city',
-                                        fieldLabel: 'City'
-                                    },{
-                                        xtype: 'textfield',
-                                        padding: 2,
-                                        name : 'streetAddress',
-                                        fieldLabel: 'Street Address'
-                                    },{
-                                        xtype: 'textfield',
-                                        padding: 2,
-                                        name : 'region',
-                                        fieldLabel: 'Region'
-                                    },{
-                                        xtype: 'textfield',
-                                        padding: 2,
-                                        name : 'postIndex',
-                                        fieldLabel: 'Post Index'
-                                    }]
-                                },
-                                tables:[]
-                            }
-                        });
-                        view.down('form').loadRecord(record);
-
-                        return view;
-                    },
+                    entityEditorWindowProducer: CM.view.ViewFactory.createLocationWindowProducer,
                     table: Ext.create('Ext.grid.Panel',
                         {
                             name: 'table.organization.locations',

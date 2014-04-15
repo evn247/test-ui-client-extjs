@@ -6,7 +6,7 @@
 Ext.define('CM.view.OrganizationWindow', {
     extend: 'Ext.window.Window',
     alias: 'widget.OrganizationWindow',
-    requires: ['CM.view.EntityPanel','CM.view.ViewFactory'],
+    requires: ['CM.view.EntityPanel','CM.view.ViewFactory','CM.view.LookUpPanel'],
 
     title: 'Organization',
     layout: {
@@ -51,15 +51,17 @@ Ext.define('CM.view.OrganizationWindow', {
                 name : 'email',
                 fieldLabel: 'E-Mail'
             },{
-                xtype:'textfield',
-                editable:false,
-                padding: 2,
-                name:"address_id",
-                fieldLabel:"Judicial address",
-                listeners:{
-                    change:function(src, newValue, oldValue){
-                        console.log('onChange, newValue:'+newValue+' class='+Ext.getClassName(newValue));
-                        console.log('onChange, oldValue:'+oldValue);
+                xtype:'LookUpPanel',
+                params:{
+                    recordFactory:function(){
+                        return Ext.create('CM.model.Location');
+                    },
+                    entityEditorWindowProducer: CM.view.ViewFactory.createLocationWindowProducer,
+                    updateOwner:function(owner, record){
+                        owner.setAddress(record);
+                    },
+                    readOwner:function(record){
+                        return record.getAddress();
                     }
                 }
             }]

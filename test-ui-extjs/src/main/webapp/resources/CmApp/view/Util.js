@@ -26,6 +26,23 @@ Ext.define('CM.view.Util', {
             {
                 to.add(record);
             });
+        },
+        join:function(record, delim, fields){
+            var value = '';
+            for(var i = 0; i < fields.length; i++)
+            {
+                var fieldValue = record.get(fields[i]);
+                if(fieldValue)
+                {
+                    if(value.length > 0)
+                    {
+                        value += delim;
+                    }
+                    value += fieldValue;
+                }
+            }
+
+            return value;
         }
     }
 });
