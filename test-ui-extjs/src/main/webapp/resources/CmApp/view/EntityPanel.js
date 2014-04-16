@@ -34,38 +34,7 @@ Ext.define('CM.view.EntityPanel', {
         };
         var updateStore = function(window, record)
         {
-            console.log('updateStore called, record:');
-            CM.LogUtil.logRecord(record);
-
-            console.log('store content before commit:');
-            CM.LogUtil.logStore(me.table.store);
-
-            if(!record.getId())
-            {
-                console.log('potentially new entry');
-
-                var found = false;
-                me.table.store.each(function(entry){
-                    console.log('checking entry:');
-                    CM.LogUtil.logRecord(entry);
-                        if(entry === record){
-                            console.log('entry matched record!');
-                            found = true;
-                        }
-                });
-
-                console.log('found='+found);
-                if(!found)
-                {
-                    me.table.store.add(record);
-                }
-
-            }
-
-            var changes = me.table.store.getUpdatedRecords();
-            console.log('updated records:');
-            CM.LogUtil.logRecords(changes);
-            me.table.store.commitChanges();
+            CM.view.Util.saveRecord(record);
 
             console.log('store content after commit:');
             CM.LogUtil.logStore(me.table.store);

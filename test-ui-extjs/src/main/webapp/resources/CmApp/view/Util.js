@@ -43,6 +43,43 @@ Ext.define('CM.view.Util', {
             }
 
             return value;
+        },
+        saveRecord:function(record){
+            console.log('saveRecord.record:');
+            record.endEdit();
+            CM.LogUtil.logRecord(record);
+
+            var stores = record.stores;
+            console.log('record stores:'+stores);
+            for(var i = 0; i < stores.length; i++)
+            {
+                var store = stores[i];
+                CM.LogUtil.logStore(store);
+                console.log('updatedRecords:');
+                CM.LogUtil.logRecords(store.getUpdatedRecords());
+                if(!record.getId())
+                {
+                    console.log('potentially new entry');
+
+                    var found = false;
+                    store.each(function(entry){
+                        console.log('checking entry:');
+                        CM.LogUtil.logRecord(entry);
+                        if(entry === record){
+                            console.log('entry matched record!');
+                            found = true;
+                        }
+                    });
+
+                    console.log('found='+found);
+                    if(!found)
+                    {
+                        store.add(record);
+                    }
+                }
+                console.log('committing store...');
+                store.commitChanges();
+            }
         }
     }
 });

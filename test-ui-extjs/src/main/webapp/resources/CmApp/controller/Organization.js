@@ -19,7 +19,6 @@ Ext.define('CM.controller.Organization', {
         'CM.store.Location'],
 
     models: ['CM.model.Organization'],
-    grid:null,
 
     init: function() {
         console.log('Organization.controller.init');
@@ -32,18 +31,17 @@ Ext.define('CM.controller.Organization', {
             },
             'OrganizationWindow button[action=save]': {
                 click: this.saveOrganization
+            },
+            'OrganizationWindow button[action=cancel]': {
+                click: this.cancelEdit
             }
         });
     },
     editOrganization: function(grid, record) {
-        this.grid = grid;
+        console.log('record.class='+Ext.getClassName(record));
         var view = Ext.widget('OrganizationWindow');
 
-        console.log('record.class='+Ext.getClassName(record));
-        console.log('record.getAddress:');
-        CM.LogUtil.logRecord(record.getAddress());
-
-
+        record.beginEdit();
         view.down('form').loadRecord(record);
         CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.phones]', record.phones());
         CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.managers]', record.managers());
@@ -52,6 +50,12 @@ Ext.define('CM.controller.Organization', {
         view.show();
     },
 
+    cancelEdit:function(button){
+        var window = button.up('window');
+        var record = window.down('form').getRecord();
+        record.cancelEdit();
+        window.hide();
+    },
 
     createOrganization:function(button){
         var view = Ext.widget('OrganizationWindow');
@@ -61,29 +65,9 @@ Ext.define('CM.controller.Organization', {
     saveOrganization:function(button){
         console.log('saveOrganization clicked.');
         var window = button.up('window');
-        var record = window.down('form').getRecord();
-        var table = this.grid;
-        if(!record.getId())
-        {
-            console.log('potentially new entry');
+        var form = window.down('form');
+        CM.view.Util.saveRecord(form.updateRecord().getRecord());
 
-            var found = false;
-            table.store.each(function(entry){
-                console.log('checking entry:');
-                CM.LogUtil.logRecord(entry);
-                if(entry === record){
-                    console.log('entry matched record!');
-                    found = true;
-                }
-            });
-
-            console.log('found='+found);
-            if(!found)
-            {
-                table.store.add(record);
-            }
-            table.store.commitChanges();
-        }
         CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.phones]', record.phones());
         CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.managers]', record.managers());
         CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.locations]', record.locations());
