@@ -14,6 +14,9 @@ Ext.define('CM.view.DictionariesMain', {
             },
             {
                 xtype:'ServicePanel'
+            },
+            {
+                xtype:'KbkPanel'
             }
         ];
 

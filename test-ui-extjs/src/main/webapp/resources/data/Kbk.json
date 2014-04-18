@@ -1,0 +1,15 @@
+{
+    "success": true,
+    "data":[
+        {
+            "id":1,
+            "description":"Test kbk 1",
+            "code":"1234567890"
+        },
+        {
+            "id":2,
+            "description":"Test kbk 2",
+            "code":"1234567891"
+        }
+   ]
+}

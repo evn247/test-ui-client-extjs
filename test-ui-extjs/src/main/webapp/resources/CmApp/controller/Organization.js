@@ -37,7 +37,7 @@ Ext.define('CM.controller.Organization', {
             }
         });
     },
-    editService: function(grid, record) {
+    editKbk: function(grid, record) {
         console.log('record.class='+Ext.getClassName(record));
         var view = Ext.widget('OrganizationWindow');
 
@@ -57,12 +57,12 @@ Ext.define('CM.controller.Organization', {
         window.hide();
     },
 
-    createService:function(button){
+    createKbk:function(button){
         var view = Ext.widget('OrganizationWindow');
         view.down('form').loadRecord(Ext.create('CM.model.Organization'));
         view.show();
     },
-    saveService:function(button){
+    saveKbk:function(button){
         console.log('saveOrganization clicked.');
         var window = button.up('window');
         var record = window.down('form').updateRecord().getRecord();

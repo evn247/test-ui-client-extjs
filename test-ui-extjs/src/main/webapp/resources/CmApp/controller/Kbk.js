@@ -3,37 +3,37 @@
  * Date: 04.04.14
  * Time: 12:07
  */
-Ext.define('CM.controller.Service', {
+Ext.define('CM.controller.Kbk', {
     extend: 'Ext.app.Controller',
     requires: ['CM.view.Util','CM.LogUtil'],
 
-    views: ['CM.view.ServicePanel',
-            'CM.view.ServiceWindow'],
+    views: ['CM.view.KbkPanel',
+            'CM.view.KbkWindow'],
 
-    stores: ['CM.store.Service'],
+    stores: ['CM.store.Kbk'],
 
-    models: ['CM.model.Service'],
+    models: ['CM.model.Kbk'],
 
     init: function() {
-        console.log('Service.controller.init');
+        console.log('Kbk.controller.init');
         this.control({
-            'ServicePanel grid[name=table.service]': {
-                itemdblclick: this.editService
+            'KbkPanel grid[name=table.kbk]': {
+                itemdblclick: this.editKbk
             },
-            'ServicePanel button[name=create]': {
-                click: this.createService
+            'KbkPanel button[name=create]': {
+                click: this.createKbk
             },
-            'ServiceWindow button[action=save]': {
-                click: this.saveService
+            'KbkWindow button[action=save]': {
+                click: this.saveKbk
             },
-            'ServiceWindow button[action=cancel]': {
+            'KbkWindow button[action=cancel]': {
                 click: this.cancelEdit
             }
         });
     },
     editKbk: function(grid, record) {
         console.log('record.class='+Ext.getClassName(record));
-        var view = Ext.widget('ServiceWindow');
+        var view = Ext.widget('KbkWindow');
 
         record.beginEdit();
         view.down('form').loadRecord(record);
@@ -48,12 +48,12 @@ Ext.define('CM.controller.Service', {
     },
 
     createKbk:function(button){
-        var view = Ext.widget('ServiceWindow');
-        view.down('form').loadRecord(Ext.create('CM.model.Service'));
+        var view = Ext.widget('KbkWindow');
+        view.down('form').loadRecord(Ext.create('CM.model.Kbk'));
         view.show();
     },
     saveKbk:function(button){
-        console.log('saveService clicked.');
+        console.log('saveKbk clicked.');
         var window = button.up('window');
         var record = window.down('form').updateRecord().getRecord();
         CM.view.Util.saveRecord(record);

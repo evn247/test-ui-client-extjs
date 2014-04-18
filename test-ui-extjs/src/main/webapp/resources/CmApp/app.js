@@ -9,7 +9,8 @@ Ext.application({
         'CM.support.Shared',
         'CM.auth.User',
         'CM.store.Organization',
-        'CM.store.Service'
+        'CM.store.Service',
+        'CM.store.Kbk'
     ],
 
     views: ['CM.view.DocumentsMain',
@@ -17,7 +18,8 @@ Ext.application({
 
     controllers: [
         'CM.controller.Organization',
-        'CM.controller.Service'
+        'CM.controller.Service',
+        'CM.controller.Kbk'
     ],
 
     config: {
