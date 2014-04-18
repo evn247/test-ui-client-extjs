@@ -11,7 +11,7 @@ Ext.define('CM.view.KbkPanel', {
     layout: 'fit',
     autoScroll:true,
 
-    title: 'Service',
+    title: 'KBK',
 
     requires: ['CM.store.Kbk'],
 

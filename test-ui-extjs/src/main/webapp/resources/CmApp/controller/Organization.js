@@ -24,20 +24,20 @@ Ext.define('CM.controller.Organization', {
         console.log('Organization.controller.init');
         this.control({
             'OrganizationPanel grid[name=table.organization]': {
-                itemdblclick: this.editService
+                itemdblclick: this.editOrganization
             },
             'OrganizationPanel button[name=create]': {
-                click: this.createService
+                click: this.createOrganization
             },
             'OrganizationWindow button[action=save]': {
-                click: this.saveService
+                click: this.saveOrganization
             },
             'OrganizationWindow button[action=cancel]': {
                 click: this.cancelEdit
             }
         });
     },
-    editKbk: function(grid, record) {
+    editOrganization: function(grid, record) {
         console.log('record.class='+Ext.getClassName(record));
         var view = Ext.widget('OrganizationWindow');
 
@@ -57,12 +57,12 @@ Ext.define('CM.controller.Organization', {
         window.hide();
     },
 
-    createKbk:function(button){
+    createOrganization:function(button){
         var view = Ext.widget('OrganizationWindow');
         view.down('form').loadRecord(Ext.create('CM.model.Organization'));
         view.show();
     },
-    saveKbk:function(button){
+    saveOrganization:function(button){
         console.log('saveOrganization clicked.');
         var window = button.up('window');
         var record = window.down('form').updateRecord().getRecord();

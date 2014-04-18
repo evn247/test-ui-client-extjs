@@ -31,7 +31,7 @@ Ext.define('CM.controller.Service', {
             }
         });
     },
-    editKbk: function(grid, record) {
+    editService: function(grid, record) {
         console.log('record.class='+Ext.getClassName(record));
         var view = Ext.widget('ServiceWindow');
 
@@ -47,12 +47,12 @@ Ext.define('CM.controller.Service', {
         window.hide();
     },
 
-    createKbk:function(button){
+    createService:function(button){
         var view = Ext.widget('ServiceWindow');
         view.down('form').loadRecord(Ext.create('CM.model.Service'));
         view.show();
     },
-    saveKbk:function(button){
+    saveService:function(button){
         console.log('saveService clicked.');
         var window = button.up('window');
         var record = window.down('form').updateRecord().getRecord();
