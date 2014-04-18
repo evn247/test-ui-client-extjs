@@ -357,19 +357,34 @@ Ext.define('CM.view.ViewFactory', {
                                     },
                                     items: [{
                                         xtype: 'textfield',
-                                        name : 'type',
+                                        name : 'accountName',
                                         padding: 2,
-                                        fieldLabel: 'Type'
+                                        fieldLabel: 'Account Name'
                                     },{
                                         xtype: 'textfield',
                                         padding: 2,
-                                        name : 'name',
-                                        fieldLabel: 'Name'
+                                        name : 'accountNumber',
+                                        fieldLabel: 'Account Number'
                                     },{
                                         xtype: 'textfield',
                                         padding: 2,
-                                        name : 'number',
-                                        fieldLabel: 'Number'
+                                        name : 'bankName',
+                                        fieldLabel: 'Bank Name'
+                                    },{
+                                        xtype: 'textfield',
+                                        padding: 2,
+                                        name : 'corrAccountNumber',
+                                        fieldLabel: 'Bank Corr Account Number'
+                                    },{
+                                        xtype: 'textfield',
+                                        padding: 2,
+                                        name : 'bik',
+                                        fieldLabel: 'BIK'
+                                    },{
+                                        xtype: 'textfield',
+                                        padding: 2,
+                                        name : 'kbk',
+                                        fieldLabel: 'KBK'
                                     }]
                                 },
                                 tables:[]
@@ -387,17 +402,32 @@ Ext.define('CM.view.ViewFactory', {
                                     xtype:'rownumberer'
                                 },
                                 {
-                                    header: 'Type',
-                                    dataIndex: 'type',
+                                    header: 'Account Name',
+                                    dataIndex: 'accountName',
                                     flex:1
                                 },
                                 {
-                                    header: 'Name',
-                                    dataIndex: 'name'
+                                    header: 'Account Number',
+                                    dataIndex: 'accountNumber'
                                 },
                                 {
-                                    header: 'Number',
-                                    dataIndex: 'number',
+                                    header: 'Bank Name',
+                                    dataIndex: 'bankName',
+                                    flex:1
+                                },
+                                {
+                                    header: 'BIK',
+                                    dataIndex: 'bik',
+                                    flex:1
+                                },
+                                {
+                                    header: 'Bank Corr Account Number',
+                                    dataIndex: 'corrAccountNumber',
+                                    flex:1
+                                },
+                                {
+                                    header: 'KBK',
+                                    dataIndex: 'kbk',
                                     flex:1
                                 }
                             ]

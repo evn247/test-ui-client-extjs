@@ -15,7 +15,7 @@ Ext.define('CM.model.Organization', {
         setterName:'setAddress',
         foreignKey:'address_id',
         associatedName : 'Location',
-        associationKey : 'Address'
+        associationKey : 'address'
     },{
         type: 'hasMany',
         model: 'CM.model.Phone',

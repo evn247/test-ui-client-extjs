@@ -24,20 +24,20 @@ Ext.define('CM.controller.Organization', {
         console.log('Organization.controller.init');
         this.control({
             'OrganizationPanel grid[name=table.organization]': {
-                itemdblclick: this.editOrganization
+                itemdblclick: this.editService
             },
             'OrganizationPanel button[name=create]': {
-                click: this.createOrganization
+                click: this.createService
             },
             'OrganizationWindow button[action=save]': {
-                click: this.saveOrganization
+                click: this.saveService
             },
             'OrganizationWindow button[action=cancel]': {
                 click: this.cancelEdit
             }
         });
     },
-    editOrganization: function(grid, record) {
+    editService: function(grid, record) {
         console.log('record.class='+Ext.getClassName(record));
         var view = Ext.widget('OrganizationWindow');
 
@@ -57,16 +57,16 @@ Ext.define('CM.controller.Organization', {
         window.hide();
     },
 
-    createOrganization:function(button){
+    createService:function(button){
         var view = Ext.widget('OrganizationWindow');
         view.down('form').loadRecord(Ext.create('CM.model.Organization'));
         view.show();
     },
-    saveOrganization:function(button){
+    saveService:function(button){
         console.log('saveOrganization clicked.');
         var window = button.up('window');
-        var form = window.down('form');
-        CM.view.Util.saveRecord(form.updateRecord().getRecord());
+        var record = window.down('form').updateRecord().getRecord();
+        CM.view.Util.saveRecord(record);
 
         CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.phones]', record.phones());
         CM.view.Util.copyFromTablePanel(window, 'grid[name=table.organization.managers]', record.managers());

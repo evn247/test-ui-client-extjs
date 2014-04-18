@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>test-client</artifactId>
-    <groupId>com.rstyle.pfr</groupId>
+    <groupId>com.nsl.cm</groupId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 

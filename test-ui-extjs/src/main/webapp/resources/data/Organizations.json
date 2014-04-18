@@ -11,7 +11,7 @@
             "email":"info@test1.ru",
             "address_id": 25,
 
-            "Address":{
+            "address":{
                 "id":25,
                 "name":"judicial address",
                 "streetAddress":"Lenina 25",
@@ -69,9 +69,12 @@
             "accounts":[
                 {
                     "id":1,
-                    "type":"bank account",
-                    "number":"1234567890",
-                    "name":"main bank account"
+                    "accountName":"main bank account",
+                    "accountNumber":"123456789012345",
+                    "bankName":"Super Bank, Moscow",
+                    "corrAccountNumber":"0987654321012345",
+                    "bik":"123456",
+                    "kbk":"1234568901"
                 }
             ],
 
@@ -95,7 +98,7 @@
             "email":"info@test2.ru",
             "address_id":26,
 
-            "Address":{
+            "address":{
                 "id":26,
                 "name":"judicial address",
                 "streetAddress":"Shevchenko 34",
@@ -152,10 +155,13 @@
             ],
             "accounts":[
                 {
-                    "id":1,
-                    "type":"bank account",
-                    "number":"1234567890",
-                    "name":"main bank account"
+                    "id":2,
+                    "accountName":"main bank account",
+                    "accountNumber":"12345678912345",
+                    "bankName":"Super-Duper Bank, Moscow",
+                    "corrAccountNumber":"09876543210123456789",
+                    "bik":"654321",
+                    "kbk":"1234568901"
                 }
             ],
             "locations":[

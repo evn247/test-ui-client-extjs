@@ -1,0 +1,17 @@
+{
+    "success": true,
+    "data":[
+        {
+            "id":1,
+            "fullName":"Test service 1 full name",
+            "shortName":"Test service 1 short name",
+            "price":"100.20"
+        },
+        {
+            "id":2,
+            "fullName":"Test service 2 full name",
+            "shortName":"Test service 2 short name",
+            "price":"250.55"
+        }
+   ]
+}

@@ -3,13 +3,17 @@ Ext.define('CM.view.DictionariesMain', {
     alias: 'widget.DictionariesMain',
 
     requires: [
-        'CM.view.OrganizationPanel'
+        'CM.view.OrganizationPanel',
+        'CM.view.ServicePanel'
     ],
 
     initComponent: function () {
         this.items = [
             {
                 xtype:'OrganizationPanel'
+            },
+            {
+                xtype:'ServicePanel'
             }
         ];
 
