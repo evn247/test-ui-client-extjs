@@ -5,5 +5,5 @@
  */
 Ext.define('CM.model.Account', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'accountName', 'accountNumber', 'bankName', 'corrAccountNumber', 'bik', 'kbk']
+    fields: ['id', 'accountName', 'accountNumber', 'bankName', 'corrAccountNumber', 'bik']
 });

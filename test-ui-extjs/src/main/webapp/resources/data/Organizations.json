@@ -73,8 +73,7 @@
                     "accountNumber":"123456789012345",
                     "bankName":"Super Bank, Moscow",
                     "corrAccountNumber":"0987654321012345",
-                    "bik":"123456",
-                    "kbk":"1234568901"
+                    "bik":"123456"
                 }
             ],
 
@@ -160,8 +159,7 @@
                     "accountNumber":"12345678912345",
                     "bankName":"Super-Duper Bank, Moscow",
                     "corrAccountNumber":"09876543210123456789",
-                    "bik":"654321",
-                    "kbk":"1234568901"
+                    "bik":"654321"
                 }
             ],
             "locations":[

@@ -1,0 +1,207 @@
+{
+    "success": true,
+    "data":[
+        {
+            "id":1,
+            "client_full_name":"Test organization 1 full name",
+            "client_short_name":"Test organization 1 short name",
+            "client_city":"Moscow",
+            "client_street_address":"St. Lenina, 44 suite 433",
+            "client_region":"Moscow region",
+            "client_post_index":"123344",
+            "client_phone_type":"city",
+            "client_phone_number":"495-343-3545",
+            "client_phone_ext":"",
+            "client_officer_position":"Director",
+            "client_officer_full_name":"Ivan Ivanych Ivanov",
+            "client_officer_phone_number":"555-555-6666",
+            "client_officer_phone_type":"cell phone",
+            "client_officer_phone_ext":"",
+            "client_lot_city":"Moscow",
+            "client_lot_street_address":"St. Industrial, 44",
+            "client_lot_region":"Moscow region",
+            "client_lot_post_index":"212323",
+            "client_account_number":"123456789012345",
+            "client_bank":"Super Bank, Moscow",
+            "client_bank_bik":"1243543",
+            "client_bank_corr_account":"0987654321012345",
+            "client_kbk":"1234567890",
+            "type":"Order",
+            "status":"Draft",
+            "termOfPayment":"Pre-payed",
+            "prepay_percent":"100",
+            "date":"2014-04-23",
+            "manager":"Sidorov Sergey",
+            "site_id":25,
+            "client_id":1,
+            "account_id":1,
+            "executive_officer_id":1,
+            "executive_officer_phone_id":3,
+            "kbk_id":1,
+            "site":
+            {
+                "id":25,
+                "name":"judicial address",
+                "streetAddress":"Lenina 25",
+                "city":"Moscow",
+                "postIndex":"123000"
+            },
+            "client":
+            {
+                "id":1,
+                "shortName":"Test organization 1 short name",
+                "fullName":"Test organization 1 full name",
+                "inn":"1234567890",
+                "kpp":"123456789012",
+                "website":"www.test1.ru",
+                "email":"info@test1.ru",
+                "address_id": 25,
+
+                "address":{
+                    "id":25,
+                    "name":"judicial address",
+                    "streetAddress":"Lenina 25",
+                    "city":"Moscow",
+                    "postIndex":"123000"
+                },
+
+                "phones":[
+                    {
+                        "id":1,
+                        "type":"phone",
+                        "number":"555-555-5555",
+                        "extension":"123"
+                    },
+                    {
+                        "id":2,
+                        "type":"fax",
+                        "number":"555-555-5555",
+                        "extension":"123"
+                    }
+                ],
+
+                "managers":[
+                    {
+                        "id":1,
+                        "firstName":"Ivan",
+                        "lastName":"Ivanov",
+                        "middleName":"Ivanovich",
+                        "position":"Director",
+                        "email":"director@test1.ru",
+                        "phones":[
+                            {
+                                "id":3,
+                                "type":"cell phone",
+                                "number":"555-555-6666"
+                            }
+                        ]
+                    },
+                    {
+                        "id":2,
+                        "firstName":"Petr",
+                        "lastName":"Petrov",
+                        "middleName":"Petrovich",
+                        "position":"Accountant",
+                        "email":"accountant@test1.ru",
+                        "phones":[
+                            {
+                                "id":4,
+                                "type":"cell phone",
+                                "number":"555-555-7777"
+                            }
+                        ]
+                    }
+                ],
+                "accounts":[
+                    {
+                        "id":1,
+                        "accountName":"main bank account",
+                        "accountNumber":"123456789012345",
+                        "bankName":"Super Bank, Moscow",
+                        "corrAccountNumber":"0987654321012345",
+                        "bik":"123456",
+                        "kbk":"1234568901"
+                    }
+                ],
+
+                "locations":[
+                    {
+                        "id":1,
+                        "name":"main location",
+                        "streetAddress":"Lenina 25",
+                        "city":"Moscow",
+                        "postIndex":"123000"
+                    }
+                ]
+            },
+            "account":
+            {
+                "id":1,
+                "accountName":"main bank account",
+                "accountNumber":"123456789012345",
+                "bankName":"Super Bank, Moscow",
+                "corrAccountNumber":"0987654321012345",
+                "bik":"123456"
+            },
+            "executiveOfficer":
+            {
+                "id":1,
+                "firstName":"Ivan",
+                "lastName":"Ivanov",
+                "middleName":"Ivanovich",
+                "position":"Director",
+                "email":"director@test1.ru",
+                "phones":[
+                    {
+                        "id":3,
+                        "type":"cell phone",
+                        "number":"555-555-6666"
+                    }
+                ]
+            },
+            "kbk":
+            {
+                "id":1,
+                "description":"Test kbk 1",
+                "code":"1234567890"
+            },
+            "executiveOfficerPhone":
+            {
+                "id":3,
+                "type":"cell phone",
+                "number":"555-555-6666"
+            },
+            "services":
+            [
+                {
+                    "id":1,
+                    "fullName":"Test service 1 full name",
+                    "shortName":"Test service 1 short name",
+                    "price":"200.20",
+                    "service_id":1,
+                    "service":
+                    {
+                        "id":1,
+                        "fullName":"Test service 1 full name",
+                        "shortName":"Test service 1 short name",
+                        "price":"100.20"
+                    }
+                },
+                {
+                    "id":2,
+                    "fullName":"Test service 2 full name",
+                    "shortName":"Test service 2 short name",
+                    "price":"220.20",
+                    "service_id":2,
+                    "service":
+                    {
+                        "id":2,
+                        "fullName":"Test service 2 full name",
+                        "shortName":"Test service 2 short name",
+                        "price":"250.55"
+                    }
+                }
+            ]
+        }
+   ]
+}
