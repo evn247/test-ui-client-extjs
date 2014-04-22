@@ -10,6 +10,7 @@ Ext.application({
         'CM.auth.User',
         'CM.store.Organization',
         'CM.store.Service',
+        'CM.store.Contract',
         'CM.store.Kbk'
     ],
 
@@ -19,6 +20,7 @@ Ext.application({
     controllers: [
         'CM.controller.Organization',
         'CM.controller.Service',
+        'CM.controller.Contract',
         'CM.controller.Kbk'
     ],
 

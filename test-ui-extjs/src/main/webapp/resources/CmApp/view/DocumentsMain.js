@@ -6,10 +6,14 @@ Ext.define('CM.view.DocumentsMain', {
     alias: 'widget.DocumentsMain',
     layout: 'fit',
 
+    requires: [
+        'CM.view.ContractPanel'
+    ],
+
     initComponent: function () {
         this.items = [
             {
-                html: 'DOCUMENTS_MAIN_PLACEHOLDER'
+                xtype:'ContractPanel'
             }
         ];
 
