@@ -36,7 +36,7 @@ Ext.define('CM.controller.Contract', {
         var view = Ext.widget('ContractWindow');
 
         record.beginEdit();
-        view.down('form').loadRecord(record);
+        view.loadRecord(record);
         view.show();
     },
 

@@ -7,10 +7,14 @@ Ext.define('CM.view.LookUpField', {
     extend: 'Ext.form.field.Text',
     alias: 'widget.LookUpField',
     requires: ['CM.LogUtil','CM.view.Util'],
+    renderer:null,
+    reader:null,
 
     initComponent: function () {
         var me = this;
         this.callParent(arguments);
+        this.renderer = this.params.renderer;
+        this.reader = this.params.reader;
 
         this.on('change', function (src, newValue) {
             console.log('change event for lookup field, newValue='+newValue);
@@ -18,8 +22,8 @@ Ext.define('CM.view.LookUpField', {
             var record = me.up('form').getRecord();
             console.log('current record:');
             CM.LogUtil.logRecord(record);
-            var address = record.getAddress();
-            me.updateValue(address);
+            var value = me.reader(record);
+            me.updateValue(value);
         });
     },
     updateValue:function(record){
@@ -28,7 +32,7 @@ Ext.define('CM.view.LookUpField', {
         this.suspendEvents();
         if(record)
         {
-            this.setValue(CM.view.Util.join(record, ', ', ['region', 'city', 'streetAddress']));
+            this.setValue(this.renderer(record));
         }
 
         this.resumeEvents();

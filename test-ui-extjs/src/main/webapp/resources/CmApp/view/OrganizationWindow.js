@@ -72,6 +72,10 @@ Ext.define('CM.view.OrganizationWindow', {
                     },
                     readOwner:function(record){
                         return record.getAddress();
+                    },
+                    renderer:function(record)
+                    {
+                        return CM.view.Util.join(record, ', ', ['postIndex', 'region', 'city', 'streetAddress']);
                     }
                 }
             }]

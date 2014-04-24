@@ -197,5 +197,11 @@ Ext.define('CM.view.ContractWindow', {
         ];
 
         this.callParent(arguments);
+    },
+
+    loadRecord:function(record)
+    {
+        console.log('this.class='+Ext.getClassName(this));
+        this.down('form').loadRecord(record);
     }
 });

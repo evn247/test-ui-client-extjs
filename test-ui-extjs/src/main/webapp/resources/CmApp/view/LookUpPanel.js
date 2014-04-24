@@ -16,6 +16,7 @@ Ext.define('CM.view.LookUpPanel', {
     createRecord:null,
     updateOwner:null,
     readOwner:null,
+    renderer:null,
 
     initComponent: function () {
         var me = this;
@@ -23,8 +24,9 @@ Ext.define('CM.view.LookUpPanel', {
         this.createRecord = this.params.recordFactory;
         this.updateOwner = this.params.updateOwner;
         this.readOwner = this.params.readOwner;
+        this.renderer = this.params.renderer;
 
-        console.log('create LookUpPanel, arguments:'+arguments);
+        console.log('create LookUpPanel, renderer:'+this.renderer);
 
         var updateOwnerRecord = function(window, record)
         {
@@ -53,7 +55,11 @@ Ext.define('CM.view.LookUpPanel', {
             padding: 2,
             name : 'address_id',
             fieldLabel: 'Judicial Address',
-            flex: 1
+            flex: 1,
+            params:{
+                renderer: me.renderer,
+                reader: me.readOwner
+            }
         });
         this.items = [this.textField,
         {
