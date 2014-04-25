@@ -6,7 +6,7 @@
 Ext.define('CM.view.ContractWindow', {
     extend: 'Ext.window.Window',
     alias: 'widget.ContractWindow',
-    requires: ['CM.view.EntityPanel','CM.view.ViewFactory','CM.view.LookUpPanel'],
+    requires: ['CM.view.EntityPanel','CM.view.ViewFactory','CM.view.LookUpPanel','CM.view.SelectorPanel'],
 
     title: 'Contract',
     layout: {
@@ -16,12 +16,15 @@ Ext.define('CM.view.ContractWindow', {
     autoShow: true,
     autoScroll:true,
     modal:true,
+    record: null,
 
     width: 800,
     height:600,
     padding: 6,
 
     initComponent: function() {
+        var me = this;
+
         this.items = [
         {
             xtype: 'form',
@@ -31,10 +34,46 @@ Ext.define('CM.view.ContractWindow', {
                 align:'stretch'
             },
             items: [{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_full_name',
-                fieldLabel: 'Full Name'
+
+                xtype:'SelectorPanel',
+                params:{
+                    fieldLabel: 'Full Name',
+
+                    selectorTable: null,
+
+                    selectorWindowName: 'Organization',
+
+                    recordFactory:function(){
+                        return Ext.create('CM.model.Location');
+                    },
+                    entityEditorWindowProducer: function(record){
+                        var view = Ext.widget('OrganizationWindow');
+
+                        record.beginEdit();
+                        view.down('form').loadRecord(record);
+                        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.phones]', record.phones());
+                        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.managers]', record.managers());
+                        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.locations]', record.locations());
+                        CM.view.Util.setupTablePanel(view, 'grid[name=table.organization.accounts]', record.accounts());
+                        view.show();
+                        return view;
+                    },
+                    updateOwner:function(owner, record){
+                        owner.setClient(record);
+                    },
+                    readOwner:function(record){
+                        return record.getClient();
+                    },
+                    renderer:function(record)
+                    {
+                        return record.get('fullName');
+                    },
+                    selectionHandler:function(window, record)
+                    {
+                        me.record.set('shortName', record.get('shortName'));
+                        // todo: copy properties.
+                    }
+                }
             },{
                 xtype: 'textfield',
                 padding: 2,
@@ -201,7 +240,13 @@ Ext.define('CM.view.ContractWindow', {
 
     loadRecord:function(record)
     {
-        console.log('this.class='+Ext.getClassName(this));
+        this.record = record;
         this.down('form').loadRecord(record);
+    },
+
+    getRecord: function()
+    {
+        console.log('getRecord called');
+        return null;
     }
 });

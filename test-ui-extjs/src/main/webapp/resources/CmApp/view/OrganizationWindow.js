@@ -63,6 +63,8 @@ Ext.define('CM.view.OrganizationWindow', {
             },{
                 xtype:'LookUpPanel',
                 params:{
+                    fieldLabel : 'Judicial Address',
+
                     recordFactory:function(){
                         return Ext.create('CM.model.Location');
                     },

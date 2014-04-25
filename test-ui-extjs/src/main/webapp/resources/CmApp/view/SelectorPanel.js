@@ -3,35 +3,39 @@
  * Date: 08.04.14
  * Time: 12:01
  */
-Ext.define('CM.view.LookUpPanel', {
+Ext.define('CM.view.SelectorPanel', {
     extend: 'Ext.panel.Panel',
-    alias: 'widget.LookUpPanel',
+    alias: 'widget.SelectorPanel',
     requires: ['CM.LogUtil','CM.view.LookUpField'],
     layout: {
         type: 'hbox',
         align:'stretch'
     },
     textField:undefined,
-    createEntityWindow:null,
-    createRecord:null,
+    selectorStore:null,
+    selectorWindowName:null,
     updateOwner:null,
     readOwner:null,
     renderer:null,
 
     initComponent: function () {
         var me = this,
-            fieldLabel = this.params.fieldLabel;
-        this.createEntityWindow = this.params.entityEditorWindowProducer;
-        this.createRecord = this.params.recordFactory;
+            fieldLabel = this.params.fieldLabel,
+            selectorTable = this.params.selectorTable,
+            selectorWindowName = this.params.selectorWindowName,
+            entityEditorWindowProducer = this.params.entityEditorWindowProducer,
+            recordFactory = this.params.recordFactory,
+            selectionHandler = this.params.selectionHandler;
+        this.selectorWindowName = this.params.selectorWindowName;
         this.updateOwner = this.params.updateOwner;
         this.readOwner = this.params.readOwner;
         this.renderer = this.params.renderer;
 
-        console.log('create LookUpPanel, renderer:'+this.renderer);
+        console.log('create SelectorPanel, renderer:'+this.renderer);
 
         var updateOwnerRecord = function(window, record)
         {
-            console.log('updateOwnerRecord called, record:');
+            console.log('SelectorPanel.updateOwnerRecord called, record:');
             CM.LogUtil.logRecord(record);
 
             var owner = me.up('form').getRecord();
@@ -42,11 +46,19 @@ Ext.define('CM.view.LookUpPanel', {
             me.textField.updateValue(record);
         };
 
-        var editRecord =function(record)
+        var showSelectionWindow =function(currentSelection)
         {
-            record.beginEdit();
-            var view = me.createEntityWindow(record);
-            view.on('save', updateOwnerRecord);
+            var view = Ext.create('CM.view.SelectionWindow',{
+                params:{
+                    name:  selectorWindowName,
+                    table: selectorTable,
+                    entityEditorWindowProducer: entityEditorWindowProducer,
+                    recordFactory: recordFactory
+                }
+            });
+            view.setCurrentSelection(currentSelection);
+            view.on('entitySelection', updateOwnerRecord);
+            view.on('entitySelection', selectionHandler);
             view.show();
         };
 
@@ -72,12 +84,7 @@ Ext.define('CM.view.LookUpPanel', {
                 var record = me.up('form').getRecord();
                 console.log('current record:');
                 CM.LogUtil.logRecord(record);
-                var ownerRecord = me.readOwner(record);
-                if(!ownerRecord)
-                {
-                    ownerRecord = me.createRecord();
-                }
-                editRecord(ownerRecord);
+                showSelectionWindow(me.readOwner(record));
             }
         }];
 
