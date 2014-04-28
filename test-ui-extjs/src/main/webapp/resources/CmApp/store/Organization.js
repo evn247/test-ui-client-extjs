@@ -7,6 +7,7 @@ Ext.define('CM.store.Organization', {
     extend: 'Ext.data.Store',
     model: 'CM.model.Organization',
     requires: ['CM.LogUtil'],
+    storeId: 'orgStore',
 
     autoLoad: true,
     proxy:{

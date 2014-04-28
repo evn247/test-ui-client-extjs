@@ -34,6 +34,10 @@ Ext.application({
         this.setUser(user);
 
         CM.support.Shared.showLoadingMask('Загрузка');
+
+        // pre-load stores.
+        Ext.create('CM.store.Organization');
+
         function onItemClicked(item) {
             var controlButton = Ext.getCmp('button.control');
             console.log('controlButton.text='+controlButton.text);

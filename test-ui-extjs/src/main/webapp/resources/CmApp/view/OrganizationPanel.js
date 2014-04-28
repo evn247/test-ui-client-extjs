@@ -60,7 +60,7 @@ Ext.define('CM.view.OrganizationPanel', {
                                 }
                             ],
                             selType: 'rowmodel',
-                            store : Ext.create('CM.store.Organization')
+                            store : 'orgStore'
                         })
         ];
 

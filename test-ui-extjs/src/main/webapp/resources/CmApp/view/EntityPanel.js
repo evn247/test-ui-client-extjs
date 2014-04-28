@@ -30,7 +30,6 @@ Ext.define('CM.view.EntityPanel', {
             var disabled = !model.hasSelection();
             me.table.up('panel').down('button[name$=delete]').setDisabled(disabled);
             me.table.up('panel').down('button[name$=edit]').setDisabled(disabled);
-
         };
         var updateStore = function(window, record)
         {

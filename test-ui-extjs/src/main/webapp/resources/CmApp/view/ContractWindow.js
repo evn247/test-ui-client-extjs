@@ -6,7 +6,11 @@
 Ext.define('CM.view.ContractWindow', {
     extend: 'Ext.window.Window',
     alias: 'widget.ContractWindow',
-    requires: ['CM.view.EntityPanel','CM.view.ViewFactory','CM.view.LookUpPanel','CM.view.SelectorPanel'],
+    requires: ['CM.view.EntityPanel',
+               'CM.view.ViewFactory',
+               'CM.view.LookUpPanel',
+               'CM.view.SelectorPanel',
+               'CM.view.SelectionWindow'],
 
     title: 'Contract',
     layout: {
@@ -36,10 +40,37 @@ Ext.define('CM.view.ContractWindow', {
             items: [{
 
                 xtype:'SelectorPanel',
+                name:'clientSelector',
                 params:{
                     fieldLabel: 'Full Name',
 
-                    selectorTable: null,
+                    selectorTable: Ext.create('Ext.grid.Panel',{
+                        name: 'table.select.organization',
+                        store:'orgStore',
+                        selModel: Ext.create('Ext.selection.RowModel', {
+                                                 singleSelect: true
+                                             }),
+
+                        columns: [
+                            {
+                                xtype:'rownumberer'
+                            },
+                            {
+                                header: 'Short Name',
+                                dataIndex: 'shortName',
+                                flex:1
+                            },
+                            {
+                                header: 'INN',
+                                dataIndex: 'inn',
+                                flex:1
+                            },
+                            {
+                                header: 'KPP',
+                                dataIndex: 'kpp'
+                            }
+                        ]
+                    }),
 
                     selectorWindowName: 'Organization',
 
@@ -70,8 +101,15 @@ Ext.define('CM.view.ContractWindow', {
                     },
                     selectionHandler:function(window, record)
                     {
-                        me.record.set('shortName', record.get('shortName'));
+                        console.log('ContractWindow.selectionHandler called');
+                        me.record.set('client_short_name', record.get('shortName'));
+                        me.record.set('client_full_name', record.get('fullName'));
                         // todo: copy properties.
+
+                        console.log('Updated record is:');
+                        CM.LogUtil.logRecord(me.record);
+
+                        me.down('form').loadRecord(me.record);
                     }
                 }
             },{
@@ -242,6 +280,7 @@ Ext.define('CM.view.ContractWindow', {
     {
         this.record = record;
         this.down('form').loadRecord(record);
+        this.down('SelectorPanel[name=clientSelector]').setRecord(record);
     },
 
     getRecord: function()

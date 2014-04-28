@@ -15,7 +15,7 @@ Ext.define('CM.controller.Contract', {
     models: ['CM.model.Contract'],
 
     init: function() {
-        console.log('Service.controller.init');
+        console.log('Contract.controller.init');
         this.control({
             'ContractPanel grid[name=table.contract]': {
                 itemdblclick: this.editContract

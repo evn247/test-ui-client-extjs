@@ -33,6 +33,8 @@ Ext.define('CM.view.SelectorPanel', {
 
         console.log('create SelectorPanel, renderer:'+this.renderer);
 
+        selectorTable.getSelectionModel().bindStore(selectorTable.getStore());
+
         var updateOwnerRecord = function(window, record)
         {
             console.log('SelectorPanel.updateOwnerRecord called, record:');
@@ -49,8 +51,8 @@ Ext.define('CM.view.SelectorPanel', {
         var showSelectionWindow =function(currentSelection)
         {
             var view = Ext.create('CM.view.SelectionWindow',{
+                title:selectorWindowName,
                 params:{
-                    name:  selectorWindowName,
                     table: selectorTable,
                     entityEditorWindowProducer: entityEditorWindowProducer,
                     recordFactory: recordFactory
@@ -89,5 +91,9 @@ Ext.define('CM.view.SelectorPanel', {
         }];
 
         this.callParent(arguments);
+    },
+    setRecord:function(record)
+    {
+        this.textField.updateValue(this.readOwner(record))
     }
 });

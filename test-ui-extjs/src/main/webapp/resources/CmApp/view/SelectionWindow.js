@@ -8,13 +8,13 @@ Ext.define('CM.view.SelectionWindow', {
     alias: 'widget.SelectionWindow',
     requires: ['CM.view.EntityPanel','CM.LogUtil'],
 
-    layout: {
-        type: 'vbox',
-        align:'stretch'
-    },
+    layout: 'fit',
     autoScroll:true,
     modal:true,
     padding: 6,
+    width: 400,
+    height:300,
+    table:undefined,
 
     initComponent: function () {
         var name = this.params.name,
@@ -23,7 +23,17 @@ Ext.define('CM.view.SelectionWindow', {
             createRecord = this.params.recordFactory,
             me = this;
 
+        this.table = table;
+
         console.log('create SelectionWindow, name='+name);
+
+        var onSelectionChange = function(model)
+        {
+            console.log('selectionchange event handler');
+            var disabled = !model.hasSelection();
+            table.up('window').down('button[name=button.select]').setDisabled(disabled);
+        };
+
         this.name = name;
         this.items = [Ext.create('CM.view.EntityPanel',{
             collapsible: false,
@@ -31,6 +41,7 @@ Ext.define('CM.view.SelectionWindow', {
 
             params:{
                 table: table,
+                prefix: 'table.select.'+name,
                 createEntityWindow: createEntityWindow,
                 createRecord: createRecord
             }
@@ -40,18 +51,21 @@ Ext.define('CM.view.SelectionWindow', {
             {
                 xtype:'button',
                 text:'Select',
-                action: name+'.save',
+                disabled: true,
+                name: 'button.select',
                 handler: function()
                 {
                     console.log('firing entitySelection event...');
-                    me.fireEvent('entitySelection', window, record);
+                    var record = table.getSelectionModel().getSelection()[0];
+                    console.log('record="'+record+'" class='+Ext.getDisplayName(record));
+                    me.fireEvent('entitySelection', me, record);
                     me.hide();
                 }
             },
             {
                 xtype:'button',
                 text:'Отменить',
-                action: name+'.cancel',
+                action: 'button.cancel',
                 handler: function()
                 {
                     me.hide();
@@ -59,15 +73,33 @@ Ext.define('CM.view.SelectionWindow', {
             }
         ];
 
+        table.getSelectionModel().on('selectionchange', onSelectionChange);
         this.addEvents('entitySelection');
 
         this.callParent(arguments);
     },
 
-    setCurrentSelection: function(currentSelection)
+    setCurrentSelection: function(selection)
     {
         console.log('setCurrentSelector, currentRecord:');
-        CM.LogUtil.logRecord(currentSelection);
+        console.log('initialSelection:');
+        CM.LogUtil.logRecord(selection);
+        if(selection)
+        {
+            var index = this.table.getStore().indexOf(selection);
+            console.log('currentSelection.index='+index);
+            this.table.getSelectionModel().setLocked(false);
+            console.log('locked='+this.table.getSelectionModel().isLocked());
+            console.log('store='+this.table.getSelectionModel().store);
+            this.table.getSelectionModel().select(index);
+            console.log('hasSelection='+this.table.getSelectionModel().hasSelection());
+            console.log('Store:');
+            CM.LogUtil.logStore(this.table.getStore());
+        }
+        else
+        {
+            this.table.getSelectionModel().deselectAll();
+        }
     }
 
 });
