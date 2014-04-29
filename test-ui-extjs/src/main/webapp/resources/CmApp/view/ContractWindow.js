@@ -10,7 +10,8 @@ Ext.define('CM.view.ContractWindow', {
                'CM.view.ViewFactory',
                'CM.view.LookUpPanel',
                'CM.view.SelectorPanel',
-               'CM.view.SelectionWindow'],
+               'CM.view.SelectionWindow',
+               'CM.view.Util'],
 
     title: 'Contract',
     layout: {
@@ -104,7 +105,17 @@ Ext.define('CM.view.ContractWindow', {
                         console.log('ContractWindow.selectionHandler called');
                         me.record.set('client_short_name', record.get('shortName'));
                         me.record.set('client_full_name', record.get('fullName'));
+
+                        var address = record.getAddress();
+                        me.record.set('client_city', address.get('city'));
+                        me.record.set('client_street_address', address.get('streetAddress'));
+                        me.record.set('client_region', address.get('region'));
+                        me.record.set('client_post_index', address.get('postIndex'));
+
                         // todo: copy properties.
+
+                        // todo: update compounding components
+                        me.down('LookUpField[name=clientAddress]').updateValue(address);
 
                         console.log('Updated record is:');
                         CM.LogUtil.logRecord(me.record);
@@ -117,27 +128,21 @@ Ext.define('CM.view.ContractWindow', {
                 padding: 2,
                 name : 'client_short_name',
                 fieldLabel: 'Short Name'
-            },{
-                xtype: 'textfield',
+            },
+            Ext.create('CM.view.LookUpField',{
                 padding: 2,
-                name : 'client_city',
-                fieldLabel: 'City'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_street_address',
-                fieldLabel: 'Street'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_region',
-                fieldLabel: 'Region'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_post_index',
-                fieldLabel: 'Post Index'
-            },{
+                name : 'clientAddress',
+                fieldLabel: 'Client Address',
+                flex: 1,
+                params:{
+                    renderer: function(record){
+                        return CM.view.Util.join(record, ',',['postIndex','region','city','streetAddress']);
+                    },
+                    reader: function(record){
+                        return record.getAddress();
+                    }
+                }
+            }),{
                 xtype: 'textfield',
                 padding: 2,
                 name : 'client_phone_type',
@@ -281,6 +286,7 @@ Ext.define('CM.view.ContractWindow', {
         this.record = record;
         this.down('form').loadRecord(record);
         this.down('SelectorPanel[name=clientSelector]').setRecord(record);
+        this.down('LookUpField[name=clientAddress]').updateValue(record.getClient().getAddress());
     },
 
     getRecord: function()

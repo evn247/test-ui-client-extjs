@@ -86,15 +86,7 @@ Ext.define('CM.view.SelectionWindow', {
         CM.LogUtil.logRecord(selection);
         if(selection)
         {
-            var index = this.table.getStore().indexOf(selection);
-            console.log('currentSelection.index='+index);
-            this.table.getSelectionModel().setLocked(false);
-            console.log('locked='+this.table.getSelectionModel().isLocked());
-            console.log('store='+this.table.getSelectionModel().store);
-            this.table.getSelectionModel().select(index);
-            console.log('hasSelection='+this.table.getSelectionModel().hasSelection());
-            console.log('Store:');
-            CM.LogUtil.logStore(this.table.getStore());
+            this.table.getSelectionModel().select(selection);
         }
         else
         {

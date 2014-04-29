@@ -33,8 +33,6 @@ Ext.define('CM.view.SelectorPanel', {
 
         console.log('create SelectorPanel, renderer:'+this.renderer);
 
-        selectorTable.getSelectionModel().bindStore(selectorTable.getStore());
-
         var updateOwnerRecord = function(window, record)
         {
             console.log('SelectorPanel.updateOwnerRecord called, record:');
