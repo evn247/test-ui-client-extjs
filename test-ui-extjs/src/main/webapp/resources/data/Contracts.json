@@ -34,6 +34,7 @@
             "manager":"Sidorov Sergey",
             "site_id":25,
             "client_id":1,
+            "client_phone_id":1,
             "account_id":1,
             "executive_officer_id":1,
             "executive_officer_phone_id":3,
@@ -133,6 +134,13 @@
                         "postIndex":"123000"
                     }
                 ]
+            },
+            "clientPhone":
+            {
+                "id":1,
+                "type":"phone",
+                "number":"555-555-5555",
+                "extension":"123"
             },
             "account":
             {

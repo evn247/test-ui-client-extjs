@@ -14,7 +14,7 @@ Ext.define('CM.model.Contract', {
              'client_lot_city','client_lot_street_address','client_lot_region','client_lot_post_index',
              'client_account_number','client_bank','client_bank_bik','client_bank_corr_account','client_kbk',
              'type', 'status', 'termOfPayment', 'prepay_percent', 'date',
-             'site_id', 'client_id', 'account_id',
+             'site_id', 'client_id', 'client_phone_id', 'account_id',
              'executive_officer_id','executive_officer_phone_id', 'kbk_id', 'manager'],
     associations: [{
         type: 'hasOne',
@@ -34,6 +34,15 @@ Ext.define('CM.model.Contract', {
         foreignKey:'client_id',
         associatedName : 'Organization',
         associationKey : 'client'
+    },{
+        type: 'hasOne',
+        model: 'CM.model.Phone',
+        name: 'clientPhone',
+        getterName:'getClientPhone',
+        setterName:'setClientPhone',
+        foreignKey:'client_phone_id',
+        associatedName : 'Phone',
+        associationKey : 'clientPhone'
     },{
         type: 'hasOne',
         model: 'CM.model.Account',

@@ -9,6 +9,7 @@ Ext.define('CM.view.ContractWindow', {
     requires: ['CM.view.EntityPanel',
                'CM.view.ViewFactory',
                'CM.view.LookUpPanel',
+               'CM.view.ComboBoxSelector',
                'CM.view.SelectorPanel',
                'CM.view.SelectionWindow',
                'CM.view.Util'],
@@ -142,22 +143,23 @@ Ext.define('CM.view.ContractWindow', {
                         return record.getAddress();
                     }
                 }
+            }),Ext.create('CM.view.ComboBoxSelector',{
+                    padding: 2,
+                    name : 'clientPhone',
+                    fieldLabel: 'Client Phone',
+                    displayField:'number',
+                    model: 'CM.model.Phone',
+                    flex: 1,
+                    params:{
+                        renderer: function(record){
+                            return CM.view.Util.join(record, ' ',['type','number','extension']);
+                        },
+                        readOwner: function(record){
+                            return record.getClient().phones();
+                        }
+                    }
+
             }),{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_phone_type',
-                fieldLabel: 'Type'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_phone_number',
-                fieldLabel: 'Phone'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_phone_ext',
-                fieldLabel: 'Ext'
-            },{
                 xtype: 'textfield',
                 padding: 2,
                 name : 'client_officer_position',
@@ -287,6 +289,7 @@ Ext.define('CM.view.ContractWindow', {
         this.down('form').loadRecord(record);
         this.down('SelectorPanel[name=clientSelector]').setRecord(record);
         this.down('LookUpField[name=clientAddress]').updateValue(record.getClient().getAddress());
+        this.down('ComboBoxSelector[name=clientPhone]').setRecord(record);
     },
 
     getRecord: function()
