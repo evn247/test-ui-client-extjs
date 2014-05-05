@@ -41,7 +41,7 @@ Ext.define('CM.model.Contract', {
         getterName:'getClientPhone',
         setterName:'setClientPhone',
         foreignKey:'client_phone_id',
-        associatedName : 'Phone',
+        associatedName : 'ClientPhone',
         associationKey : 'clientPhone'
     },{
         type: 'hasOne',
@@ -77,7 +77,7 @@ Ext.define('CM.model.Contract', {
         getterName:'getOfficerPhone',
         setterName:'setOfficerPhone',
         foreignKey:'executive_officer_phone_id',
-        associatedName : 'Phone',
+        associatedName : 'ExecutivePhone',
         associationKey : 'executiveOfficerPhone'
     },{
         type: 'hasMany',

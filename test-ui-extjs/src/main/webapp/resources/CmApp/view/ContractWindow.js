@@ -113,10 +113,15 @@ Ext.define('CM.view.ContractWindow', {
                         me.record.set('client_region', address.get('region'));
                         me.record.set('client_post_index', address.get('postIndex'));
 
-                        // todo: copy properties.
+                        // reset linked entities
+                        me.record.setClientPhone(null);
+                        me.record.setAccount(null);
+                        me.record.setExecutiveOfficer(null);
+                        me.record.setOfficerPhone(null);
+                        console.log('reset fields...');
 
-                        // todo: update compounding components
-                        me.down('LookUpField[name=clientAddress]').updateValue(address);
+                        // update compounding components
+                        me.onClientChange(me.record);
 
                         console.log('Updated record is:');
                         CM.LogUtil.logRecord(me.record);
@@ -146,45 +151,113 @@ Ext.define('CM.view.ContractWindow', {
             }),Ext.create('CM.view.ComboBoxSelector',{
                     padding: 2,
                     name : 'clientPhone',
-                    fieldLabel: 'Client Phone',
-                    displayField:'number',
-                    model: 'CM.model.Phone',
                     flex: 1,
                     params:{
+                        fieldLabel: 'Client Phone',
                         renderer: function(record){
                             return CM.view.Util.join(record, ' ',['type','number','extension']);
                         },
-                        readOwner: function(record){
+                        dataReader: function(record){
                             return record.getClient().phones();
+                        },
+                        currentRecordReader:function(record){
+                            return record.getClientPhone();
+                        },
+                        selectionHandler:function(record){
+                            console.log('clientPhone.selectionHandler.record:'+record);
+                            CM.LogUtil.logRecord(record);
+
+                            me.record.set('client_phone_type', record.get('type'));
+                            me.record.set('client_phone_number', record.get('number'));
+                            me.record.set('client_phone_ext', record.get('extension'));
+
+                            me.record.setClientPhone(record);
+
+                            console.log('Updated record is:');
+                            CM.LogUtil.logRecord(me.record);
+
+                            me.down('form').loadRecord(me.record);
+
+                        }
+                    }
+
+            }),Ext.create('CM.view.ComboBoxSelector',{
+                    padding: 2,
+                    name : 'clientOfficer',
+                    flex: 1,
+                    params:{
+                        fieldLabel: 'Client Officer',
+                        renderer: function(record){
+                            var position = record.get('position');
+                            var fullName = CM.view.Util.join(record,
+                                                             ' ',['lastName', 'firstName', 'middleName']);
+                            return position + ':' + fullName;
+                        },
+                        dataReader: function(record){
+                            return record.getClient()
+                                    ? record.getClient().managers()
+                                    : Ext.create('Ext.data.Store');
+                        },
+                        currentRecordReader:function(record){
+                            return record.getExecutiveOfficer();
+                        },
+                        selectionHandler:function(record){
+                            console.log('clientOfficer.selectionHandler.record:'+record);
+                            CM.LogUtil.logRecord(record);
+
+                            me.record.set('client_officer_position', record.get('position'));
+                            me.record.set('client_officer_full_name',
+                                          CM.view.Util.join(record,
+                                                            ' ',['lastName','firstName','middleName']));
+
+                            me.record.setExecutiveOfficer(record);
+
+                            // update linked component.
+                            me.down('ComboBoxSelector[name=officerPhone]').setRecord(me.record);
+
+                            console.log('Updated record is:');
+                            CM.LogUtil.logRecord(me.record);
+
+                            me.down('form').loadRecord(me.record);
+                        }
+                    }
+
+            }),Ext.create('CM.view.ComboBoxSelector',{
+                    padding: 2,
+                    name : 'officerPhone',
+                    flex: 1,
+                    params:{
+                        fieldLabel: 'Officer Phone',
+                        renderer: function(record){
+                            return CM.view.Util.join(record, ' ',['type','number','extension']);
+                        },
+                        dataReader: function(record){
+                            return record.getExecutiveOfficer()
+                                ? record.getExecutiveOfficer().phones()
+                                : Ext.create('Ext.data.Store');
+                        },
+                        currentRecordReader:function(record){
+                            return record.getOfficerPhone();
+                        },
+                        selectionHandler:function(record){
+                            console.log('officerPhone.selectionHandler.record:'+record);
+                            CM.LogUtil.logRecord(record);
+
+                            me.record.set('client_officer_phone_type', record.get('type'));
+                            me.record.set('client_officer_phone_number', record.get('number'));
+                            me.record.set('client_officer_phone_ext', record.get('extension'));
+
+                            me.record.setExecutiveOfficer(record);
+
+                            console.log('Updated record is:');
+                            CM.LogUtil.logRecord(me.record);
+
+                            me.down('form').loadRecord(me.record);
+
                         }
                     }
 
             }),{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_officer_position',
-                fieldLabel: 'Position'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_officer_full_name',
-                fieldLabel: 'Officer'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_officer_phone_number',
-                fieldLabel: 'Phone'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_officer_phone_type',
-                fieldLabel: 'Type'
-            },{
-                xtype: 'textfield',
-                padding: 2,
-                name : 'client_officer_phone_ext',
-                fieldLabel: 'Ext'
-            },{
                 xtype: 'textfield',
                 padding: 2,
                 name : 'client_lot_city',
@@ -288,10 +361,15 @@ Ext.define('CM.view.ContractWindow', {
         this.record = record;
         this.down('form').loadRecord(record);
         this.down('SelectorPanel[name=clientSelector]').setRecord(record);
+        this.onClientChange(record);
+    },
+    onClientChange: function(record){
+        console.log('onClientChange...');
         this.down('LookUpField[name=clientAddress]').updateValue(record.getClient().getAddress());
         this.down('ComboBoxSelector[name=clientPhone]').setRecord(record);
+        this.down('ComboBoxSelector[name=clientOfficer]').setRecord(record);
+        this.down('ComboBoxSelector[name=officerPhone]').setRecord(record);
     },
-
     getRecord: function()
     {
         console.log('getRecord called');
