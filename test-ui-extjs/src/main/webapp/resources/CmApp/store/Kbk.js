@@ -6,6 +6,7 @@
 Ext.define('CM.store.Kbk', {
     extend: 'Ext.data.Store',
     model: 'CM.model.Kbk',
+    storeId: 'kbkStore',
     autoLoad: true,
     proxy:{
         type: 'ajax',

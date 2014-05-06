@@ -19,7 +19,7 @@ Ext.define('CM.view.EntityPanel', {
         var prefix = this.params.table.name;
         var me = this;
         this.table = this.params.table;
-        this.createEntityWindow = this.params.entityEditorWindowProducer;
+        this.createEntityWindow = this.params.createEntityWindow;
         this.createRecord = this.params.recordFactory;
 
         console.log('create EntityPanel, prefix='+prefix);

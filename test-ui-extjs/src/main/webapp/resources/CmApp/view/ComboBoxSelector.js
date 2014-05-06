@@ -57,7 +57,7 @@ Ext.define('CM.view.ComboBoxSelector', {
         var currentRecord = this.currentRecordReader(record);
         console.log('setRecord.');
         console.log('currentRecord:');
-        CM.LogUtil.logRecord(currentRecord)
+        CM.LogUtil.logRecord(currentRecord);
         var newStore = this.dataReader(record);
         console.log('newStore:');
         CM.LogUtil.logStore(newStore);

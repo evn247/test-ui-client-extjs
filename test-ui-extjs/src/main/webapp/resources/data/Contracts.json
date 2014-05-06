@@ -28,7 +28,7 @@
             "client_kbk":"1234567890",
             "type":"Order",
             "status":"Draft",
-            "termOfPayment":"Pre-payed",
+            "termOfPayment":"Advance",
             "prepay_percent":"100",
             "date":"2014-04-23",
             "manager":"Sidorov Sergey",
@@ -41,8 +41,8 @@
             "kbk_id":1,
             "site":
             {
-                "id":25,
-                "name":"judicial address",
+                "id":1,
+                "name":"main location",
                 "streetAddress":"Lenina 25",
                 "city":"Moscow",
                 "postIndex":"123000"
@@ -70,13 +70,13 @@
                     {
                         "id":1,
                         "type":"phone",
-                        "number":"555-555-5555",
+                        "number":"1-555-555-5555",
                         "extension":"123"
                     },
                     {
                         "id":2,
                         "type":"fax",
-                        "number":"555-555-5555",
+                        "number":"2-555-555-5555",
                         "extension":"123"
                     }
                 ],
@@ -93,7 +93,7 @@
                             {
                                 "id":3,
                                 "type":"cell phone",
-                                "number":"555-555-6666"
+                                "number":"3-555-555-6666"
                             }
                         ]
                     },
@@ -108,7 +108,7 @@
                             {
                                 "id":4,
                                 "type":"cell phone",
-                                "number":"555-555-7777"
+                                "number":"4-555-555-7777"
                             }
                         ]
                     }
@@ -139,7 +139,7 @@
             {
                 "id":1,
                 "type":"phone",
-                "number":"555-555-5555",
+                "number":"CF-555-555-5555",
                 "extension":"123"
             },
             "account":
@@ -163,7 +163,7 @@
                     {
                         "id":3,
                         "type":"cell phone",
-                        "number":"555-555-6666"
+                        "number":"3-555-555-6666"
                     }
                 ]
             },
