@@ -49,7 +49,7 @@ Ext.define('CM.controller.Contract', {
 
     createContract:function(button){
         var view = Ext.widget('ContractWindow');
-        view.down('form').loadRecord(Ext.create('CM.model.Contract'));
+        view.createContract();
         view.show();
     },
     saveContract:function(button){

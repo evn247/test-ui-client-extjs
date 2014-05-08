@@ -495,13 +495,13 @@ Ext.define('CM.view.ContractWindow', {
                 items:[
                 {
                     xtype: 'textfield',
-                    editable:false,
+                    readOnly:true,
                     padding: 2,
                     name : 'type',
                     fieldLabel: 'Type'
                 },{
                     xtype: 'textfield',
-                    editable:false,
+                    readOnly:true,
                     padding: 2,
                     name : 'status',
                     fieldLabel: 'Status'
@@ -565,5 +565,13 @@ Ext.define('CM.view.ContractWindow', {
     {
         console.log('getRecord called');
         return this.record;
+    },
+    createContract:function(){
+        var contract = Ext.create('CM.model.Contract');
+        contract.set('type','Contract');
+        contract.set('status', 'Draft');
+        contract.set('date', new Date());
+        this.loadRecord(contract)
     }
+
 });
