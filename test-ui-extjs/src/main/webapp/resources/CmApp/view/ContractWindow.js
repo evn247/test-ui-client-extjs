@@ -23,6 +23,7 @@ Ext.define('CM.view.ContractWindow', {
     autoScroll:true,
     modal:true,
     record: null,
+    width:800,
 
     padding: 6,
 
@@ -136,7 +137,7 @@ Ext.define('CM.view.ContractWindow', {
                     },{
                         xtype: 'textfield',
                         padding: 2,
-                        editable:false,
+                        readOnly:true,
                         name : 'client_short_name',
                         fieldLabel: 'Short Name'
                     },
@@ -144,6 +145,7 @@ Ext.define('CM.view.ContractWindow', {
                         padding: 2,
                         name : 'clientAddress',
                         fieldLabel: 'Client Address',
+                        readOnly:true,
                         flex: 1,
                         params:{
                             renderer: function(record){
@@ -153,7 +155,8 @@ Ext.define('CM.view.ContractWindow', {
                                 return record.getAddress();
                             }
                         }
-                    }),Ext.create('CM.view.ComboBoxSelector',{
+                    }),
+                    Ext.create('CM.view.ComboBoxSelector',{
                         padding: 2,
                         name : 'clientPhone',
                         flex: 1,
@@ -186,83 +189,95 @@ Ext.define('CM.view.ContractWindow', {
                             }
                         }
 
-                    }),Ext.create('CM.view.ComboBoxSelector',{
-                        padding: 2,
-                        name : 'clientOfficer',
-                        flex: 1,
-                        params:{
-                            fieldLabel: 'Client Officer',
-                            renderer: function(record){
-                                var position = record.get('position');
-                                var fullName = CM.view.Util.join(record,
-                                    ' ',['lastName', 'firstName', 'middleName']);
-                                return position + ':' + fullName;
-                            },
-                            dataReader: function(record){
-                                return record.getClient()
-                                    ? record.getClient().managers()
-                                    : Ext.create('Ext.data.Store');
-                            },
-                            currentRecordReader:function(record){
-                                return record.getExecutiveOfficer();
-                            },
-                            selectionHandler:function(record){
-                                console.log('clientOfficer.selectionHandler.record:'+record);
-                                CM.LogUtil.logRecord(record);
+                    }),
+                    Ext.create('Ext.panel.Panel',{
+                        layout: {
+                            type: 'hbox',
+                            align:'stretch'
+                        },
+                        collapsible: false,
+                        collapsed: false,
+                        border:false,
+                        items:[
+                            Ext.create('CM.view.ComboBoxSelector',{
+                            padding: 2,
+                            name : 'clientOfficer',
+                            flex: 1,
+                            params:{
+                                fieldLabel: 'Client Officer',
+                                renderer: function(record){
+                                    var position = record.get('position');
+                                    var fullName = CM.view.Util.join(record,
+                                        ' ',['lastName', 'firstName', 'middleName']);
+                                    return position + ':' + fullName;
+                                },
+                                dataReader: function(record){
+                                    return record.getClient()
+                                        ? record.getClient().managers()
+                                        : Ext.create('Ext.data.Store');
+                                },
+                                currentRecordReader:function(record){
+                                    return record.getExecutiveOfficer();
+                                },
+                                selectionHandler:function(record){
+                                    console.log('clientOfficer.selectionHandler.record:'+record);
+                                    CM.LogUtil.logRecord(record);
 
-                                me.record.set('client_officer_position', record.get('position'));
-                                me.record.set('client_officer_full_name',
-                                    CM.view.Util.join(record,
-                                        ' ',['lastName','firstName','middleName']));
+                                    me.record.set('client_officer_position', record.get('position'));
+                                    me.record.set('client_officer_full_name',
+                                        CM.view.Util.join(record,
+                                            ' ',['lastName','firstName','middleName']));
 
-                                me.record.setExecutiveOfficer(record);
+                                    me.record.setExecutiveOfficer(record);
 
-                                // update linked component.
-                                me.down('ComboBoxSelector[name=officerPhone]').setRecord(me.record);
+                                    // update linked component.
+                                    me.down('ComboBoxSelector[name=officerPhone]').setRecord(me.record);
 
-                                console.log('Updated record is:');
-                                CM.LogUtil.logRecord(me.record);
+                                    console.log('Updated record is:');
+                                    CM.LogUtil.logRecord(me.record);
 
-                                me.down('form').loadRecord(me.record);
+                                    me.down('form').loadRecord(me.record);
+                                }
                             }
-                        }
 
-                    }),Ext.create('CM.view.ComboBoxSelector',{
-                        padding: 2,
-                        name : 'officerPhone',
-                        flex: 1,
-                        params:{
-                            fieldLabel: 'Officer Phone',
-                            renderer: function(record){
-                                return CM.view.Util.join(record, ' ',['type','number','extension']);
-                            },
-                            dataReader: function(record){
-                                return record.getExecutiveOfficer()
-                                    ? record.getExecutiveOfficer().phones()
-                                    : Ext.create('Ext.data.Store');
-                            },
-                            currentRecordReader:function(record){
-                                return record.getOfficerPhone();
-                            },
-                            selectionHandler:function(record){
-                                console.log('officerPhone.selectionHandler.record:'+record);
-                                CM.LogUtil.logRecord(record);
+                        }),Ext.create('CM.view.ComboBoxSelector',{
+                            padding: 2,
+                            name : 'officerPhone',
+                            flex: 1,
+                            params:{
+                                fieldLabel: 'Officer Phone',
+                                renderer: function(record){
+                                    return CM.view.Util.join(record, ' ',['type','number','extension']);
+                                },
+                                dataReader: function(record){
+                                    return record.getExecutiveOfficer()
+                                        ? record.getExecutiveOfficer().phones()
+                                        : Ext.create('Ext.data.Store');
+                                },
+                                currentRecordReader:function(record){
+                                    return record.getOfficerPhone();
+                                },
+                                selectionHandler:function(record){
+                                    console.log('officerPhone.selectionHandler.record:'+record);
+                                    CM.LogUtil.logRecord(record);
 
-                                me.record.set('client_officer_phone_type', record.get('type'));
-                                me.record.set('client_officer_phone_number', record.get('number'));
-                                me.record.set('client_officer_phone_ext', record.get('extension'));
+                                    me.record.set('client_officer_phone_type', record.get('type'));
+                                    me.record.set('client_officer_phone_number', record.get('number'));
+                                    me.record.set('client_officer_phone_ext', record.get('extension'));
 
-                                me.record.setExecutiveOfficer(record);
+                                    me.record.setExecutiveOfficer(record);
 
-                                console.log('Updated record is:');
-                                CM.LogUtil.logRecord(me.record);
+                                    console.log('Updated record is:');
+                                    CM.LogUtil.logRecord(me.record);
 
-                                me.down('form').loadRecord(me.record);
+                                    me.down('form').loadRecord(me.record);
 
+                                }
                             }
-                        }
 
-                    }),Ext.create('CM.view.ComboBoxSelector',{
+                        })]
+                    }),,
+                    Ext.create('CM.view.ComboBoxSelector',{
                         padding: 2,
                         name : 'lot',
                         flex: 1,
@@ -299,7 +314,8 @@ Ext.define('CM.view.ContractWindow', {
                             }
                         }
 
-                    }),Ext.create('CM.view.ComboBoxSelector',{
+                    }),
+                    Ext.create('CM.view.ComboBoxSelector',{
                         padding: 2,
                         name : 'account',
                         flex: 1,
@@ -334,25 +350,29 @@ Ext.define('CM.view.ContractWindow', {
                             }
                         }
 
-                    }),{
-                        xtype: 'textfield',
+                    }),
+                    Ext.create('CM.view.LookUpField',{
                         padding: 2,
-                        editable:false,
-                        name : 'client_bank',
-                        fieldLabel: 'Bank'
-                    },{
-                        xtype: 'textfield',
-                        padding: 2,
-                        editable:false,
-                        name : 'client_bank_bik',
-                        fieldLabel: 'Bik'
-                    },{
-                        xtype: 'textfield',
-                        padding: 2,
-                        editable:false,
-                        name : 'client_bank_corr_account',
-                        fieldLabel: 'Corr Account'
-                    },{
+                        name : 'bank',
+                        fieldLabel: 'Bank',
+                        readOnly:true,
+                        flex: 1,
+                        params:{
+                            renderer: function(record){
+                                var bank = record.get('client_bank');
+                                var bik = record.get('client_bank_bik');
+                                var corr = record.get('client_bank_corr_account');
+                                var v = bank ? bank +', ' : '';
+                                v += (bik ? 'Bik:'+bik : '');
+                                v += (corr ? (v.length > 0 ? ', ':'')+'Corr Account:'+corr: '');
+                                return v;
+                            },
+                            reader: function(record){
+                                return record;
+                            }
+                        }
+                    }),
+                    {
                         xtype:'SelectorPanel',
                         name:'kbkSelector',
                         params:{
@@ -415,11 +435,6 @@ Ext.define('CM.view.ContractWindow', {
                                 me.down('form').loadRecord(me.record);
                             }
                         }
-                    },{
-                        xtype: 'textfield',
-                        padding: 2,
-                        name : 'manager',
-                        fieldLabel: 'Manager'
                     }
                 ]
             }),
@@ -463,8 +478,7 @@ Ext.define('CM.view.ContractWindow', {
                     xtype: 'textfield',
                     padding: 2,
                     name : 'prepay_percent',
-                    fieldLabel: 'Prepay percent',
-                    flex:1
+                    fieldLabel: 'Prepay percent'
                 }]
             }),
             Ext.create('Ext.panel.Panel',{
@@ -481,7 +495,15 @@ Ext.define('CM.view.ContractWindow', {
                     padding: 2,
                     name : 'date',
                     fieldLabel: 'Date'
-                }]
+                },
+                {
+                    xtype: 'textfield',
+                    padding: 2,
+                    flex:1,
+                    name : 'manager',
+                    fieldLabel: 'Manager'
+                }
+                ]
             }),
             Ext.create('Ext.panel.Panel',{
                 layout: {
@@ -506,8 +528,140 @@ Ext.define('CM.view.ContractWindow', {
                     name : 'status',
                     fieldLabel: 'Status'
                 }]
+            }),
+            Ext.create('CM.view.EntityPanel',{
+                collapsible: false,
+                collapsed: false,
+                border: false,
+                params:{
+                    title:'Services',
+                    recordFactory:function(){
+                        return Ext.create('CM.model.ContractServiceLine');
+                    },
+                    createEntityWindow: function(record){
+                        var view = Ext.create('CM.view.EntityWindow',{
+                            title : 'Service',
+                            width: 400,
+                            params:{
+                                name : 'contract.service',
+                                form: {
+                                    xtype: 'form',
+                                    padding: 6,
+                                    layout: {
+                                        type: 'vbox',
+                                        align:'stretch'
+                                    },
+                                    items: [{
+
+                                        xtype:'SelectorPanel',
+                                        name:'clientSelector',
+                                        params:{
+                                            fieldLabel: 'Full Name',
+                                            selectorTable: Ext.create('Ext.grid.Panel',{
+                                                name: 'table.select.organization.service',
+                                                store:'serviceStore',
+                                                selModel: Ext.create('Ext.selection.RowModel', {
+                                                    singleSelect: true
+                                                }),
+
+                                                columns: [
+                                                    {
+                                                        xtype:'rownumberer'
+                                                    },
+                                                    {
+                                                        header: 'Short Name',
+                                                        dataIndex: 'shortName',
+                                                        flex:1
+                                                    },
+                                                    {
+                                                        header: 'Price',
+                                                        dataIndex: 'price'
+                                                    }
+                                                ]
+                                            }),
+
+                                            selectorWindowName: 'Service',
+
+                                            recordFactory:function(){
+                                                return Ext.create('CM.model.Service');
+                                            },
+                                            entityEditorWindowProducer: function(record){
+                                                var view = Ext.widget('ServiceWindow');
+
+                                                record.beginEdit();
+                                                view.down('form').loadRecord(record);
+                                                view.show();
+                                                return view;
+                                            },
+                                            updateOwner:function(owner, record){
+                                                owner.setService(record);
+                                            },
+                                            readOwner:function(record){
+                                                return record.getService();
+                                            },
+                                            renderer:function(record)
+                                            {
+                                                return record.get('fullName');
+                                            },
+                                            selectionHandler:function(window, record)
+                                            {
+                                                console.log('ContractWindow.Service.selectionHandler called');
+                                                me.record.set('shortName', record.get('shortName'));
+                                                me.record.set('fullName', record.get('fullName'));
+                                                me.record.set('price', record.get('price'));
+
+                                                console.log('Updated record is:');
+                                                CM.LogUtil.logRecord(me.record);
+
+                                                me.down('form').loadRecord(me.record);
+                                            }
+                                        }
+                                    },{
+                                        xtype: 'textfield',
+                                        padding: 2,
+                                        name : 'shortName',
+                                        fieldLabel: 'Short Name'
+                                    },{
+                                        xtype: 'textfield',
+                                        padding: 2,
+                                        name : 'price',
+                                        fieldLabel: 'Price'
+                                    }]
+                                },
+                                tables:[]
+                            }
+                        });
+                        view.down('form').loadRecord(record);
+
+                        return view;
+                    },
+                    table: Ext.create('Ext.grid.Panel',{
+                        name: 'contract.service.lines',
+                        store:Ext.create('CM.store.ContractServiceLine'),
+
+                        columns: [
+                            {
+                                xtype:'rownumberer'
+                            },
+                            {
+                                header: 'Full name',
+                                dataIndex: 'fullName',
+                                flex:1
+                            },
+                            {
+                                header: 'Short name',
+                                dataIndex: 'shortName',
+                                flex:1
+                            },
+                            {
+                                header: 'Price',
+                                dataIndex: 'price'
+                            }
+                        ]
+                    })
+                }
             })
-]
+            ]
         }];
 
         this.buttons = [{
@@ -542,6 +696,7 @@ Ext.define('CM.view.ContractWindow', {
     onClientChange: function(record){
         console.log('onClientChange...');
         this.down('LookUpField[name=clientAddress]').updateValue(record.getClient().getAddress());
+        this.down('LookUpField[name=bank]').updateValue(record);
         this.down('ComboBoxSelector[name=clientPhone]').setRecord(record);
         this.down('ComboBoxSelector[name=clientOfficer]').setRecord(record);
         this.down('ComboBoxSelector[name=officerPhone]').setRecord(record);

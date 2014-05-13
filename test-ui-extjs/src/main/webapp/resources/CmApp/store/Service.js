@@ -6,6 +6,7 @@
 Ext.define('CM.store.Service', {
     extend: 'Ext.data.Store',
     model: 'CM.model.Service',
+    storeId: 'serviceStore',
     autoLoad: true,
     proxy:{
         type: 'ajax',
