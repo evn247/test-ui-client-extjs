@@ -536,7 +536,9 @@ Ext.define('CM.view.ContractWindow', {
                 params:{
                     title:'Services',
                     recordFactory:function(){
-                        return Ext.create('CM.model.ContractServiceLine');
+                        var line = Ext.create('CM.model.ContractServiceLine');
+                        line.setService(Ext.create('CM.model.Service'));
+                        return line;
                     },
                     createEntityWindow: function(record){
                         var view = Ext.create('CM.view.EntityWindow',{
@@ -554,7 +556,7 @@ Ext.define('CM.view.ContractWindow', {
                                     items: [{
 
                                         xtype:'SelectorPanel',
-                                        name:'clientSelector',
+                                        name:'serviceSelector',
                                         params:{
                                             fieldLabel: 'Full Name',
                                             selectorTable: Ext.create('Ext.grid.Panel',{
@@ -594,6 +596,10 @@ Ext.define('CM.view.ContractWindow', {
                                                 return view;
                                             },
                                             updateOwner:function(owner, record){
+                                                console.log('updateOwner, owner:');
+                                                CM.LogUtil.logRecord(owner);
+                                                console.log('record:');
+                                                CM.LogUtil.logRecord(record);
                                                 owner.setService(record);
                                             },
                                             readOwner:function(record){
@@ -605,15 +611,19 @@ Ext.define('CM.view.ContractWindow', {
                                             },
                                             selectionHandler:function(window, record)
                                             {
-                                                console.log('ContractWindow.Service.selectionHandler called');
-                                                me.record.set('shortName', record.get('shortName'));
-                                                me.record.set('fullName', record.get('fullName'));
-                                                me.record.set('price', record.get('price'));
+                                                console.log('ContractWindow.Service.selectionHandler called, record:');
+                                                CM.LogUtil.logRecord(record);
+                                                var serviceLine = view.down('form').getRecord();
+                                                console.log('line:');
+                                                CM.LogUtil.logRecord(serviceLine);
+                                                serviceLine.set('shortName', record.get('shortName'));
+                                                serviceLine.set('fullName', record.get('fullName'));
+                                                serviceLine.set('price', record.get('price'));
 
                                                 console.log('Updated record is:');
-                                                CM.LogUtil.logRecord(me.record);
+                                                CM.LogUtil.logRecord(serviceLine);
 
-                                                me.down('form').loadRecord(me.record);
+                                                view.down('form').loadRecord(serviceLine);
                                             }
                                         }
                                     },{
@@ -632,6 +642,7 @@ Ext.define('CM.view.ContractWindow', {
                             }
                         });
                         view.down('form').loadRecord(record);
+                        view.down('SelectorPanel').setRecord(record);
 
                         return view;
                     },

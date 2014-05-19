@@ -48,6 +48,7 @@ Ext.define('CM.view.SelectorPanel', {
 
         var showSelectionWindow =function(currentSelection)
         {
+            console.log('showSelectionWindow selection:'+currentSelection);
             var view = Ext.create('CM.view.SelectionWindow',{
                 title:selectorWindowName,
                 params:{
@@ -56,6 +57,7 @@ Ext.define('CM.view.SelectorPanel', {
                     recordFactory: recordFactory
                 }
             });
+            console.log('showSelectionWindow view='+view);
             view.setCurrentSelection(currentSelection);
             view.on('entitySelection', updateOwnerRecord);
             view.on('entitySelection', selectionHandler);
@@ -66,7 +68,6 @@ Ext.define('CM.view.SelectorPanel', {
 
         this.textField = Ext.create('CM.view.LookUpField',{
             padding: 2,
-            name : 'address_id',
             fieldLabel: fieldLabel,
             flex: 1,
             params:{

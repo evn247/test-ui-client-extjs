@@ -38,27 +38,36 @@ Ext.define('CM.view.EntityPanel', {
             console.log('store content after commit:');
             CM.LogUtil.logStore(me.table.store);
         };
-        var editRecord =function(record)
+        var updateStoreWithNew = function(window, record)
+        {
+            me.table.store.add(record);
+
+            CM.view.Util.saveRecord(record);
+
+            console.log('store content after commit:');
+            CM.LogUtil.logStore(me.table.store);
+        };
+        var editRecord =function(record, saveHandler)
         {
             record.beginEdit();
             var view = me.createEntityWindow(record);
-            view.on('save', updateStore);
+            view.on('save', saveHandler);
             view.show();
         };
         var onItemDoubleClick = function(grid, record)
         {
             console.log('itemdblclick for '+me.table.name+' record='+record);
-            editRecord(record);
+            editRecord(record, updateStore);
         };
         var onItemEditClick =function()
         {
             console.log('handle.edit.button');
-            editRecord(me.table.getSelectionModel().getSelection()[0]);
+            editRecord(me.table.getSelectionModel().getSelection()[0], updateStore);
         };
         var onItemCreateClick=function()
         {
             console.log('handle.create.button');
-            editRecord(me.createRecord());
+            editRecord(me.createRecord(), updateStoreWithNew);
         };
         var onItemDeleteClick =function()
         {
