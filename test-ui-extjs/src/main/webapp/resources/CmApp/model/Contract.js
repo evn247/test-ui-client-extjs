@@ -6,23 +6,23 @@
 Ext.define('CM.model.Contract', {
     extend: 'Ext.data.Model',
     idProperty: 'id',
-    fields: ['id', 'client_full_name', 'client_short_name',
-             'client_city','client_street_address','client_region','client_post_index',
-             'client_phone_type', 'client_phone_number', 'client_phone_ext',
-             'client_officer_position','client_officer_full_name',
-             'client_officer_phone_number','client_officer_phone_type','client_officer_phone_ext',
-             'client_lot_city','client_lot_street_address','client_lot_region','client_lot_post_index',
-             'client_account_number','client_bank','client_bank_bik','client_bank_corr_account','client_kbk',
-             'type', 'status', 'termOfPayment', 'prepay_percent', 'date',
-             'site_id', 'client_id', 'client_phone_id', 'account_id',
-             'executive_officer_id','executive_officer_phone_id', 'kbk_id', 'manager'],
+    fields: ['id', 'clientFullName', 'clientShortName',
+             'clientCity','clientStreetAddress','clientRegion','clientPostIndex',
+             'clientPhoneType', 'clientPhoneNumber', 'clientPhoneExt',
+             'clientOfficerPosition','clientOfficerFullName',
+             'clientOfficerPhoneNumber','clientOfficerPhoneType','clientOfficerPhoneExt',
+             'clientLotCity','clientLotStreetAddress','clientLotRegion','clientLotPostIndex',
+             'clientAccountNumber','clientBank','clientBankBik','clientBankCorrAccount','clientKbk',
+             'type', 'status', 'termOfPayment', 'prepayPercent', 'date',
+             'siteId', 'clientId', 'clientPhoneId', 'accountId',
+             'executiveOfficerId','executiveOfficerPhoneId', 'kbkId', 'manager'],
     associations: [{
         type: 'hasOne',
         model: 'CM.model.Location',
         name: 'clientSite',
         getterName:'getSiteAddress',
         setterName:'setSiteAddress',
-        foreignKey:'site_id',
+        foreignKey:'siteId',
         associatedName : 'Location',
         associationKey : 'site'
     },{
@@ -31,7 +31,7 @@ Ext.define('CM.model.Contract', {
         name: 'client',
         getterName:'getClient',
         setterName:'setClient',
-        foreignKey:'client_id',
+        foreignKey:'clientId',
         associatedName : 'Organization',
         associationKey : 'client'
     },{
@@ -40,7 +40,7 @@ Ext.define('CM.model.Contract', {
         name: 'clientPhone',
         getterName:'getClientPhone',
         setterName:'setClientPhone',
-        foreignKey:'client_phone_id',
+        foreignKey:'clientPhoneId',
         associatedName : 'ClientPhone',
         associationKey : 'clientPhone'
     },{
@@ -49,7 +49,7 @@ Ext.define('CM.model.Contract', {
         name: 'account',
         getterName:'getAccount',
         setterName:'setAccount',
-        foreignKey:'account_id',
+        foreignKey:'accountId',
         associatedName : 'Account',
         associationKey : 'account'
     },{
@@ -58,7 +58,7 @@ Ext.define('CM.model.Contract', {
         name: 'executiveOfficer',
         getterName:'getExecutiveOfficer',
         setterName:'setExecutiveOfficer',
-        foreignKey:'executive_officer_id',
+        foreignKey:'executiveOfficerId',
         associatedName : 'Person',
         associationKey : 'executiveOfficer'
     },{
@@ -67,7 +67,7 @@ Ext.define('CM.model.Contract', {
         name: 'kbk',
         getterName:'getKbk',
         setterName:'setKbk',
-        foreignKey:'kbk_id',
+        foreignKey:'kbkId',
         associatedName : 'Kbk',
         associationKey : 'kbk'
     },{
@@ -76,7 +76,7 @@ Ext.define('CM.model.Contract', {
         name: 'executivePhone',
         getterName:'getOfficerPhone',
         setterName:'setOfficerPhone',
-        foreignKey:'executive_officer_phone_id',
+        foreignKey:'executiveOfficerPhoneId',
         associatedName : 'ExecutivePhone',
         associationKey : 'executiveOfficerPhone'
     },{

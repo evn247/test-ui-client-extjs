@@ -9,7 +9,7 @@
             "kpp":"123456789012",
             "website":"www.test1.ru",
             "email":"info@test1.ru",
-            "address_id": 25,
+            "addressId": 25,
 
             "address":{
                 "id":25,
@@ -95,7 +95,7 @@
             "kpp":"123456789922",
             "website":"www.test2.ru",
             "email":"info@test2.ru",
-            "address_id":26,
+            "addressId":26,
 
             "address":{
                 "id":26,

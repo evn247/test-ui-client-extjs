@@ -3,42 +3,42 @@
     "data":[
         {
             "id":1,
-            "client_full_name":"Test organization 1 full name",
-            "client_short_name":"Test organization 1 short name",
-            "client_city":"Moscow",
-            "client_street_address":"St. Lenina, 44 suite 433",
-            "client_region":"Moscow region",
-            "client_post_index":"123344",
-            "client_phone_type":"city",
-            "client_phone_number":"495-343-3545",
-            "client_phone_ext":"",
-            "client_officer_position":"Director",
-            "client_officer_full_name":"Ivan Ivanych Ivanov",
-            "client_officer_phone_number":"555-555-6666",
-            "client_officer_phone_type":"cell phone",
-            "client_officer_phone_ext":"",
-            "client_lot_city":"Moscow",
-            "client_lot_street_address":"St. Industrial, 44",
-            "client_lot_region":"Moscow region",
-            "client_lot_post_index":"212323",
-            "client_account_number":"123456789012345",
-            "client_bank":"Super Bank, Moscow",
-            "client_bank_bik":"1243543",
-            "client_bank_corr_account":"0987654321012345",
-            "client_kbk":"1234567890",
+            "clientFullName":"Test organization 1 full name",
+            "clientShortName":"Test organization 1 short name",
+            "clientCity":"Moscow",
+            "clientStreetAddress":"St. Lenina, 44 suite 433",
+            "clientRegion":"Moscow region",
+            "clientPostIndex":"123344",
+            "clientPhoneType":"city",
+            "clientPhoneNumber":"495-343-3545",
+            "clientPhoneExt":"",
+            "clientOfficerPosition":"Director",
+            "clientOfficerFullName":"Ivan Ivanych Ivanov",
+            "clientOfficerPhoneNumber":"555-555-6666",
+            "clientOfficerPhoneType":"cell phone",
+            "clientOfficerPhoneExt":"",
+            "clientLotCity":"Moscow",
+            "clientLotStreetAddress":"St. Industrial, 44",
+            "clientLotRegion":"Moscow region",
+            "clientLotPostIndex":"212323",
+            "clientAccountNumber":"123456789012345",
+            "clientBank":"Super Bank, Moscow",
+            "clientBankBik":"1243543",
+            "clientBankCorrAccount":"0987654321012345",
+            "clientKbk":"1234567890",
             "type":"Order",
             "status":"Draft",
             "termOfPayment":"Advance",
-            "prepay_percent":"100",
+            "prepayPercent":"100",
             "date":"2014-04-23",
             "manager":"Sidorov Sergey",
-            "site_id":25,
-            "client_id":1,
-            "client_phone_id":1,
-            "account_id":1,
-            "executive_officer_id":1,
-            "executive_officer_phone_id":3,
-            "kbk_id":1,
+            "siteId":25,
+            "clientId":1,
+            "clientPhoneId":1,
+            "accountId":1,
+            "executiveOfficerId":1,
+            "executiveOfficerPhoneId":3,
+            "kbkId":1,
             "site":
             {
                 "id":1,
@@ -56,7 +56,7 @@
                 "kpp":"123456789012",
                 "website":"www.test1.ru",
                 "email":"info@test1.ru",
-                "address_id": 25,
+                "addressId": 25,
 
                 "address":{
                     "id":25,
@@ -65,7 +65,6 @@
                     "city":"Moscow",
                     "postIndex":"123000"
                 },
-
                 "phones":[
                     {
                         "id":1,
@@ -80,7 +79,6 @@
                         "extension":"123"
                     }
                 ],
-
                 "managers":[
                     {
                         "id":1,
@@ -124,7 +122,6 @@
                         "kbk":"1234568901"
                     }
                 ],
-
                 "locations":[
                     {
                         "id":1,
@@ -186,7 +183,7 @@
                     "fullName":"Test service 1 full name",
                     "shortName":"Test service 1 short name",
                     "price":"200.20",
-                    "service_id":1,
+                    "serviceId":1,
                     "service":
                     {
                         "id":1,
@@ -200,7 +197,7 @@
                     "fullName":"Test service 2 full name",
                     "shortName":"Test service 2 short name",
                     "price":"220.20",
-                    "service_id":2,
+                    "serviceId":2,
                     "service":
                     {
                         "id":2,

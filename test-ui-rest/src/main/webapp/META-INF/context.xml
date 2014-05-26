@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="ConnectionFactory" auth="Application"
+              type="com.ibm.mq.jms.MQConnectionFactory"
+              factory="com.ibm.mq.jms.MQConnectionFactoryFactory"
+              description="IBM MQ Connection Factory"
+              HOST="10.0.12.113" PORT="1414"
+              CHAN="SYSTEM.ADMIN.SVRCONN" TRAN="1" QMGR="SAMPLE.QUEUEMANAGER"/>
+    <Resource name="PFR_XML_INPUT" auth="Application"
+              type="com.ibm.mq.jms.MQQueue"
+              factory="com.ibm.mq.jms.MQQueueFactory"
+              description="Input JMS Queue"
+              QU="PFR_XML_INPUT"/>
+    <Resource name="PFR_XML_INPUT_TEST" auth="Application"
+              type="com.ibm.mq.jms.MQQueue"
+              factory="com.ibm.mq.jms.MQQueueFactory"
+              description="Input JMS Queue"
+              QU="PFR_XML_INPUT_TEST"/>
+</Context>

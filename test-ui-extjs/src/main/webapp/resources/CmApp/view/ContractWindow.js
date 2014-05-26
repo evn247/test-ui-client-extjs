@@ -114,14 +114,14 @@ Ext.define('CM.view.ContractWindow', {
                             selectionHandler:function(window, record)
                             {
                                 console.log('ContractWindow.selectionHandler called');
-                                me.record.set('client_short_name', record.get('shortName'));
-                                me.record.set('client_full_name', record.get('fullName'));
+                                me.record.set('clientShortName', record.get('shortName'));
+                                me.record.set('clientFullName', record.get('fullName'));
 
                                 var address = record.getAddress();
-                                me.record.set('client_city', address.get('city'));
-                                me.record.set('client_street_address', address.get('streetAddress'));
-                                me.record.set('client_region', address.get('region'));
-                                me.record.set('client_post_index', address.get('postIndex'));
+                                me.record.set('clientCity', address.get('city'));
+                                me.record.set('clientStreetAddress', address.get('streetAddress'));
+                                me.record.set('clientRegion', address.get('region'));
+                                me.record.set('clientPostIndex', address.get('postIndex'));
 
                                 // reset linked entities
                                 me.resetRecordOnOrganizationChange();
@@ -138,7 +138,7 @@ Ext.define('CM.view.ContractWindow', {
                         xtype: 'textfield',
                         padding: 2,
                         readOnly:true,
-                        name : 'client_short_name',
+                        name : 'clientShortName',
                         fieldLabel: 'Short Name'
                     },
                     Ext.create('CM.view.LookUpField',{
@@ -175,9 +175,9 @@ Ext.define('CM.view.ContractWindow', {
                                 console.log('clientPhone.selectionHandler.record:'+record);
                                 CM.LogUtil.logRecord(record);
 
-                                me.record.set('client_phone_type', record.get('type'));
-                                me.record.set('client_phone_number', record.get('number'));
-                                me.record.set('client_phone_ext', record.get('extension'));
+                                me.record.set('clientPhoneType', record.get('type'));
+                                me.record.set('clientPhoneNumber', record.get('number'));
+                                me.record.set('clientPhoneExt', record.get('extension'));
 
                                 me.record.setClientPhone(record);
 
@@ -223,8 +223,8 @@ Ext.define('CM.view.ContractWindow', {
                                     console.log('clientOfficer.selectionHandler.record:'+record);
                                     CM.LogUtil.logRecord(record);
 
-                                    me.record.set('client_officer_position', record.get('position'));
-                                    me.record.set('client_officer_full_name',
+                                    me.record.set('clientOfficerPosition', record.get('position'));
+                                    me.record.set('clientOfficerFullName',
                                         CM.view.Util.join(record,
                                             ' ',['lastName','firstName','middleName']));
 
@@ -261,9 +261,9 @@ Ext.define('CM.view.ContractWindow', {
                                     console.log('officerPhone.selectionHandler.record:'+record);
                                     CM.LogUtil.logRecord(record);
 
-                                    me.record.set('client_officer_phone_type', record.get('type'));
-                                    me.record.set('client_officer_phone_number', record.get('number'));
-                                    me.record.set('client_officer_phone_ext', record.get('extension'));
+                                    me.record.set('clientOfficerPhoneType', record.get('type'));
+                                    me.record.set('clientOfficerPhoneNumber', record.get('number'));
+                                    me.record.set('clientOfficerPhoneExt', record.get('extension'));
 
                                     me.record.setExecutiveOfficer(record);
 
@@ -300,10 +300,10 @@ Ext.define('CM.view.ContractWindow', {
                                 console.log('lot.selectionHandler.record:'+record);
                                 CM.LogUtil.logRecord(record);
 
-                                me.record.set('client_lot_city', record.get('city'));
-                                me.record.set('client_lot_street_address', record.get('streetAddress'));
-                                me.record.set('client_lot_region', record.get('region'));
-                                me.record.set('client_lot_post_index', record.get('postIndex'));
+                                me.record.set('clientLotCity', record.get('city'));
+                                me.record.set('clientLotStreetAddress', record.get('streetAddress'));
+                                me.record.set('clientLotRegion', record.get('region'));
+                                me.record.set('clientLotPostIndex', record.get('postIndex'));
 
                                 me.record.setSiteAddress(record);
 
@@ -336,10 +336,10 @@ Ext.define('CM.view.ContractWindow', {
                                 console.log('account.selectionHandler.record:'+record);
                                 CM.LogUtil.logRecord(record);
 
-                                me.record.set('client_account_number', record.get('accountNumber'));
-                                me.record.set('client_bank', record.get('bankName'));
-                                me.record.set('client_bank_bik', record.get('bik'));
-                                me.record.set('client_bank_corr_account', record.get('corrAccountNumber'));
+                                me.record.set('clientAccountNumber', record.get('accountNumber'));
+                                me.record.set('clientBank', record.get('bankName'));
+                                me.record.set('clientBankBik', record.get('bik'));
+                                me.record.set('clientBankCorrAccount', record.get('corrAccountNumber'));
 
                                 me.record.setAccount(record);
 
@@ -359,9 +359,9 @@ Ext.define('CM.view.ContractWindow', {
                         flex: 1,
                         params:{
                             renderer: function(record){
-                                var bank = record.get('client_bank');
-                                var bik = record.get('client_bank_bik');
-                                var corr = record.get('client_bank_corr_account');
+                                var bank = record.get('clientBank');
+                                var bik = record.get('clientBankBik');
+                                var corr = record.get('clientBankCorrAccount');
                                 var v = bank ? bank +', ' : '';
                                 v += (bik ? 'Bik:'+bik : '');
                                 v += (corr ? (v.length > 0 ? ', ':'')+'Corr Account:'+corr: '');
@@ -427,7 +427,7 @@ Ext.define('CM.view.ContractWindow', {
                             selectionHandler:function(window, record)
                             {
                                 console.log('ContractWindow.kbk.selectionHandler called');
-                                me.record.set('client_kbk', record.get('code'));
+                                me.record.set('clientKbk', record.get('code'));
 
                                 console.log('Updated record is:');
                                 CM.LogUtil.logRecord(me.record);
@@ -464,7 +464,7 @@ Ext.define('CM.view.ContractWindow', {
                         'select': function(combo, records){
                             console.log('select, records[0].value='+records[0].get('value'));
                             me.record.set('termOfPayment', records[0]);
-                            var field = me.down('textfield[name=prepay_percent]');
+                            var field = me.down('textfield[name=prepayPercent]');
                             if(records[0].get('value') === 'Advance'){
                                 field.enable();
                             }
@@ -477,7 +477,7 @@ Ext.define('CM.view.ContractWindow', {
                 },{
                     xtype: 'textfield',
                     padding: 2,
-                    name : 'prepay_percent',
+                    name : 'prepayPercent',
                     fieldLabel: 'Prepay percent'
                 }]
             }),
@@ -722,10 +722,10 @@ Ext.define('CM.view.ContractWindow', {
         this.record.setOfficerPhone(Ext.create('CM.model.Phone'));
         this.record.setSiteAddress(Ext.create('CM.model.Location'));
         this.record.setAccount(Ext.create('CM.model.Account'));
-        this.record.set('client_account_number', '');
-        this.record.set('client_bank', '');
-        this.record.set('client_bank_bik', '');
-        this.record.set('client_bank_corr_account', '');
+        this.record.set('clientAccountNumber', '');
+        this.record.set('clientBank', '');
+        this.record.set('clientBankBik', '');
+        this.record.set('clientBankCorrAccount', '');
     },
     getRecord: function()
     {

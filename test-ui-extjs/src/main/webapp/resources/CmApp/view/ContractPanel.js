@@ -41,7 +41,7 @@ Ext.define('CM.view.ContractPanel', {
                                 },
                                 {
                                     header: 'Short Name',
-                                    dataIndex: 'client_short_name',
+                                    dataIndex: 'clientShortName',
                                     flex:1
                                 },
 

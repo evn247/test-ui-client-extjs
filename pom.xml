@@ -147,6 +147,11 @@
         <fscontext.version>4.4.2</fscontext.version>
         <jaxb-xjc.version>2.2.7</jaxb-xjc.version>
         <eclipselink.version>2.5.0</eclipselink.version>
+
+        <host>localhost</host>
+        <port>8080</port>
+        <tomcat.server>tomcat-local</tomcat.server>
+
     </properties>
 
     <dependencies>
@@ -1022,6 +1027,8 @@
 
     <modules>
         <module>test-ui-extjs</module>
+        <module>test-ui-rest</module>
+        <module>test-ui-rest-ui</module>
     </modules>
 
 </project>

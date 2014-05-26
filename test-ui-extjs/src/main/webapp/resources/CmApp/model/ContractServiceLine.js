@@ -6,14 +6,14 @@
 Ext.define('CM.model.ContractServiceLine', {
     extend: 'Ext.data.Model',
     idProperty: 'id',
-    fields: ['id', 'fullName','shortName', 'price', 'service_id'],
+    fields: ['id', 'fullName','shortName', 'price', 'serviceId'],
     associations: [{
         type: 'hasOne',
         model: 'CM.model.Service',
         name: 'service',
         getterName:'getService',
         setterName:'setService',
-        foreignKey:'service_id',
+        foreignKey:'serviceId',
         associatedName : 'Service',
         associationKey : 'service'
     }]

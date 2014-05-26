@@ -54,7 +54,6 @@ Ext.define('CM.view.LookUpPanel', {
 
         this.textField = Ext.create('CM.view.LookUpField',{
             padding: 2,
-            name : 'address_id',
             fieldLabel: fieldLabel,
             flex: 1,
             params:{
