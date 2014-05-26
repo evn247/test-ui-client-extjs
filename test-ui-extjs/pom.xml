@@ -23,7 +23,7 @@
     </repositories>
 
     <properties>
-        <deploy.context.path>/cm</deploy.context.path>
+        <deploy.context.path>/cm-ui</deploy.context.path>
 
         <spring.context.file>/WEB-INF/mvc-dispatcher-servlet.xml,/WEB-INF/spring-security.xml</spring.context.file>
 

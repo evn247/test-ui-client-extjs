@@ -1029,6 +1029,7 @@
         <module>test-ui-extjs</module>
         <module>test-ui-rest</module>
         <module>test-ui-rest-ui</module>
+        <module>test-ui-db</module>
     </modules>
 
 </project>
