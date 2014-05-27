@@ -1,19 +1,43 @@
 package com.nsl.cm.db.model;
 
+import javax.persistence.*;
+
 /**
  * <code>Account</code>
  *
  * @author Eduard Napolov <Eduard.Napolov@R-Style.com>
  * @version 1.0
  */
+@Entity
+@Table(name = "account")
+@SequenceGenerator(name = "dic_seq", sequenceName = "def_seq", allocationSize = 1)
 public class Account
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dic_seq")
+    @Column(name = "entry_id")
     private long id;
+
+    @Column(name = "account_name")
     private String accountName;
+
+    @Column(name = "account_number")
     private String accountNumber;
+
+    @Column(name = "bank_name")
     private String bankName;
+
+    @Column(name = "bank_corr_account_number")
     private String corrAccountNumber;
+
+    @Column(name = "bank_bik")
     private String bik;
+
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+
+
 
     public long getId()
     {
@@ -75,6 +99,16 @@ public class Account
         this.bik = bik;
     }
 
+    public Organization getOrganization()
+    {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization)
+    {
+        this.organization = organization;
+    }
+
     @Override
     public String toString()
     {
@@ -85,6 +119,7 @@ public class Account
                ", bankName='" + bankName + '\'' +
                ", corrAccountNumber='" + corrAccountNumber + '\'' +
                ", bik='" + bik + '\'' +
+               ", organization=" + (organization == null ? "NULL" : organization.getId())+
                '}';
     }
 }

@@ -1,22 +1,44 @@
 package com.nsl.cm.db.model;
 
 import java.util.List;
+import javax.persistence.*;
 
 /**
- * <code>Person</code>
+ * <code>Employee</code>
  *
  * @author Eduard Napolov <Eduard.Napolov@R-Style.com>
  * @version 1.0
  */
-public class Person
+@Entity
+@Table(name = "employee")
+@SequenceGenerator(name = "dic_seq", sequenceName = "def_seq", allocationSize = 1)
+public class Employee
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dic_seq")
+    @Column(name = "entry_id")
     private long id;
+
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "middle_name")
     private String middleName;
+    @Column(name = "position")
     private String position;
+    @Column(name = "email")
     private String email;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "phone_assoc",
+               joinColumns = {@JoinColumn(name = "one_entry_id")},
+               inverseJoinColumns = {@JoinColumn(name = "many_entry_id")})
     private List<Phone> phones;
+
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
 
     public List<Phone> getPhones()
     {
@@ -91,7 +113,7 @@ public class Person
     @Override
     public String toString()
     {
-        return "Person{" +
+        return "Employee{" +
                "id=" + id +
                ", firstName='" + firstName + '\'' +
                ", lastName='" + lastName + '\'' +

@@ -1,9 +1,8 @@
 package com.nsl.cm.db.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import org.joda.time.DateTime;
 
 /**
  * <code>Contract</code>
@@ -41,7 +40,7 @@ public class Contract
     private String status;
     private String termOfPayment;
     private String prepayPercent;
-    private DateTime date;
+    private Date date;
     private String manager;
     private long siteId;
     private long clientId;
@@ -54,7 +53,7 @@ public class Contract
     private Organization client;
     private Phone clientPhone;
     private Account account;
-    private Person executiveOfficer;
+    private Employee executiveOfficer;
     private Kbk kbk;
     private Phone executiveOfficerPhone;
     private List<ContractServiceLine> services;
@@ -344,12 +343,12 @@ public class Contract
         this.prepayPercent = prepayPercent;
     }
 
-    public DateTime getDate()
+    public Date getDate()
     {
         return date;
     }
 
-    public void setDate(DateTime date)
+    public void setDate(Date date)
     {
         this.date = date;
     }
@@ -474,12 +473,12 @@ public class Contract
         this.account = account;
     }
 
-    public Person getExecutiveOfficer()
+    public Employee getExecutiveOfficer()
     {
         return executiveOfficer;
     }
 
-    public void setExecutiveOfficer(Person executiveOfficer)
+    public void setExecutiveOfficer(Employee executiveOfficer)
     {
         this.executiveOfficer = executiveOfficer;
     }

@@ -147,6 +147,8 @@
         <fscontext.version>4.4.2</fscontext.version>
         <jaxb-xjc.version>2.2.7</jaxb-xjc.version>
         <eclipselink.version>2.5.0</eclipselink.version>
+        <hibernate.version>4.3.5.Final</hibernate.version>
+        <hibernate.annotations.version>3.5.6-Final</hibernate.annotations.version>
 
         <host>localhost</host>
         <port>8080</port>
@@ -459,17 +461,6 @@
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.ibm.db2</groupId>
-                <artifactId>db2jcc4</artifactId>
-                <version>${db2jcc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ibm.db2</groupId>
-                <artifactId>db2jcc_license_cu</artifactId>
-                <version>${db2jcc.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.apache.openejb</groupId>
                 <artifactId>openejb-core</artifactId>
@@ -852,6 +843,22 @@
                 <artifactId>juniversalchardet</artifactId>
                 <version>${juniversalchardet.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-annotations</artifactId>
+                <version>${hibernate.annotations.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

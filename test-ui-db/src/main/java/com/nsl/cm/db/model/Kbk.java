@@ -1,15 +1,26 @@
 package com.nsl.cm.db.model;
 
+import javax.persistence.*;
+
 /**
  * <code>Kbk</code>
  *
  * @author Eduard Napolov <Eduard.Napolov@R-Style.com>
  * @version 1.0
  */
+@Entity
+@Table(name = "phone")
+@SequenceGenerator(name = "dic_seq", sequenceName = "def_seq", allocationSize = 1)
 public class Kbk
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dic_seq")
+    @Column(name = "entry_id")
     private long id;
+
+    @Column(name = "description")
     private String description;
+    @Column(name = "code")
     private String code;
 
     public long getId()

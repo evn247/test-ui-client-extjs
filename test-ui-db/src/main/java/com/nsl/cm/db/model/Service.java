@@ -1,17 +1,28 @@
 package com.nsl.cm.db.model;
 
+import java.math.BigDecimal;
+import javax.persistence.*;
 /**
  * <code>Service</code>
  *
  * @author Eduard Napolov <Eduard.Napolov@R-Style.com>
  * @version 1.0
  */
+@Entity
+@Table(name = "service")
+@SequenceGenerator(name = "dic_seq", sequenceName = "def_seq", allocationSize = 1)
 public class Service
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dic_seq")
+    @Column(name = "entry_id")
     private long id;
+    @Column(name = "full_name")
     private String fullName;
+    @Column(name = "short_name")
     private String shortName;
-    private double price;
+    @Column(name = "price")
+    private BigDecimal price;
 
     public long getId()
     {
@@ -43,12 +54,12 @@ public class Service
         this.shortName = shortName;
     }
 
-    public double getPrice()
+    public BigDecimal getPrice()
     {
         return price;
     }
 
-    public void setPrice(double price)
+    public void setPrice(BigDecimal price)
     {
         this.price = price;
     }
