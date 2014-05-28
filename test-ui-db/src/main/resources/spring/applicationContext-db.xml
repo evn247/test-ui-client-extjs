@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--Annotation driven transaction support-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="cmDataSource"/>
+    </bean>
+
+    <!--MyBatis configuration-->
+    <mybatis:scan base-package="com.nsl.cm.db.mapper"/>
+
+    <bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider"/>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="cmDataSource"
+          p:mapperLocations="classpath*:/mybatis/mappers/*.xml"
+          p:databaseIdProvider-ref="databaseIdProvider">
+    </bean>
+
+    <!--MyBatis mapper-->
+    <!--<bean id="dontNameIt_documentMapper_asItClashesWith_DocumentMapper_java_bean"-->
+          <!--class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+        <!--<property name="mapperInterface" value="com.rstyle.core.storage.purexml.mapper.DocumentMapper"/>-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <!--MyBatis DAO-->
+    <!--<bean id="documentDao" class="com.rstyle.core.storage.purexml.dao.impl.DocumentDaoImpl">-->
+        <!--<constructor-arg ref="dontNameIt_documentMapper_asItClashesWith_DocumentMapper_java_bean"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="documentStore" class="com.rstyle.core.storage.purexml.api.impl.UdsFacadeImpl">-->
+        <!--<property name="documentDao" ref="documentDao"/>-->
+        <!--<property name="documentAttributeDao" ref="documentAttributeDao"/>-->
+        <!--<property name="documentContentDao" ref="documentContentDao"/>-->
+        <!--<property name="relationDao" ref="linkDao"/>-->
+    <!--</bean>-->
+</beans>
