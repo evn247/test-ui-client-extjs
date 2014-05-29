@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.nsl.cm.db.mapper.ServiceSearchMapper">
+
+    <resultMap type="com.nsl.cm.db.model.Contract" id="Contract">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <resultMap type="com.nsl.cm.db.model.Location" id="Location">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <resultMap type="com.nsl.cm.db.model.Employee" id="Employee">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <resultMap type="com.nsl.cm.db.model.Account" id="Account">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <resultMap type="com.nsl.cm.db.model.Phone" id="Phone">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <resultMap type="com.nsl.cm.db.model.Service" id="Service">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <resultMap type="com.nsl.cm.db.model.ContractServiceLine" id="ContractServiceLine">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <resultMap type="com.nsl.cm.db.model.Organization" id="Organization">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <resultMap type="com.nsl.cm.db.model.Kbk" id="Kbk">
+        <id column="name" javaType="java.lang.String" property="name"/>
+        <result column="r_doc" javaType="java.lang.Long" property="documentId"/>
+        <result column="typ" javaType="java.lang.Long" property="type"/>
+        <result column="val" javaType="java.lang.String" property="value"/>
+        <result column="sd" javaType="org.joda.time.DateTime" property="startDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="ed" javaType="org.joda.time.DateTime" property="endDate" typeHandler="com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler" />
+        <result column="dsc" javaType="java.lang.String" property="description"/>
+    </resultMap>
+
+    <select id="findContract" statementType="STATEMENT" resultMap="Contract">
+        <choose>
+            <when test="param2 != null">
+                #{param2.userId, jdbcType = VARCHAR},
+            </when>
+            <otherwise>
+                null,
+            </otherwise>
+        </choose>
+        call API_UDS.NEW_DOC_ATTR (
+            #{param2.result, jdbcType=BIGINT, mode=OUT},
+            #{param2.message, jdbcType=VARCHAR, mode=OUT},
+            #{param2.errorCode, jdbcType=VARCHAR, mode=OUT},
+            #{param1.id, jdbcType=BIGINT, mode=OUT},
+            #{param1.documentId, jdbcType=BIGINT},
+            #{param1.name, jdbcType=VARCHAR},
+            #{param1.type, jdbcType=BIGINT},
+            #{param1.value, jdbcType=VARCHAR},
+            #{param1.description, jdbcType=BIGINT},
+            #{param1.startDate, jdbcType=TIMESTAMP, typeHandler=com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler},
+            #{param1.endDate, jdbcType=TIMESTAMP, typeHandler=com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler}
+        )
+    </select>
+
+    <select id="find" statementType="STATEMENT" resultMap="Organization">
+        call API_UDS.NEW_DOC_ATTR (
+            #{param2.result, jdbcType=BIGINT, mode=OUT},
+            #{param2.message, jdbcType=VARCHAR, mode=OUT},
+            #{param2.errorCode, jdbcType=VARCHAR, mode=OUT},
+            #{param1.id, jdbcType=BIGINT, mode=OUT},
+            #{param1.documentId, jdbcType=BIGINT},
+            #{param1.name, jdbcType=VARCHAR},
+            #{param1.type, jdbcType=BIGINT},
+            #{param1.value, jdbcType=VARCHAR},
+            #{param1.description, jdbcType=BIGINT},
+            #{param1.startDate, jdbcType=TIMESTAMP, typeHandler=com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler},
+            #{param1.endDate, jdbcType=TIMESTAMP, typeHandler=com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler}
+        )
+    </select>
+
+    <select id="findKbk" statementType="STATEMENT" resultMap="Kbk">
+        call API_UDS.NEW_DOC_ATTR (
+            #{param2.result, jdbcType=BIGINT, mode=OUT},
+            #{param2.message, jdbcType=VARCHAR, mode=OUT},
+            #{param2.errorCode, jdbcType=VARCHAR, mode=OUT},
+            #{param1.id, jdbcType=BIGINT, mode=OUT},
+            #{param1.documentId, jdbcType=BIGINT},
+            #{param1.name, jdbcType=VARCHAR},
+            #{param1.type, jdbcType=BIGINT},
+            #{param1.value, jdbcType=VARCHAR},
+            #{param1.description, jdbcType=BIGINT},
+            #{param1.startDate, jdbcType=TIMESTAMP, typeHandler=com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler},
+            #{param1.endDate, jdbcType=TIMESTAMP, typeHandler=com.rstyle.core.support.typehandler.JodaDateTimeTypeHandler}
+        )
+    </select>
+</mapper>

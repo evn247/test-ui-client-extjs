@@ -1,5 +1,6 @@
 package com.nsl.cm.db.model;
 
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 
@@ -45,16 +46,16 @@ public class Organization
     @JoinTable(name = "phone_assoc",
                joinColumns = {@JoinColumn(name = "one_entry_id")},
                inverseJoinColumns = {@JoinColumn(name = "many_entry_id")})
-    private List<Phone> phones;
+    private Collection<Phone> phones;
 
     @OneToMany(mappedBy = "organization")
-    private List<Employee> managers;
+    private Collection<Employee> managers;
 
     @OneToMany(mappedBy = "organization")
-    private List<Account> accounts;
+    private Collection<Account> accounts;
 
     @OneToMany(mappedBy = "organization")
-    private List<Location> locations;
+    private Collection<Location> locations;
 
     public String getFullName()
     {
@@ -126,42 +127,42 @@ public class Organization
         this.address = address;
     }
 
-    public List<Phone> getPhones()
+    public Collection<Phone> getPhones()
     {
         return phones;
     }
 
-    public void setPhones(List<Phone> phones)
+    public void setPhones(Collection<Phone> phones)
     {
         this.phones = phones;
     }
 
-    public List<Employee> getManagers()
+    public Collection<Employee> getManagers()
     {
         return managers;
     }
 
-    public void setManagers(List<Employee> managers)
+    public void setManagers(Collection<Employee> managers)
     {
         this.managers = managers;
     }
 
-    public List<Account> getAccounts()
+    public Collection<Account> getAccounts()
     {
         return accounts;
     }
 
-    public void setAccounts(List<Account> accounts)
+    public void setAccounts(Collection<Account> accounts)
     {
         this.accounts = accounts;
     }
 
-    public List<Location> getLocations()
+    public Collection<Location> getLocations()
     {
         return locations;
     }
 
-    public void setLocations(List<Location> locations)
+    public void setLocations(Collection<Location> locations)
     {
         this.locations = locations;
     }

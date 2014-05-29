@@ -1,6 +1,6 @@
 package com.nsl.cm.rest.model;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * <code>RestContract</code>
@@ -17,12 +17,12 @@ public class RestOrganization
     private String kpp;
     private String website;
     private String email;
-    private String addressId;
+    private Long addressId;
     private RestLocation address;
-    private List<RestPhone> phones;
-    private List<RestPerson> managers;
-    private List<RestAccount> accounts;
-    private List<RestLocation> locations;
+    private Collection<RestPhone> phones;
+    private Collection<RestPerson> managers;
+    private Collection<RestAccount> accounts;
+    private Collection<RestLocation> locations;
 
     public String getFullName()
     {
@@ -84,12 +84,12 @@ public class RestOrganization
         this.email = email;
     }
 
-    public String getAddressId()
+    public Long getAddressId()
     {
         return addressId;
     }
 
-    public void setAddressId(String addressId)
+    public void setAddressId(Long addressId)
     {
         this.addressId = addressId;
     }
@@ -104,42 +104,42 @@ public class RestOrganization
         this.address = address;
     }
 
-    public List<RestPhone> getPhones()
+    public Collection<RestPhone> getPhones()
     {
         return phones;
     }
 
-    public void setPhones(List<RestPhone> phones)
+    public void setPhones(Collection<RestPhone> phones)
     {
         this.phones = phones;
     }
 
-    public List<RestPerson> getManagers()
+    public Collection<RestPerson> getManagers()
     {
         return managers;
     }
 
-    public void setManagers(List<RestPerson> managers)
+    public void setManagers(Collection<RestPerson> managers)
     {
         this.managers = managers;
     }
 
-    public List<RestAccount> getAccounts()
+    public Collection<RestAccount> getAccounts()
     {
         return accounts;
     }
 
-    public void setAccounts(List<RestAccount> accounts)
+    public void setAccounts(Collection<RestAccount> accounts)
     {
         this.accounts = accounts;
     }
 
-    public List<RestLocation> getLocations()
+    public Collection<RestLocation> getLocations()
     {
         return locations;
     }
 
-    public void setLocations(List<RestLocation> locations)
+    public void setLocations(Collection<RestLocation> locations)
     {
         this.locations = locations;
     }

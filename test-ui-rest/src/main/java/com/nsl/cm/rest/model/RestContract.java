@@ -14,6 +14,7 @@ import org.joda.time.DateTime;
 public class RestContract
 {
     private long id;
+    private String contractNumber;
     private String clientFullName;
     private String clientShortName;
     private String clientCity;
@@ -72,6 +73,16 @@ public class RestContract
     public long getId()
     {
         return id;
+    }
+
+    public String getContractNumber()
+    {
+        return contractNumber;
+    }
+
+    public void setContractNumber(String contractNumber)
+    {
+        this.contractNumber = contractNumber;
     }
 
     public String getClientFullName()
@@ -519,6 +530,7 @@ public class RestContract
     {
         return "RestContract{" +
                "id=" + id +
+               ", contractNumber='" + contractNumber + '\'' +
                ", clientFullName='" + clientFullName + '\'' +
                ", clientShortName='" + clientShortName + '\'' +
                ", clientCity='" + clientCity + '\'' +

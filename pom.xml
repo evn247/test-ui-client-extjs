@@ -83,6 +83,7 @@
         <spring.version>3.2.6.RELEASE</spring.version>
         <spring.integration.version>3.0.0.RELEASE</spring.integration.version>
         <spring-xml.version>2.1.2.RELEASE</spring-xml.version>
+        <ejb-api.version>3.0</ejb-api.version>
         <jms.version>1.1</jms.version>
         <commons-io.version>2.4</commons-io.version>
         <lambdaj.version>2.3.3</lambdaj.version>
@@ -515,6 +516,16 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-tx</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.ejb</groupId>
+                <artifactId>ejb-api</artifactId>
+                <version>${ejb-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>

@@ -1,5 +1,6 @@
 package com.nsl.cm.rest.model;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,14 +17,14 @@ public class RestPerson
     private String middleName;
     private String position;
     private String email;
-    private List<RestPhone> phones;
+    private Collection<RestPhone> phones;
 
-    public List<RestPhone> getPhones()
+    public Collection<RestPhone> getPhones()
     {
         return phones;
     }
 
-    public void setPhones(List<RestPhone> phones)
+    public void setPhones(Collection<RestPhone> phones)
     {
         this.phones = phones;
     }

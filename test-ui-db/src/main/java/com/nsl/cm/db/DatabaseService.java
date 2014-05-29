@@ -1,24 +1,22 @@
-package com.nsl.cm.db.dao;
+package com.nsl.cm.db;
 
 import java.util.Collection;
 import java.util.Map;
 
-import com.nsl.cm.db.model.Organization;
-
 /**
- * <code>EntityDao</code>
+ * <code>DatabaseService</code>
  *
  * @author Eduard Napolov <Eduard.Napolov@R-Style.com>
  * @version 1.0
  */
-public interface EntityDao<E, ID>
+public interface DatabaseService<E, ID>
 {
     /**
      * Creates entity.
      * @param entity the entity to be created
-     * @return the new entity ID
+     * @return the new entity
      */
-    ID create(E entity);
+    E create(E entity);
 
     /**
      * Returns entity by ID.
@@ -31,7 +29,7 @@ public interface EntityDao<E, ID>
      * Updates entity.
      * @param entity the entity to update
      */
-    void update(E entity);
+    E update(E entity);
 
     /**
      * Deletes entity.

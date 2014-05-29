@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.nsl.cm.db.mapper.SearchMapper">
+<mapper namespace="com.nsl.cm.db.mapper.ContractSearchMapper">
 
     <resultMap type="com.nsl.cm.db.model.Contract" id="Contract">
         <id column="name" javaType="java.lang.String" property="name"/>
@@ -119,7 +119,7 @@
         )
     </select>
 
-    <select id="findOrganization" statementType="STATEMENT" resultMap="Organization">
+    <select id="find" statementType="STATEMENT" resultMap="Organization">
         call API_UDS.NEW_DOC_ATTR (
             #{param2.result, jdbcType=BIGINT, mode=OUT},
             #{param2.message, jdbcType=VARCHAR, mode=OUT},

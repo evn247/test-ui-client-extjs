@@ -12,7 +12,6 @@ public class ContractServiceLine
     private String fullName;
     private String shortName;
     private String price;
-    private long serviceId;
     private Service service;
 
     public Service getService()
@@ -65,16 +64,6 @@ public class ContractServiceLine
         this.price = price;
     }
 
-    public long getServiceId()
-    {
-        return serviceId;
-    }
-
-    public void setServiceId(long serviceId)
-    {
-        this.serviceId = serviceId;
-    }
-
     @Override
     public String toString()
     {
@@ -83,7 +72,6 @@ public class ContractServiceLine
                ", fullName='" + fullName + '\'' +
                ", shortName='" + shortName + '\'' +
                ", price='" + price + '\'' +
-               ", serviceId=" + serviceId +
                ", service=" + service +
                '}';
     }

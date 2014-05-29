@@ -1,5 +1,6 @@
 package com.nsl.cm.db.model;
 
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 
@@ -34,18 +35,18 @@ public class Employee
     @JoinTable(name = "phone_assoc",
                joinColumns = {@JoinColumn(name = "one_entry_id")},
                inverseJoinColumns = {@JoinColumn(name = "many_entry_id")})
-    private List<Phone> phones;
+    private Collection<Phone> phones;
 
     @ManyToOne
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
-    public List<Phone> getPhones()
+    public Collection<Phone> getPhones()
     {
         return phones;
     }
 
-    public void setPhones(List<Phone> phones)
+    public void setPhones(Collection<Phone> phones)
     {
         this.phones = phones;
     }

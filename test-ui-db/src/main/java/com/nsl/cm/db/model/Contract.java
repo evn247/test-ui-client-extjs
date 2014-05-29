@@ -13,6 +13,7 @@ import java.util.List;
 public class Contract
 {
     private long id;
+    private String contractNumber;
     private String clientFullName;
     private String clientShortName;
     private String clientCity;
@@ -42,13 +43,6 @@ public class Contract
     private String prepayPercent;
     private Date date;
     private String manager;
-    private long siteId;
-    private long clientId;
-    private long clientPhoneId;
-    private long accountId;
-    private long executiveOfficerId;
-    private long executiveOfficerPhoneId;
-    private long kbkId;
     private Location site;
     private Organization client;
     private Phone clientPhone;
@@ -71,6 +65,16 @@ public class Contract
     public long getId()
     {
         return id;
+    }
+
+    public String getContractNumber()
+    {
+        return contractNumber;
+    }
+
+    public void setContractNumber(String contractNumber)
+    {
+        this.contractNumber = contractNumber;
     }
 
     public String getClientFullName()
@@ -363,76 +367,6 @@ public class Contract
         this.manager = manager;
     }
 
-    public long getSiteId()
-    {
-        return siteId;
-    }
-
-    public void setSiteId(long siteId)
-    {
-        this.siteId = siteId;
-    }
-
-    public long getClientId()
-    {
-        return clientId;
-    }
-
-    public void setClientId(long clientId)
-    {
-        this.clientId = clientId;
-    }
-
-    public long getClientPhoneId()
-    {
-        return clientPhoneId;
-    }
-
-    public void setClientPhoneId(long clientPhoneId)
-    {
-        this.clientPhoneId = clientPhoneId;
-    }
-
-    public long getAccountId()
-    {
-        return accountId;
-    }
-
-    public void setAccountId(long accountId)
-    {
-        this.accountId = accountId;
-    }
-
-    public long getExecutiveOfficerId()
-    {
-        return executiveOfficerId;
-    }
-
-    public void setExecutiveOfficerId(long executiveOfficerId)
-    {
-        this.executiveOfficerId = executiveOfficerId;
-    }
-
-    public long getExecutiveOfficerPhoneId()
-    {
-        return executiveOfficerPhoneId;
-    }
-
-    public void setExecutiveOfficerPhoneId(long executiveOfficerPhoneId)
-    {
-        this.executiveOfficerPhoneId = executiveOfficerPhoneId;
-    }
-
-    public long getKbkId()
-    {
-        return kbkId;
-    }
-
-    public void setKbkId(long kbkId)
-    {
-        this.kbkId = kbkId;
-    }
-
     public Location getSite()
     {
         return site;
@@ -518,6 +452,7 @@ public class Contract
     {
         return "Contract{" +
                "id=" + id +
+               ", contractNumber='" + contractNumber + '\'' +
                ", clientFullName='" + clientFullName + '\'' +
                ", clientShortName='" + clientShortName + '\'' +
                ", clientCity='" + clientCity + '\'' +
@@ -547,13 +482,6 @@ public class Contract
                ", prepayPercent='" + prepayPercent + '\'' +
                ", date=" + date +
                ", manager='" + manager + '\'' +
-               ", siteId=" + siteId +
-               ", clientId=" + clientId +
-               ", clientPhoneId=" + clientPhoneId +
-               ", accountId=" + accountId +
-               ", executiveOfficerId=" + executiveOfficerId +
-               ", executiveOfficerPhoneId=" + executiveOfficerPhoneId +
-               ", kbkId=" + kbkId +
                ", site=" + site +
                ", client=" + client +
                ", clientPhone=" + clientPhone +
