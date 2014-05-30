@@ -61,6 +61,16 @@ public class Employee
         this.id = id;
     }
 
+    public Organization getOrganization()
+    {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization)
+    {
+        this.organization = organization;
+    }
+
     public String getFirstName()
     {
         return firstName;
@@ -122,6 +132,7 @@ public class Employee
                ", position='" + position + '\'' +
                ", email='" + email + '\'' +
                ", phones=" + phones +
+               ", organization=" + (organization == null ? "NULL" : organization.getId())+
                '}';
     }
 }

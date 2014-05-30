@@ -67,23 +67,6 @@ public abstract class AbstractTranslator<T1, T2> implements Translator<T1, T2>
     }
 
     /**
-     * Translates KBK entity to internal format.
-     * @param kbk the source
-     * @return the result of translation
-     */
-    protected Kbk translate(RestKbk kbk)
-    {
-        Kbk result = new Kbk();
-        if (kbk != null)
-        {
-            result.setId(kbk.getId());
-            result.setCode(kbk.getCode());
-            result.setDescription(kbk.getDescription());
-        }
-        return result;
-    }
-
-    /**
      * Translates KBK entity to external format.
      * @param kbk the source
      * @return the result of translation

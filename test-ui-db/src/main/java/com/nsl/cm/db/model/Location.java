@@ -43,6 +43,16 @@ public class Location
         this.id = id;
     }
 
+    public Organization getOrganization()
+    {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization)
+    {
+        this.organization = organization;
+    }
+
     public String getName()
     {
         return name;
@@ -92,6 +102,7 @@ public class Location
                ", streetAddress='" + streetAddress + '\'' +
                ", city='" + city + '\'' +
                ", postIndex='" + postIndex + '\'' +
+               ", organization=" + (organization == null ? "NULL" : organization.getId())+
                '}';
     }
 }

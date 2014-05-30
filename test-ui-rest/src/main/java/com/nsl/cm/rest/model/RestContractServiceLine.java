@@ -11,7 +11,7 @@ public class RestContractServiceLine
     private long id;
     private String fullName;
     private String shortName;
-    private String price;
+    private double price;
     private long serviceId;
     private RestService service;
 
@@ -55,12 +55,12 @@ public class RestContractServiceLine
         this.shortName = shortName;
     }
 
-    public String getPrice()
+    public double getPrice()
     {
         return price;
     }
 
-    public void setPrice(String price)
+    public void setPrice(double price)
     {
         this.price = price;
     }
@@ -82,7 +82,7 @@ public class RestContractServiceLine
                "id=" + id +
                ", fullName='" + fullName + '\'' +
                ", shortName='" + shortName + '\'' +
-               ", price='" + price + '\'' +
+               ", price=" + price +
                ", serviceId=" + serviceId +
                ", service=" + service +
                '}';

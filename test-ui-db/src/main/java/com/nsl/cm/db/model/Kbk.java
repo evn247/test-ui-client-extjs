@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@Table(name = "phone")
+@Table(name = "kbk")
 @SequenceGenerator(name = "dic_seq", sequenceName = "def_seq", allocationSize = 1)
 public class Kbk
 {

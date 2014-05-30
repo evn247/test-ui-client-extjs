@@ -30,31 +30,10 @@ public class ServiceService extends AbstractService<Service, Long>
     private ServiceSearchMapper searchMapper;
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Service create(Service entity)
-    {
-        return entityManager.merge(entity);
-    }
-
-    @Override
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Service get(Long id)
     {
         return entityManager.find(Service.class, id);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Service update(Service entity)
-    {
-        return entityManager.merge(entity);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void delete(Service entity)
-    {
-        entityManager.remove(entity);
     }
 
     @Override

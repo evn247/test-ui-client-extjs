@@ -86,24 +86,20 @@ public class ContractResource
             RestContract contract) throws IOException
     {
         logger.debug("createContract, contract=" + contract);
-        return JResponse.ok(CONTRACT_TRANSLATOR.reverse(contractService.create(CONTRACT_TRANSLATOR.translate(
-                contract)))).build();
+        return JResponse.ok(CONTRACT_TRANSLATOR.reverse(
+                contractService.create(CONTRACT_TRANSLATOR.translate(contract)))).build();
     }
 
     @PUT
-    @Path("/{id}")
     @Transactional
     @ApiOperation(value = "Update contract",
                   responseClass = "com.nsl.cm.rest.model.RestContract")
     public JResponse<RestContract> update(
-            @PathParam("id")
-            @ApiParam(value = "Contract identifier", required = true)
-            Long id,
             @ApiParam(value = "Contract instance", required = true)
             RestContract contract) {
         logger.debug("updateContract, contract=" + contract);
-        return JResponse.ok(CONTRACT_TRANSLATOR.reverse(contractService.update(CONTRACT_TRANSLATOR.translate(
-                contract)))).build();
+        return JResponse.ok(CONTRACT_TRANSLATOR.reverse(
+                contractService.update(CONTRACT_TRANSLATOR.translate(contract)))).build();
     }
 
     @DELETE
@@ -120,7 +116,7 @@ public class ContractResource
     }
 
     @POST
-    @Path("/{id}/filter")
+    @Path("/filter")
     @Transactional
     @ApiOperation(value = "Get contracts by filters",
                   responseClass = "com.nsl.cm.rest.model.RestContract",
@@ -130,7 +126,8 @@ public class ContractResource
             RestContractFilter filter,
             @QueryParam("page") Integer page, @QueryParam("pageSize") Integer pageSize) {
         logger.debug("filter="+filter);
-        return JResponse.ok(COLLECTION_TRANSLATOR.reverse(contractService.search(FILTER_TRANSLATOR.translate(filter), page, pageSize))).build();
+        return JResponse.ok(COLLECTION_TRANSLATOR.reverse(
+                contractService.search(FILTER_TRANSLATOR.translate(filter), page, pageSize))).build();
     }
 
 }

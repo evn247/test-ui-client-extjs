@@ -29,32 +29,12 @@ public class ContractService extends AbstractService<Contract, Long>
     @Autowired
     private ContractSearchMapper searchMapper;
 
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Contract create(Contract entity)
-    {
-        return entityManager.merge(entity);
-    }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Contract get(Long id)
     {
         return entityManager.find(Contract.class, id);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Contract update(Contract entity)
-    {
-        return entityManager.merge(entity);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void delete(Contract entity)
-    {
-        entityManager.remove(entity);
     }
 
     @Override

@@ -10,6 +10,12 @@ import java.util.Map;
  */
 public abstract class AbstractFilterTranslator<FROM, TO> implements Translator<FROM, TO>
 {
+    @Override
+    public FROM reverse(TO from)
+    {
+        throw new UnsupportedOperationException("reverse is not supported for filters!");
+    }
+
     /**
      * Adds value to the map if it's not null.
      * @param map the map to be updated

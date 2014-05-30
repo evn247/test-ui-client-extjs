@@ -17,13 +17,16 @@ public class RestContractFilterTranslator extends AbstractFilterTranslator<RestC
     public Map<String, Object> translate(RestContractFilter restContractFilter)
     {
         HashMap<String, Object> map = new HashMap<>();
-        putIfNotNull(map, "contractNumber", restContractFilter.getContractNumber());
-        putIfNotNull(map, "clientName", restContractFilter.getClientFullName());
-        putIfNotNull(map, "officerName", restContractFilter.getClientOfficerFullName());
-        putIfNotNull(map, "date", restContractFilter.getDate());
-        putIfNotNull(map, "type", restContractFilter.getType());
-        putIfNotNull(map, "status", restContractFilter.getStatus());
-        putIfNotNull(map, "manager", restContractFilter.getManager());
+        if(restContractFilter != null)
+        {
+            putIfNotNull(map, "contractNumber", restContractFilter.getContractNumber());
+            putIfNotNull(map, "clientName", restContractFilter.getClientFullName());
+            putIfNotNull(map, "officerName", restContractFilter.getClientOfficerFullName());
+            putIfNotNull(map, "date", restContractFilter.getDate());
+            putIfNotNull(map, "type", restContractFilter.getType());
+            putIfNotNull(map, "status", restContractFilter.getStatus());
+            putIfNotNull(map, "manager", restContractFilter.getManager());
+        }
         return map;
     }
 }

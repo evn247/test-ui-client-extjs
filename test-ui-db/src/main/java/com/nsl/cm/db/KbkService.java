@@ -28,31 +28,10 @@ public class KbkService extends AbstractService<Kbk, Long>
     private KbkSearchMapper searchMapper;
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Kbk create(Kbk entity)
-    {
-        return entityManager.merge(entity);
-    }
-
-    @Override
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Kbk get(Long id)
     {
         return entityManager.find(Kbk.class, id);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Kbk update(Kbk entity)
-    {
-        return entityManager.merge(entity);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void delete(Kbk entity)
-    {
-        entityManager.remove(entity);
     }
 
     @Override

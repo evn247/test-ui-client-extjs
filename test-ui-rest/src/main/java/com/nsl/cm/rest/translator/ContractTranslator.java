@@ -1,11 +1,13 @@
 package com.nsl.cm.rest.translator;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.nsl.cm.db.model.Account;
 import com.nsl.cm.db.model.Contract;
 import com.nsl.cm.db.model.ContractServiceLine;
+import com.nsl.cm.db.model.Kbk;
 import com.nsl.cm.db.model.Organization;
 import com.nsl.cm.db.model.Service;
 import com.nsl.cm.rest.model.RestAccount;
@@ -29,6 +31,7 @@ public class ContractTranslator extends AbstractTranslator<RestContract, Contrac
 {
     private final static Translator<RestService, Service> SERVICE_TRANSLATOR = new ServiceTranslator();
     private final static Translator<RestOrganization, Organization> ORGANIZATION_TRANSLATOR = new OrganizationTranslator();
+    private final static Translator<RestKbk, Kbk> KBK_TRANSLATOR = new KbkTranslator();
 
     @Override
     public Contract translate(RestContract contract)
@@ -44,7 +47,7 @@ public class ContractTranslator extends AbstractTranslator<RestContract, Contrac
         result.setClientPhone(translate(contract.getClientPhone()));
         result.setExecutiveOfficer(translate(contract.getExecutiveOfficer()));
         result.setExecutiveOfficerPhone(translate(contract.getExecutiveOfficerPhone()));
-        result.setKbk(translate(contract.getKbk()));
+        result.setKbk(KBK_TRANSLATOR.translate(contract.getKbk()));
         result.setSite(translate(contract.getSite()));
 
         result.setClientAccountNumber(contract.getClientAccountNumber());
@@ -167,7 +170,7 @@ public class ContractTranslator extends AbstractTranslator<RestContract, Contrac
             ContractServiceLine line = new ContractServiceLine();
             line.setFullName(restLine.getFullName());
             line.setId(restLine.getId());
-            line.setPrice(restLine.getPrice());
+            line.setPrice(BigDecimal.valueOf(restLine.getPrice()));
             line.setShortName(restLine.getShortName());
             line.setService(SERVICE_TRANSLATOR.translate(restLine.getService()));
 
@@ -189,7 +192,7 @@ public class ContractTranslator extends AbstractTranslator<RestContract, Contrac
             RestContractServiceLine restLine = new RestContractServiceLine();
             restLine.setFullName(line.getFullName());
             restLine.setId(line.getId());
-            restLine.setPrice(line.getPrice());
+            restLine.setPrice(line.getPrice().doubleValue());
             restLine.setShortName(line.getShortName());
             restLine.setService(SERVICE_TRANSLATOR.reverse(line.getService()));
 

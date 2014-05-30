@@ -28,31 +28,10 @@ public class OrganizationService extends AbstractService<Organization, Long>
     private OrganizationSearchMapper searchMapper;
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Organization create(Organization entity)
-    {
-        return entityManager.merge(entity);
-    }
-
-    @Override
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Organization get(Long id)
     {
         return entityManager.find(Organization.class, id);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Organization update(Organization entity)
-    {
-        return entityManager.merge(entity);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void delete(Organization entity)
-    {
-        entityManager.remove(entity);
     }
 
     @Override

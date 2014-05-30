@@ -17,48 +17,68 @@ import com.nsl.cm.rest.model.RestPerson;
  */
 public class OrganizationTranslator extends AbstractTranslator<RestOrganization, Organization>
 {
-    protected final static CollectionTranslator<RestAccount, Account> ACCOUNT_LIST_TRANSLATOR
-            = new CollectionTranslator<>(new AbstractTranslator<RestAccount, Account>(){
-        @Override
-        public RestAccount reverse(Account from)
-        {
-            return translate(from);
-        }
-    });
-    protected final static CollectionTranslator<RestLocation, Location> LOCATION_LIST_TRANSLATOR
-            = new CollectionTranslator<>(new AbstractTranslator<RestLocation, Location>(){
-        @Override
-        public RestLocation reverse(Location from)
-        {
-            return translate(from);
-        }
-    });
-
-    protected final static CollectionTranslator<RestPerson, Employee> EMPLOYEE_LIST_TRANSLATOR
-            = new CollectionTranslator<>(new AbstractTranslator<RestPerson, Employee>(){
-        @Override
-        public RestPerson reverse(Employee from)
-        {
-            return translate(from);
-        }
-    });
 
 
     @Override
     public Organization translate(RestOrganization from)
     {
-        Organization result = new Organization();
+        final Organization result = new Organization();
         if(from != null)
         {
             result.setId(from.getId());
-            result.setAccounts(ACCOUNT_LIST_TRANSLATOR.translate(from.getAccounts()));
+            result.setAccounts(new CollectionTranslator<>(new AbstractTranslator<RestAccount, Account>(){
+
+                @Override
+                protected Account translate(RestAccount account)
+                {
+                    Account translated = super.translate(account);
+                    translated.setOrganization(result);
+                    return translated;
+                }
+
+                @Override
+                public RestAccount reverse(Account from)
+                {
+                    return translate(from);
+                }
+            }).translate(from.getAccounts()));
             result.setAddress(translate(from.getAddress()));
             result.setEmail(from.getEmail());
             result.setFullName(from.getFullName());
             result.setInn(from.getInn());
             result.setKpp(from.getKpp());
-            result.setLocations(LOCATION_LIST_TRANSLATOR.translate(from.getLocations()));
-            result.setManagers(EMPLOYEE_LIST_TRANSLATOR.translate(from.getManagers()));
+            result.setLocations(new CollectionTranslator<>(new AbstractTranslator<RestLocation, Location>(){
+
+                @Override
+                protected Location translate(RestLocation location)
+                {
+                    Location tmp = super.translate(location);
+                    tmp.setOrganization(result);
+                    return tmp;
+                }
+
+                @Override
+                public RestLocation reverse(Location from)
+                {
+                    return translate(from);
+                }
+            }).translate(from.getLocations()));
+            result.setManagers(new CollectionTranslator<>(new AbstractTranslator<RestPerson, Employee>(){
+                @Override
+                protected Employee translate(RestPerson person)
+                {
+                    Employee tmp = super.translate(person);
+                    tmp.setOrganization(result);
+                    return tmp;
+                }
+
+                @Override
+                public RestPerson reverse(Employee from)
+                {
+                    return translate(from);
+                }
+            }).translate(from.getManagers()));
+
             result.setPhones(PHONE_LIST_TRANSLATOR.translate(from.getPhones()));
             result.setShortName(from.getShortName());
             result.setWebsite(from.getWebsite());
@@ -73,7 +93,13 @@ public class OrganizationTranslator extends AbstractTranslator<RestOrganization,
         if(from != null)
         {
             result.setId(from.getId());
-            result.setAccounts(ACCOUNT_LIST_TRANSLATOR.reverse(from.getAccounts()));
+            result.setAccounts(new CollectionTranslator<>(new AbstractTranslator<RestAccount, Account>(){
+                @Override
+                public RestAccount reverse(Account from)
+                {
+                    return translate(from);
+                }
+            }).reverse(from.getAccounts()));
 
             RestLocation location = translate(from.getAddress());
             result.setAddress(location);
@@ -83,8 +109,20 @@ public class OrganizationTranslator extends AbstractTranslator<RestOrganization,
             result.setFullName(from.getFullName());
             result.setInn(from.getInn());
             result.setKpp(from.getKpp());
-            result.setLocations(LOCATION_LIST_TRANSLATOR.reverse(from.getLocations()));
-            result.setManagers(EMPLOYEE_LIST_TRANSLATOR.reverse(from.getManagers()));
+            result.setLocations(new CollectionTranslator<>(new AbstractTranslator<RestLocation, Location>(){
+                @Override
+                public RestLocation reverse(Location from)
+                {
+                    return translate(from);
+                }
+            }).reverse(from.getLocations()));
+            result.setManagers(new CollectionTranslator<>(new AbstractTranslator<RestPerson, Employee>(){
+        @Override
+        public RestPerson reverse(Employee from)
+        {
+            return translate(from);
+        }
+    }).reverse(from.getManagers()));
             result.setPhones(PHONE_LIST_TRANSLATOR.reverse(from.getPhones()));
             result.setShortName(from.getShortName());
             result.setWebsite(from.getWebsite());
